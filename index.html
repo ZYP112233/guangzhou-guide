@@ -884,6 +884,61 @@ body.home-active .bottom-nav{
     </div>
   </div>
 
+  <div class="sec anchor" id="h-keywords">
+    <div class="sec-eyebrow">HOT KEYWORDS</div>
+    <div class="sec-title">热门关键词</div>
+    <div class="sec-sub">实时热度排行 · 内容创作参考</div>
+    <div id="keywordsContent" class="card">
+      <div style="text-align:center;padding:20px;color:var(--text-dim)">
+        <div style="font-size:13px">正在加载关键词数据...</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec anchor" id="h-competitor">
+    <div class="sec-eyebrow">COMPETITOR ANALYSIS</div>
+    <div class="sec-title">竞品分析</div>
+    <div class="sec-sub">同赛道头部账号监测</div>
+    <div id="competitorContent" class="card">
+      <div style="text-align:center;padding:20px;color:var(--text-dim)">
+        <div style="font-size:13px">正在加载竞品数据...</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec anchor" id="h-price">
+    <div class="sec-eyebrow">PRICE TRENDS</div>
+    <div class="sec-title">价格波动监测</div>
+    <div class="sec-sub">供应链价格趋势 · 采购时机参考</div>
+    <div id="priceContent" class="card">
+      <div style="text-align:center;padding:20px;color:var(--text-dim)">
+        <div style="font-size:13px">正在加载价格数据...</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec anchor" id="h-recommendations">
+    <div class="sec-eyebrow">SMART RECOMMENDATIONS</div>
+    <div class="sec-title">智能推荐</div>
+    <div class="sec-sub">基于数据的运营建议</div>
+    <div id="recommendationsContent" class="card">
+      <div style="text-align:center;padding:20px;color:var(--text-dim)">
+        <div style="font-size:13px">正在生成推荐...</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec anchor" id="h-trend">
+    <div class="sec-eyebrow">HISTORICAL TRENDS</div>
+    <div class="sec-title">历史数据趋势</div>
+    <div class="sec-sub">过去7天数据变化</div>
+    <div id="trendContent" class="card">
+      <div style="text-align:center;padding:20px;color:var(--text-dim)">
+        <div style="font-size:13px">正在加载趋势数据...</div>
+      </div>
+    </div>
+  </div>
+
   <div class="sec anchor" id="h-platform">
     <div class="sec-eyebrow">PLATFORM DATA</div>
     <div class="sec-title">小红书平台数据（2026）</div>
@@ -2551,17 +2606,22 @@ document.body.classList.add('home-active');
     .then(data => {
       dateEl.textContent = data.lastUpdate;
       
+      // 渲染每日洞察
       let html = '';
       data.topics.forEach((topic, idx) => {
         const categoryColors = {
           'platform': 'var(--gold)',
           'supply': 'var(--green)',
-          'ecommerce': 'var(--blue)'
+          'ecommerce': 'var(--blue)',
+          'competitor': 'var(--purple)',
+          'price': 'var(--orange)'
         };
         const categoryNames = {
           'platform': '平台动态',
           'supply': '供应链',
-          'ecommerce': '电商机会'
+          'ecommerce': '电商机会',
+          'competitor': '竞品分析',
+          'price': '价格监测'
         };
         const color = categoryColors[topic.category] || 'var(--gold)';
         const name = categoryNames[topic.category] || '行业动态';
@@ -2584,12 +2644,332 @@ document.body.classList.add('home-active');
       });
       
       container.innerHTML = html;
+      
+      // 渲染热门关键词
+      renderKeywords(data);
+      
+      // 渲染竞品分析
+      renderCompetitors(data);
+      
+      // 渲染价格波动
+      renderPriceTrends(data);
+      
+      // 渲染智能推荐
+      renderRecommendations(data);
+      
+      // 渲染历史趋势
+      renderTrendChart(data);
     })
     .catch(err => {
       console.error('加载每日数据失败:', err);
       container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-dim)"><div style="font-size:13px">数据加载失败，请稍后刷新</div></div>';
     });
 })();
+
+// ═══ 渲染热门关键词 ═══
+function renderKeywords(data){
+  const container = document.getElementById('keywordsContent');
+  if(!container) return;
+  
+  // 合并所有关键词
+  let allKeywords = [];
+  data.topics.forEach(topic => {
+    if(topic.keywords){
+      allKeywords = allKeywords.concat(topic.keywords);
+    }
+  });
+  
+  // 按热度排序
+  allKeywords.sort((a, b) => b.score - a.score);
+  
+  // 取前10个
+  const top10 = allKeywords.slice(0, 10);
+  
+  let html = '<div style="display:flex;flex-wrap:wrap;gap:8px">';
+  top10.forEach((kw, idx) => {
+    const size = Math.max(12, 18 - idx);
+    const opacity = Math.max(0.6, 1 - idx * 0.05);
+    html += `
+      <div style="padding:8px 14px;background:var(--card2);border-radius:20px;border:1px solid var(--border2);font-size:${size}px;color:var(--gold);opacity:${opacity};cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='var(--gold)';this.style.color='var(--bg)'" onmouseout="this.style.background='var(--card2)';this.style.color='var(--gold)'">
+        ${kw.word} <span style="font-size:10px;opacity:0.7">${kw.score}</span>
+      </div>
+    `;
+  });
+  html += '</div>';
+  
+  container.innerHTML = html;
+}
+
+// ═══ 渲染竞品分析 ═══
+function renderCompetitors(data){
+  const container = document.getElementById('competitorContent');
+  if(!container) return;
+  
+  const competitorTopic = data.topics.find(t => t.category === 'competitor');
+  if(!competitorTopic || !competitorTopic.competitors){
+    container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-dim)">暂无竞品数据</div>';
+    return;
+  }
+  
+  let html = '';
+  competitorTopic.competitors.forEach((comp, idx) => {
+    html += `
+      <div style="margin-bottom:${idx < competitorTopic.competitors.length - 1 ? '12px' : '0'};padding:12px;background:var(--card2);border-radius:8px;border-left:3px solid var(--purple)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <strong style="color:var(--purple);font-size:14px">${comp.name}</strong>
+          <span style="font-size:12px;color:var(--text-dim)">${comp.followers}粉丝</span>
+        </div>
+        <div style="font-size:12px;color:var(--text-dim);margin-bottom:6px">
+          <span>内容类型：${comp.content_type}</span> · <span>平均点赞：${comp.avg_likes}</span>
+        </div>
+        <div style="display:flex;gap:12px;font-size:11px">
+          <div style="flex:1;padding:6px;background:rgba(76,175,80,0.1);border-radius:4px">
+            <div style="color:var(--green);font-weight:600;margin-bottom:2px">✓ 优势</div>
+            <div style="color:var(--text-dim)">${comp.strength}</div>
+          </div>
+          <div style="flex:1;padding:6px;background:rgba(200,115,99,0.1);border-radius:4px">
+            <div style="color:var(--red);font-weight:600;margin-bottom:2px">✗ 弱点</div>
+            <div style="color:var(--text-dim)">${comp.weakness}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+  
+  container.innerHTML = html;
+}
+
+// ═══ 渲染价格波动图表 ═══
+function renderPriceTrends(data){
+  const container = document.getElementById('priceContent');
+  if(!container) return;
+  
+  const priceTopic = data.topics.find(t => t.category === 'price');
+  if(!priceTopic || !priceTopic.price_data){
+    container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-dim)">暂无价格数据</div>';
+    return;
+  }
+  
+  let html = '<div style="margin-bottom:16px">';
+  priceTopic.price_data.forEach((item, idx) => {
+    const trendIcon = item.trend === 'up' ? '↑' : '↓';
+    const trendColor = item.trend === 'up' ? 'var(--red)' : 'var(--green)';
+    
+    html += `
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:var(--card2);border-radius:8px;margin-bottom:8px">
+        <div>
+          <div style="font-size:14px;font-weight:600;color:var(--text)">${item.category}</div>
+          <div style="font-size:12px;color:var(--text-dim)">当前价格：¥${item.current_price}</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:16px;font-weight:600;color:${trendColor}">${trendIcon} ¥${Math.abs(item.change)}</div>
+          <div style="font-size:11px;color:var(--dim)">7天变化</div>
+        </div>
+      </div>
+    `;
+  });
+  html += '</div>';
+  
+  // 添加Canvas图表
+  html += '<canvas id="priceChart" width="100%" height="200" style="background:var(--card2);border-radius:8px"></canvas>';
+  
+  container.innerHTML = html;
+  
+  // 绘制图表
+  setTimeout(() => drawPriceChart(priceTopic.price_data), 100);
+}
+
+// ═══ 绘制价格趋势图 ═══
+function drawPriceChart(priceData){
+  const canvas = document.getElementById('priceChart');
+  if(!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
+  const width = canvas.width = canvas.offsetWidth;
+  const height = canvas.height = 200;
+  
+  // 清空画布
+  ctx.clearRect(0, 0, width, height);
+  
+  // 设置样式
+  const colors = ['#c8a45c', '#4caf50', '#42a5f5', '#ff9800'];
+  const padding = 40;
+  const chartWidth = width - padding * 2;
+  const chartHeight = height - padding * 2;
+  
+  // 找出最大最小值
+  let allPrices = [];
+  priceData.forEach(item => {
+    item.history.forEach(h => allPrices.push(h.price));
+  });
+  const maxPrice = Math.max(...allPrices);
+  const minPrice = Math.min(...allPrices);
+  const priceRange = maxPrice - minPrice;
+  
+  // 绘制网格线
+  ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+  ctx.lineWidth = 1;
+  for(let i = 0; i <= 4; i++){
+    const y = padding + (chartHeight / 4) * i;
+    ctx.beginPath();
+    ctx.moveTo(padding, y);
+    ctx.lineTo(width - padding, y);
+    ctx.stroke();
+    
+    // 添加价格标签
+    const price = maxPrice - (priceRange / 4) * i;
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.font = '10px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText('¥' + price.toFixed(0), padding - 5, y + 3);
+  }
+  
+  // 绘制每条线
+  priceData.forEach((item, idx) => {
+    const color = colors[idx % colors.length];
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    
+    item.history.forEach((h, i) => {
+      const x = padding + (chartWidth / (item.history.length - 1)) * i;
+      const y = padding + chartHeight - ((h.price - minPrice) / priceRange) * chartHeight;
+      
+      if(i === 0){
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    });
+    
+    ctx.stroke();
+    
+    // 添加图例
+    const legendX = padding + idx * 100;
+    const legendY = height - 10;
+    ctx.fillStyle = color;
+    ctx.fillRect(legendX, legendY - 8, 20, 3);
+    ctx.fillStyle = 'rgba(255,255,255,0.7)';
+    ctx.font = '11px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(item.category, legendX + 25, legendY - 3);
+  });
+}
+
+// ═══ 渲染智能推荐 ═══
+function renderRecommendations(data){
+  const container = document.getElementById('recommendationsContent');
+  if(!container || !data.recommendations) return;
+  
+  let html = '';
+  data.recommendations.forEach((rec, idx) => {
+    const priorityColors = {
+      'high': 'var(--red)',
+      'medium': 'var(--gold)',
+      'low': 'var(--green)'
+    };
+    const priorityNames = {
+      'high': '高优先',
+      'medium': '中优先',
+      'low': '低优先'
+    };
+    const color = priorityColors[rec.priority] || 'var(--gold)';
+    
+    html += `
+      <div style="margin-bottom:${idx < data.recommendations.length - 1 ? '12px' : '0'};padding:12px;background:var(--card2);border-radius:8px;border-left:3px solid ${color}">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <strong style="color:${color};font-size:13px">${rec.title}</strong>
+          <span style="font-size:10px;color:var(--dim);background:var(--card);padding:2px 8px;border-radius:4px">${priorityNames[rec.priority]}</span>
+        </div>
+        <div style="font-size:12px;color:var(--text-dim);margin-bottom:8px;line-height:1.6">${rec.description}</div>
+        <button style="padding:6px 14px;background:${color};color:var(--bg);border:none;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer" onclick="alert('建议：${rec.action}')">${rec.action}</button>
+      </div>
+    `;
+  });
+  
+  container.innerHTML = html;
+}
+
+// ═══ 渲染历史趋势图表 ═══
+function renderTrendChart(data){
+  const container = document.getElementById('trendContent');
+  if(!container || !data.trend) return;
+  
+  let html = '<canvas id="trendChart" width="100%" height="200" style="background:var(--card2);border-radius:8px"></canvas>';
+  container.innerHTML = html;
+  
+  setTimeout(() => drawTrendChart(data.trend), 100);
+}
+
+// ═══ 绘制历史趋势图 ═══
+function drawTrendChart(trendData){
+  const canvas = document.getElementById('trendChart');
+  if(!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
+  const width = canvas.width = canvas.offsetWidth;
+  const height = canvas.height = 200;
+  
+  // 清空画布
+  ctx.clearRect(0, 0, width, height);
+  
+  const padding = 40;
+  const chartWidth = width - padding * 2;
+  const chartHeight = height - padding * 2;
+  
+  // 找出最大值
+  const maxTopics = Math.max(...trendData.map(d => d.topics_count));
+  const maxKeywords = Math.max(...trendData.map(d => d.keywords_count));
+  const maxVal = Math.max(maxTopics, maxKeywords);
+  
+  // 绘制网格线
+  ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+  ctx.lineWidth = 1;
+  for(let i = 0; i <= 4; i++){
+    const y = padding + (chartHeight / 4) * i;
+    ctx.beginPath();
+    ctx.moveTo(padding, y);
+    ctx.lineTo(width - padding, y);
+    ctx.stroke();
+  }
+  
+  // 绘制柱状图
+  const barWidth = chartWidth / trendData.length * 0.6;
+  const barGap = chartWidth / trendData.length * 0.4;
+  
+  trendData.forEach((d, i) => {
+    const x = padding + (chartWidth / trendData.length) * i + barGap / 2;
+    
+    // 数据条数
+    const topicHeight = (d.topics_count / maxVal) * chartHeight;
+    ctx.fillStyle = 'rgba(200,164,92,0.6)';
+    ctx.fillRect(x, padding + chartHeight - topicHeight, barWidth / 2, topicHeight);
+    
+    // 关键词条数
+    const keywordHeight = (d.keywords_count / maxVal) * chartHeight;
+    ctx.fillStyle = 'rgba(76,175,80,0.6)';
+    ctx.fillRect(x + barWidth / 2, padding + chartHeight - keywordHeight, barWidth / 2, keywordHeight);
+    
+    // 日期标签
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.font = '10px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(d.date.slice(5), x + barWidth / 2, height - 10);
+  });
+  
+  // 图例
+  ctx.fillStyle = 'rgba(200,164,92,0.6)';
+  ctx.fillRect(padding, 10, 15, 10);
+  ctx.fillStyle = 'rgba(255,255,255,0.7)';
+  ctx.font = '11px sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('数据条数', padding + 20, 18);
+  
+  ctx.fillStyle = 'rgba(76,175,80,0.6)';
+  ctx.fillRect(padding + 100, 10, 15, 10);
+  ctx.fillStyle = 'rgba(255,255,255,0.7)';
+  ctx.fillText('关键词数', padding + 120, 18);
+}
 
 // ═══ 从CONFIG加载数据 ═══
 (function(){
