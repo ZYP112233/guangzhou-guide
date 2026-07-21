@@ -450,29 +450,26 @@ body.home-active .bottom-nav{
 
 /* Edit Button */
 .edit-btn{
-  position:fixed;
-  bottom:calc(var(--nav-h) + 20px);
-  right:20px;
-  width:48px;
-  height:48px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:32px;
+  height:32px;
   border-radius:50%;
   background:var(--gold);
   border:none;
   cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 4px 12px rgba(200,164,92,0.3);
+  margin-left:12px;
+  vertical-align:middle;
   transition:all 0.3s ease;
-  z-index:99;
 }
 .edit-btn:hover{
   transform:scale(1.1);
-  box-shadow:0 6px 16px rgba(200,164,92,0.4);
+  background:var(--gold-l);
 }
 .edit-btn svg{
-  width:24px;
-  height:24px;
+  width:18px;
+  height:18px;
   color:var(--bg);
 }
 
