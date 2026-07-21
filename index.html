@@ -873,6 +873,17 @@ body.home-active .bottom-nav{
     </div>
   </div>
 
+  <div class="sec anchor" id="h-daily">
+    <div class="sec-eyebrow">DAILY UPDATES</div>
+    <div class="sec-title">每日行业洞察</div>
+    <div class="sec-sub">AI自动抓取 · 每日更新 · <span id="dailyUpdateDate">加载中...</span></div>
+    <div id="dailyContent" class="card">
+      <div style="text-align:center;padding:20px;color:var(--text-dim)">
+        <div style="font-size:13px">正在加载最新数据...</div>
+      </div>
+    </div>
+  </div>
+
   <div class="sec anchor" id="h-platform">
     <div class="sec-eyebrow">PLATFORM DATA</div>
     <div class="sec-title">小红书平台数据（2026）</div>
@@ -2528,6 +2539,57 @@ function switchPage(idx){
 
 // Initialize home state on load
 document.body.classList.add('home-active');
+
+// ═══ 加载每日更新数据 ═══
+(function(){
+  const container = document.getElementById('dailyContent');
+  const dateEl = document.getElementById('dailyUpdateDate');
+  if(!container || !dateEl) return;
+  
+  fetch('daily-data.json')
+    .then(res => res.json())
+    .then(data => {
+      dateEl.textContent = data.lastUpdate;
+      
+      let html = '';
+      data.topics.forEach((topic, idx) => {
+        const categoryColors = {
+          'platform': 'var(--gold)',
+          'supply': 'var(--green)',
+          'ecommerce': 'var(--blue)'
+        };
+        const categoryNames = {
+          'platform': '平台动态',
+          'supply': '供应链',
+          'ecommerce': '电商机会'
+        };
+        const color = categoryColors[topic.category] || 'var(--gold)';
+        const name = categoryNames[topic.category] || '行业动态';
+        
+        html += `
+          <div style="margin-bottom:${idx < data.topics.length - 1 ? '16px' : '0'};padding:12px;background:var(--card2);border-radius:8px;border-left:3px solid ${color}">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+              <strong style="color:${color};font-size:13px">${topic.title}</strong>
+              <span style="font-size:11px;color:var(--dim);background:var(--card);padding:2px 8px;border-radius:4px">${name}</span>
+            </div>
+            <div style="font-size:13px;line-height:1.7;color:var(--text-dim);margin-bottom:8px">${topic.summary}</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--dim)">
+              <span>来源：${topic.source}</span>
+              <div style="display:flex;gap:6px">
+                ${topic.tags.map(tag => `<span style="background:var(--card);padding:2px 6px;border-radius:3px">#${tag}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      
+      container.innerHTML = html;
+    })
+    .catch(err => {
+      console.error('加载每日数据失败:', err);
+      container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-dim)"><div style="font-size:13px">数据加载失败，请稍后刷新</div></div>';
+    });
+})();
 
 // ═══ 从CONFIG加载数据 ═══
 (function(){
