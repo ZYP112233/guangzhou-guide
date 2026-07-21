@@ -239,13 +239,23 @@ body.home-active .bottom-nav{
   animation:heroZoom 1.8s cubic-bezier(.16,1,.3,1) forwards;
   transition:background-image 0.6s ease;
 }
+/* 桌面端使用横版裁切版本 */
+@media(min-width:768px){
+  .hero-base{background-image:url('hero-desktop.webp')}
+}
 .hero-base.hero-alt{background-image:url('hero2.webp')}
 .hero-base.hero-alt2{background-image:url('hero3.webp')}
 .hero-base.hero-alt3{background-image:url('hero4.webp')}
 .hero-base.hero-alt4{background-image:url('hero5.webp')}
-.hero-base.hero-alt5{background-image:url('hero-mobile-1.webp')}
-.hero-base.hero-alt6{background-image:url('hero-mobile-2.webp')}
-.hero-base.hero-alt7{background-image:url('hero-mobile-3.webp')}
+.hero-base.hero-alt5{background-image:url('hero6-mobile.webp')}
+.hero-base.hero-alt6{background-image:url('hero7-mobile.webp')}
+.hero-base.hero-alt7{background-image:url('hero8-mobile.webp')}
+/* 桌面端竖版图片使用横版裁切 */
+@media(min-width:768px){
+  .hero-base.hero-alt5{background-image:url('hero6.webp')}
+  .hero-base.hero-alt6{background-image:url('hero7.webp')}
+  .hero-base.hero-alt7{background-image:url('hero8.webp')}
+}
 .hero-reveal-layer{
   position:absolute;inset:0;z-index:20;
   pointer-events:none;
@@ -258,13 +268,23 @@ body.home-active .bottom-nav{
   -webkit-mask-size:100% 100%;mask-size:100% 100%;
   opacity:0;transition:opacity 0.4s ease;
 }
+/* 桌面端使用横版裁切版本 */
+@media(min-width:768px){
+  .hero-reveal-layer{background-image:url('hero-desktop.webp')}
+}
 .hero-reveal-layer.hero-alt{background-image:url('hero2.webp')}
 .hero-reveal-layer.hero-alt2{background-image:url('hero3.webp')}
 .hero-reveal-layer.hero-alt3{background-image:url('hero4.webp')}
 .hero-reveal-layer.hero-alt4{background-image:url('hero5.webp')}
-.hero-reveal-layer.hero-alt5{background-image:url('hero-mobile-1.webp')}
-.hero-reveal-layer.hero-alt6{background-image:url('hero-mobile-2.webp')}
-.hero-reveal-layer.hero-alt7{background-image:url('hero-mobile-3.webp')}
+.hero-reveal-layer.hero-alt5{background-image:url('hero6-mobile.webp')}
+.hero-reveal-layer.hero-alt6{background-image:url('hero7-mobile.webp')}
+.hero-reveal-layer.hero-alt7{background-image:url('hero8-mobile.webp')}
+/* 桌面端竖版图片使用横版裁切 */
+@media(min-width:768px){
+  .hero-reveal-layer.hero-alt5{background-image:url('hero6.webp')}
+  .hero-reveal-layer.hero-alt6{background-image:url('hero7.webp')}
+  .hero-reveal-layer.hero-alt7{background-image:url('hero8.webp')}
+}
 .hero-reveal-layer.active{opacity:1}
 .hero-vignette{
   position:absolute;inset:0;z-index:30;
@@ -477,6 +497,9 @@ body.home-active .bottom-nav{
       <button class="hero-toggle-btn" onclick="switchHero(2)" aria-label="Image 3"></button>
       <button class="hero-toggle-btn" onclick="switchHero(3)" aria-label="Image 4"></button>
       <button class="hero-toggle-btn" onclick="switchHero(4)" aria-label="Image 5"></button>
+      <button class="hero-toggle-btn" onclick="switchHero(5)" aria-label="Image 6"></button>
+      <button class="hero-toggle-btn" onclick="switchHero(6)" aria-label="Image 7"></button>
+      <button class="hero-toggle-btn" onclick="switchHero(7)" aria-label="Image 8"></button>
     </div>
     <!-- Content (z-50) -->
     <div class="hero-content">
@@ -1704,7 +1727,7 @@ function switchHero(idx){
   const base = document.querySelector('.hero-base');
   const revealLayer = document.getElementById('revealLayer');
   const btns = document.querySelectorAll('.hero-toggle-btn');
-  const heroClasses = ['hero-alt','hero-alt2','hero-alt3','hero-alt4'];
+  const heroClasses = ['hero-alt','hero-alt2','hero-alt3','hero-alt4','hero-alt5','hero-alt6','hero-alt7'];
   
   base.classList.remove(...heroClasses);
   revealLayer.classList.remove(...heroClasses);

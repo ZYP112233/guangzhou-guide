@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>木子菲儿 · 广州3天考察实战手册</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0a0a0a; --card: #141414; --border: #222;
+            --gold: #c8a45c; --gold-light: #e8c97a;
+            --text: #e8e8e8; --text-dim: #888;
+            --green: #4caf50; --red: #ef5350; --blue: #42a5f5;
+            --purple: #ab47bc; --orange: #ff9800;
+        }
+        body { font-family: 'PingFang SC','Microsoft YaHei',sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        
+        /* Hero */
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(135deg, #0a0a0a, #1a1a1a, #0a0a0a); position: relative; }
+        .hero h1 { font-size: 3rem; font-weight: 300; color: var(--gold); letter-spacing: 0.1em; }
+        .hero .subtitle { font-size: 1.1rem; color: var(--text-dim); margin-top: 1rem; letter-spacing: 0.2em; }
+        .hero .tagline { font-size: 1.4rem; color: var(--text); margin-top: 2rem; font-weight: 300; }
+        .hero .days-preview { display: flex; gap: 2rem; margin-top: 3rem; justify-content: center; }
+        .hero .day-chip { padding: 0.8rem 1.5rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem; }
+        .hero .day-chip.d1 { border-color: var(--gold); color: var(--gold); }
+        .hero .day-chip.d2 { border-color: var(--blue); color: var(--blue); }
+        .hero .day-chip.d3 { border-color: var(--green); color: var(--green); }
+        
+        .section { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        .section-title { font-size: 2rem; font-weight: 300; color: var(--gold); margin-bottom: 0.5rem; }
+        .section-subtitle { color: var(--text-dim); margin-bottom: 2rem; }
+        
+        /* Day Header */
+        .day-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; padding: 1.5rem; border-radius: 12px; }
+        .day-header.d1 { background: rgba(200,164,92,0.08); border: 1px solid rgba(200,164,92,0.3); }
+        .day-header.d2 { background: rgba(66,165,245,0.08); border: 1px solid rgba(66,165,245,0.3); }
+        .day-header.d3 { background: rgba(76,175,80,0.08); border: 1px solid rgba(76,175,80,0.3); }
+        .day-num { font-size: 3rem; font-weight: 200; }
+        .day-header.d1 .day-num { color: var(--gold); }
+        .day-header.d2 .day-num { color: var(--blue); }
+        .day-header.d3 .day-num { color: var(--green); }
+        .day-info h3 { font-size: 1.3rem; font-weight: 400; }
+        .day-info p { font-size: 0.85rem; color: var(--text-dim); margin-top: 0.3rem; }
+        
+        /* Timeline */
+        .schedule { position: relative; padding-left: 2.5rem; }
+        .schedule::before { content: ''; position: absolute; left: 0.5rem; top: 0; bottom: 0; width: 2px; background: var(--border); }
+        
+        .schedule-item { position: relative; margin-bottom: 2rem; padding: 1.5rem; background: var(--card); border: 1px solid var(--border); border-radius: 12px; transition: all 0.3s; }
+        .schedule-item:hover { border-color: var(--gold); transform: translateX(4px); }
+        .schedule-item::before { content: ''; position: absolute; left: -2.25rem; top: 1.5rem; width: 12px; height: 12px; border-radius: 50%; border: 3px solid var(--bg); }
+        .schedule-item.d1::before { background: var(--gold); }
+        .schedule-item.d2::before { background: var(--blue); }
+        .schedule-item.d3::before { background: var(--green); }
+        
+        .schedule-time { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .schedule-item.d1 .schedule-time { color: var(--gold); }
+        .schedule-item.d2 .schedule-time { color: var(--blue); }
+        .schedule-item.d3 .schedule-time { color: var(--green); }
+        
+        .schedule-title { font-size: 1.1rem; font-weight: 400; margin-bottom: 0.5rem; }
+        .schedule-desc { font-size: 0.85rem; color: var(--text-dim); }
+        
+        .schedule-detail { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+        .schedule-detail table { width: 100%; font-size: 0.85rem; }
+        .schedule-detail td { padding: 0.4rem 0; border: none; }
+        .schedule-detail td:first-child { color: var(--text-dim); width: 100px; }
+        
+        /* Tags */
+        .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.7rem; margin-right: 0.3rem; margin-bottom: 0.3rem; }
+        .badge-gold { background: rgba(200,164,92,0.15); color: var(--gold); }
+        .badge-green { background: rgba(76,175,80,0.15); color: var(--green); }
+        .badge-blue { background: rgba(66,165,245,0.15); color: var(--blue); }
+        .badge-red { background: rgba(239,83,80,0.15); color: var(--red); }
+        .badge-purple { background: rgba(171,71,188,0.15); color: var(--purple); }
+        .badge-orange { background: rgba(255,152,0,0.15); color: var(--orange); }
+        
+        /* Callout boxes */
+        .callout { padding: 1.2rem; border-radius: 8px; margin: 1.5rem 0; }
+        .callout-tip { background: rgba(76,175,80,0.08); border-left: 3px solid var(--green); }
+        .callout-warn { background: rgba(239,83,80,0.08); border-left: 3px solid var(--red); }
+        .callout-info { background: rgba(200,164,92,0.08); border-left: 3px solid var(--gold); }
+        .callout-script { background: rgba(66,165,245,0.08); border-left: 3px solid var(--blue); }
+        .callout strong { display: block; margin-bottom: 0.5rem; }
+        
+        /* Script dialog */
+        .dialog { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; margin-bottom: 1rem; }
+        .dialog-label { font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+        .dialog-text { font-size: 0.9rem; line-height: 1.8; }
+        .dialog-text .you { color: var(--gold); }
+        .dialog-text .them { color: var(--blue); }
+        .dialog-text .note { color: var(--text-dim); font-size: 0.8rem; font-style: italic; }
+        
+        /* Grid */
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+        
+        /* Cards */
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+        .card-title { font-size: 1.1rem; color: var(--gold); margin-bottom: 1rem; }
+        
+        /* KPI */
+        .kpi { text-align: center; padding: 1.5rem; background: var(--card); border: 1px solid var(--border); border-radius: 12px; }
+        .kpi-num { font-size: 2rem; font-weight: 300; color: var(--gold-light); }
+        .kpi-label { font-size: 0.75rem; color: var(--text-dim); margin-top: 0.3rem; letter-spacing: 0.1em; }
+        
+        /* Checklist */
+        .checklist { list-style: none; }
+        .checklist li { padding: 0.6rem 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; display: flex; align-items: flex-start; gap: 0.8rem; }
+        .checklist li:last-child { border: none; }
+        .check-icon { flex-shrink: 0; width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; margin-top: 2px; }
+        .check-icon.must { background: rgba(239,83,80,0.2); color: var(--red); }
+        .check-icon.should { background: rgba(200,164,92,0.2); color: var(--gold); }
+        .check-icon.nice { background: rgba(76,175,80,0.2); color: var(--green); }
+        
+        /* Table */
+        table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+        th { text-align: left; padding: 0.8rem; font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+        td { padding: 0.8rem; font-size: 0.85rem; border-bottom: 1px solid var(--border); }
+        tr:hover td { background: rgba(200,164,92,0.03); }
+        
+        /* Packing list */
+        .pack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+        .pack-item { display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
+        .pack-icon { font-size: 1.3rem; }
+        .pack-name { font-size: 0.85rem; }
+        .pack-why { font-size: 0.75rem; color: var(--text-dim); }
+        
+        /* Chart */
+        .chart-wrapper { position: relative; height: 300px; }
+        
+        /* Footer */
+        .footer { text-align: center; padding: 3rem; color: var(--text-dim); font-size: 0.8rem; border-top: 1px solid var(--border); }
+        
+        /* Nav dots */
+        .nav-dots { position: fixed; right: 2rem; top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 0.8rem; }
+        .nav-dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--text-dim); cursor: pointer; transition: all 0.3s; }
+        .nav-dot:hover, .nav-dot.active { background: var(--gold); border-color: var(--gold); }
+        
+        /* Separator */
+        .sep { height: 1px; background: var(--border); margin: 3rem 0; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero .days-preview { flex-direction: column; gap: 0.8rem; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .nav-dots { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Nav Dots -->
+<div class="nav-dots">
+    <div class="nav-dot" onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})" title="总览"></div>
+    <div class="nav-dot" onclick="document.getElementById('prep').scrollIntoView({behavior:'smooth'})" title="出发前"></div>
+    <div class="nav-dot" onclick="document.getElementById('day1').scrollIntoView({behavior:'smooth'})" title="Day 1"></div>
+    <div class="nav-dot" onclick="document.getElementById('day2').scrollIntoView({behavior:'smooth'})" title="Day 2"></div>
+    <div class="nav-dot" onclick="document.getElementById('day3').scrollIntoView({behavior:'smooth'})" title="Day 3"></div>
+    <div class="nav-dot" onclick="document.getElementById('scripts').scrollIntoView({behavior:'smooth'})" title="谈判话术"></div>
+    <div class="nav-dot" onclick="document.getElementById('after').scrollIntoView({behavior:'smooth'})" title="回来后"></div>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+    <div>
+        <h1>广州3天考察实战手册</h1>
+        <p class="subtitle">木子菲儿 · 女装带货创业</p>
+        <p class="tagline">"看货 → 拿货 → 谈判，精确到每个小时"</p>
+        <div class="days-preview">
+            <div class="day-chip d1">Day 1 · 十三行商圈</div>
+            <div class="day-chip d2">Day 2 · 火车站商圈</div>
+            <div class="day-chip d3">Day 3 · 沙河 + 复盘</div>
+        </div>
+    </div>
+</section>
+
+<!-- 总览 -->
+<section class="section" id="overview">
+    <h2 class="section-title">📋 3天总览</h2>
+    <p class="section-subtitle">每天的目标、预算、核心任务</p>
+    
+    <div class="grid-4" style="margin-bottom: 2rem;">
+        <div class="kpi">
+            <div class="kpi-num">3天</div>
+            <div class="kpi-label">考察周期</div>
+        </div>
+        <div class="kpi">
+            <div class="kpi-num">30+</div>
+            <div class="kpi-label">目标档口数</div>
+        </div>
+        <div class="kpi">
+            <div class="kpi-num">10-15款</div>
+            <div class="kpi-label">首批拿货</div>
+        </div>
+        <div class="kpi">
+            <div class="kpi-num">5000-8000</div>
+            <div class="kpi-label">总预算（元）</div>
+        </div>
+    </div>
+    
+    <!-- 3天对比表 -->
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th style="color:var(--gold);">Day 1 · 十三行</th>
+                <th style="color:var(--blue);">Day 2 · 火车站</th>
+                <th style="color:var(--green);">Day 3 · 沙河+复盘</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>核心目标</strong></td>
+                <td>找中高端原创档口</td>
+                <td>找韩系质感档口</td>
+                <td>了解底价 + 复盘决策</td>
+            </tr>
+            <tr>
+                <td><strong>重点市场</strong></td>
+                <td>新中国大厦4-8楼<br>红遍天大厦</td>
+                <td>汇美2-3楼<br>apM + UUS</td>
+                <td>沙河南城<br>酒店复盘</td>
+            </tr>
+            <tr>
+                <td><strong>拿货策略</strong></td>
+                <td>只看+加微信<br>下午小量试拿</td>
+                <td>精选5-8款下单</td>
+                <td>补货+谈代发合作</td>
+            </tr>
+            <tr>
+                <td><strong>预算</strong></td>
+                <td>1000-2000元</td>
+                <td>2000-3000元</td>
+                <td>1000-2000元</td>
+            </tr>
+            <tr>
+                <td><strong>交通</strong></td>
+                <td>地铁6号线文化公园D口</td>
+                <td>地铁2/5号线广州火车站</td>
+                <td>地铁6号线沙河顶</td>
+            </tr>
+            <tr>
+                <td><strong>起床时间</strong></td>
+                <td>5:30</td>
+                <td>7:00</td>
+                <td>7:00</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- 预算分配图 -->
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-title">💰 预算分配</div>
+            <div class="chart-wrapper">
+                <canvas id="budgetChart"></canvas>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-title">🎯 3天核心产出</div>
+            <ul class="checklist">
+                <li><div class="check-icon must">必</div>加30+档口微信（含价格表）</li>
+                <li><div class="check-icon must">必</div>拿10-15款样品（自己穿洗测质量）</li>
+                <li><div class="check-icon must">必</div>拍100+款衣服照片（回去做选品表）</li>
+                <li><div class="check-icon should">应</div>谈3-5家一件代发合作意向</li>
+                <li><div class="check-icon should">应</div>拍3-5条考察vlog素材</li>
+                <li><div class="check-icon nice">佳</div>了解面料成本（为日后定制做准备）</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- 出发前准备 -->
+<section class="section" id="prep">
+    <h2 class="section-title">🎒 出发前准备清单</h2>
+    <p class="section-subtitle">工欲善其事，必先利其器</p>
+    
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-title">📦 必带装备</div>
+            <div class="pack-grid">
+                <div class="pack-item">
+                    <div class="pack-icon">📏</div>
+                    <div><div class="pack-name">软尺（卷尺）</div><div class="pack-why">量衣服尺寸，对比档口标注</div></div>
+                </div>
+                <div class="pack-item">
+                    <div class="pack-icon">🔋</div>
+                    <div><div class="pack-name">充电宝</div><div class="pack-why">全天拍照+微信，手机耗电快</div></div>
+                </div>
+                <div class="pack-item">
+                    <div class="pack-icon">🛒</div>
+                    <div><div class="pack-name">折叠小推车</div><div class="pack-why">拿货多了拖着走，省体力</div></div>
+                </div>
+                <div class="pack-item">
+                    <div class="pack-icon">👟</div>
+                    <div><div class="pack-name">舒适平底鞋</div><div class="pack-why">全天走路2万步+</div></div>
+                </div>
+                <div class="pack-item">
+                    <div class="pack-icon">📝</div>
+                    <div><div class="pack-name">记录本+笔</div><div class="pack-why">档口编号+价格速记</div></div>
+                </div>
+                <div class="pack-item">
+                    <div class="pack-icon">📱</div>
+                    <div><div class="pack-name">手机备忘录模板</div><div class="pack-why">提前建好记录格式</div></div>
+                </div>
+                <div class="pack-item">
+                    <div class="pack-icon">👜</div>
+                    <div><div class="pack-name">大袋子/编织袋</div><div class="pack-why">装拿到的货</div></div>
+                </div>
+                <div class="pack-item">
+                    <div class="pack-icon">💵</div>
+                    <div><div class="pack-name">现金500元</div><div class="pack-why">部分档口只收现金</div></div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-title">📱 手机备忘录模板（提前建好）</div>
+            <div style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; font-size: 0.85rem; font-family: monospace; line-height: 1.8;">
+                <div style="color: var(--gold);">━━━ 档口记录模板 ━━━</div>
+                档口名：<br>
+                位置：X楼X号<br>
+                风格：<br>
+                批发价区间：<br>
+                起批量：<br>
+                是否支持代发：<br>
+                质量评级：A/B/C<br>
+                出片率：★★★★★<br>
+                微信：已加/未加<br>
+                备注：<br>
+                <br>
+                <div style="color: var(--gold);">━━━ 质量评级标准 ━━━</div>
+                A级 = 面料好+走线整齐+可直接上架<br>
+                B级 = 尚可，需降价处理<br>
+                C级 = 质量差，不合作<br>
+            </div>
+        </div>
+    </div>
+    
+    <div class="callout callout-info">
+        <strong>💡 穿着建议</strong>
+        穿简约有质感的衣服（你本身就是摄影博主），不要太华丽也不要太随意。档口小妹会根据你的穿着判断你是不是"行内人"。穿得像一个有品味的买手，她们会更认真对待你。
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- DAY 1 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="day1">
+    <div class="day-header d1">
+        <div class="day-num">01</div>
+        <div class="day-info">
+            <h3>十三行商圈 · 找中高端原创</h3>
+            <p>新中国大厦 + 红遍天 ｜ 你的核心选品战场 ｜ 预算1000-2000元</p>
+        </div>
+    </div>
+    
+    <div class="callout callout-warn">
+        <strong>⏰ 关键提醒</strong>
+        新中国大厦1-3楼 6:30开门，4楼以上 8:30开门。下午3点开始收摊！必须早到！<br>
+        交通：地铁6号线「文化公园站」D口出，步行3分钟。不要开车，常年堵车。
+    </div>
+    
+    <div class="schedule">
+        <!-- 7:00 -->
+        <div class="schedule-item d1">
+            <div class="schedule-time">07:00 - 08:30 · 热身</div>
+            <div class="schedule-title">新中国大厦 1-3楼 · 只看不动手</div>
+            <div class="schedule-desc">
+                这层是走量区，价格最低但同质化严重。你的目的不是在这里拿货，而是：<br>
+                ① 了解最低价位（心里有底价）<br>
+                ② 观察什么款卖得好（看哪些档口排队）<br>
+                ③ 练眼力——快速判断面料和做工
+            </div>
+            <div class="schedule-detail">
+                <table>
+                    <tr><td>看什么</td><td>面料手感、走线、扣子/拉链质量</td></tr>
+                    <tr><td>记什么</td><td>爆款样式、价格区间、档口号</td></tr>
+                    <tr><td>做什么</td><td>拍照记录，不加微信（效率太低）</td></tr>
+                    <tr><td>避坑</td><td><span class="badge badge-red">3楼多炒货</span> 同款多店出现=中间商</td></tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- 8:30 -->
+        <div class="schedule-item d1">
+            <div class="schedule-time">08:30 - 12:00 · 核心战场</div>
+            <div class="schedule-title">新中国大厦 4-8楼 · 原创设计区（重点！）</div>
+            <div class="schedule-desc">
+                这是你的主战场。4楼以上都是原创档口，品质远高于楼下。<br>
+                每层逛30-40分钟，重点档口停留更久。
+            </div>
+            <div class="schedule-detail">
+                <table>
+                    <tr><td>4楼</td><td>基础原创款，价格适中，适合你的"基础款60%"</td></tr>
+                    <tr><td>5-6楼</td><td><span class="badge badge-gold">核心层</span> 实力档口集中，设计感+品质最佳</td></tr>
+                    <tr><td>7楼</td><td>ZYGODDESS（C28-29）韩系小女人，温柔减龄</td></tr>
+                    <tr><td>8楼</td><td><span class="badge badge-gold">云裳阁</span> 轻奢通勤，原色面料，复购率60%+</td></tr>
+                </table>
+            </div>
+            <div class="callout callout-tip" style="margin-top: 1rem;">
+                <strong>✅ 每个档口的标准动作（30秒完成）</strong>
+                ① 摸面料 → ② 看走线 → ③ 翻洗标 → ④ 拉伸测试 → ⑤ 拍照 → ⑥ 问价+起批量 → ⑦ 加微信 → ⑧ 记录<br>
+                <span style="color: var(--text-dim); font-size: 0.8rem;">如果感觉特别好 → 多聊几句，问能不能一件代发</span>
+            </div>
+        </div>
+        
+        <!-- 12:00 -->
+        <div class="schedule-item d1">
+            <div class="schedule-time">12:00 - 13:00 · 午休</div>
+            <div class="schedule-title">附近吃饭 + 整理上午记录</div>
+            <div class="schedule-desc">
+                十三行附近有很多快餐店。吃饭时打开手机备忘录：<br>
+                ① 给上午看的档口打ABC评级<br>
+                ② 标记"下午要回去重点谈"的3-5家<br>
+                ③ 发一条朋友圈/小红书story（"广州拿货Day1"）
+            </div>
+        </div>
+        
+        <!-- 13:00 -->
+        <div class="schedule-item d1">
+            <div class="schedule-time">13:00 - 15:00 · 精选+小量拿货</div>
+            <div class="schedule-title">回到上午标记的A级档口 · 精选下单</div>
+            <div class="schedule-desc">
+                带着上午的评级回去，只找A级档口：<br>
+                ① 精选5-8款（基础款3-4件 + 设计款2-3件）<br>
+                ② 每款拿3-5件（凑够起批量）<br>
+                ③ 现场验货：量尺寸、检查瑕疵<br>
+                ④ 谈退换规则（质量问题能换吗？）
+            </div>
+            <div class="schedule-detail">
+                <table>
+                    <tr><td>目标</td><td>5-8款 × 3-5件 = 15-40件</td></tr>
+                    <tr><td>预算</td><td>1000-2000元（批发价50-200元/件）</td></tr>
+                    <tr><td>必问</td><td>起批量 / 补货周期 / 退换规则 / 能否代发</td></tr>
+                    <tr><td>必做</td><td>微信转账留记录 + 拍照确认款式</td></tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- 15:00 -->
+        <div class="schedule-item d1">
+            <div class="schedule-time">15:00 - 17:00 · 红遍天大厦</div>
+            <div class="schedule-title">红遍天 · 平价基础款补充</div>
+            <div class="schedule-desc">
+                红遍天以平价韩系休闲为主，单价30-100元。<br>
+                这里适合找你的"引流款"——价格低、好搭配、出片还行。<br>
+                挑2-3家拿3-5款基础款（白T、黑裤、基础针织）。
+            </div>
+            <div class="schedule-detail">
+                <table>
+                    <tr><td>目标</td><td>3-5款基础引流款</td></tr>
+                    <tr><td>预算</td><td>300-500元</td></tr>
+                    <tr><td>注意</td><td><span class="badge badge-red">16:30后收摊</span> 别去太晚</td></tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- 晚上 -->
+        <div class="schedule-item d1">
+            <div class="schedule-time">18:00 - 20:00 · 晚间复盘</div>
+            <div class="schedule-title">酒店复盘 · 整理Day1数据</div>
+            <div class="schedule-desc">
+                回到酒店后做3件事：<br>
+                ① 建Excel表：档口名/微信/款式/批发价/起批量/质量评级/代发意向<br>
+                ② 给所有档口分类：A（重点合作）/ B（备选）/ C（不合作）<br>
+                ③ 规划Day2路线（根据今天了解的情况调整）
+            </div>
+        </div>
+    </div>
+    
+    <div class="callout callout-info">
+        <strong>📊 Day1 目标产出</strong>
+        加微信 15-20个档口 ｜ 拿货 8-13款 ｜ 拍照 50+款 ｜ 建初始选品表
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- DAY 2 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="day2">
+    <div class="day-header d2">
+        <div class="day-num">02</div>
+        <div class="day-info">
+            <h3>火车站商圈 · 找韩系质感款</h3>
+            <p>汇美 + apM + UUS ｜ 中高端韩版集中地 ｜ 预算2000-3000元</p>
+        </div>
+    </div>
+    
+    <div class="callout callout-warn">
+        <strong>⏰ 关键提醒</strong>
+        火车站商圈 8:30-18:30 营业，比十三行晚开门，不用太早到。<br>
+        交通：地铁2号线/5号线「广州火车站」D4出口。白马在火车站正对面。
+    </div>
+    
+    <div class="schedule">
+        <!-- 9:00 -->
+        <div class="schedule-item d2">
+            <div class="schedule-time">09:00 - 12:00 · 汇美国际</div>
+            <div class="schedule-title">汇美 2-3楼 · 韩系原创核心区</div>
+            <div class="schedule-desc">
+                汇美是你的"质感担当"。2-3楼集中了十三行与深圳南油的高端品牌：<br>
+                • 极简老钱风（Wondah Lane）<br>
+                • 通勤针织（云朵 + YOUNGLINX）<br>
+                • 轻国风/度假风（MEGA）<br>
+                <strong>重点：汇美支持零售！</strong>可以单件买回来测试质量。
+            </div>
+            <div class="schedule-detail">
+                <table>
+                    <tr><td>策略</td><td>先买2-3件零售（测试质量），好的再谈批量/代发</td></tr>
+                    <tr><td>重点看</td><td>面料质感、版型、上身效果（你是摄影师，眼光要毒）</td></tr>
+                    <tr><td>价格</td><td>零售比批发贵30-50%，但能单件拿=零风险试错</td></tr>
+                    <tr><td>6楼</td><td>品牌展贸中心，有小众设计师品牌，值得逛</td></tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- 12:00 -->
+        <div class="schedule-item d2">
+            <div class="schedule-time">12:00 - 13:00 · 午休</div>
+            <div class="schedule-title">附近吃饭 + 整理上午记录</div>
+            <div class="schedule-desc">
+                同Day1，吃饭时整理上午数据，标记下午重点目标。
+            </div>
+        </div>
+        
+        <!-- 13:00 -->
+        <div class="schedule-item d2">
+            <div class="schedule-time">13:00 - 15:00 · apM时代国际</div>
+            <div class="schedule-title">apM · 原创设计高地（性价比之选）</div>
+            <div class="schedule-desc">
+                抖音评论真实反馈：<br>
+                <em style="color: var(--text-dim);">"apM真的可以冲""apM款式比较潮""一马apM勉强买了两件以对得起逛了一整天的心情"</em><br><br>
+                apM是原创设计集中地，款式潮、撞款率低。部分档口支持零售。<br>
+                负1-2楼女装人流最密，适合挑小众设计款。
+            </div>
+            <div class="schedule-detail">
+                <table>
+                    <tr><td>策略</td><td>找3-5家风格匹配的档口，深度聊</td></tr>
+                    <tr><td>重点问</td><td>能否一件代发？代发价多少？发货时效？</td></tr>
+                    <tr><td>优势</td><td><span class="badge badge-blue">比白马便宜</span> 同品质比火车站其他市场低20-30%</td></tr>
+                    <tr><td>注意</td><td>周末人多，工作日去更好谈价</td></tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- 15:00 -->
+        <div class="schedule-item d2">
+            <div class="schedule-time">15:00 - 17:00 · UUS</div>
+            <div class="schedule-title">UUS九龙国际 · 韩国东大门同款</div>
+            <div class="schedule-desc">
+                UUS是品质天花板（抖音评论："uus和汇美先系天花板"）。<br>
+                1/3档口韩国直营，款式同步国际潮流。<br>
+                <strong>但价格也是天花板</strong>，适合你的"形象款10%"定位。
+            </div>
+            <div class="schedule-detail">
+                <table>
+                    <tr><td>策略</td><td>只挑2-3款"形象款"（高端设计师款）</td></tr>
+                    <tr><td>价格</td><td>150-500元/件，零售更贵</td></tr>
+                    <tr><td>适合</td><td>你的"形象款10%"——提升调性、吸引高端用户</td></tr>
+                    <tr><td>注意</td><td><span class="badge badge-red">17:00前必须到</span> 很多档口16:30开始收</td></tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- 晚上 -->
+        <div class="schedule-item d2">
+            <div class="schedule-time">18:00 - 20:00 · 晚间复盘</div>
+            <div class="schedule-title">酒店复盘 · 两天数据汇总</div>
+            <div class="schedule-desc">
+                ① 汇总Day1+Day2所有档口数据<br>
+                ② 排出"Top 10 合作意向档口"<br>
+                ③ 规划Day3：哪些要回去谈代发？哪些要补货？<br>
+                ④ 发1条小红书（"广州拿货Day2"vlog素材）
+            </div>
+        </div>
+    </div>
+    
+    <div class="callout callout-info">
+        <strong>📊 Day2 目标产出</strong>
+        加微信 10-15个档口 ｜ 拿货/买样 5-10款 ｜ 拍照 50+款 ｜ 确定Top10合作意向
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- DAY 3 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="day3">
+    <div class="day-header d3">
+        <div class="day-num">03</div>
+        <div class="day-info">
+            <h3>沙河 + 复盘决策 · 了解底价 + 敲定合作</h3>
+            <p>沙河南城 + 酒店深度复盘 ｜ 建立价格锚点 ｜ 谈代发合作</p>
+        </div>
+    </div>
+    
+    <div class="callout callout-warn">
+        <strong>⏰ 关键提醒</strong>
+        沙河凌晨3-4点就开门！上午10点后很多档口就关了。必须早到！<br>
+        交通：地铁6号线「沙河顶」B出口。
+    </div>
+    
+    <div class="schedule">
+        <!-- 6:00 -->
+        <div class="schedule-item d3">
+            <div class="schedule-time">06:00 - 09:00 · 沙河</div>
+            <div class="schedule-title">沙河南城 · 了解行业底价</div>
+            <div class="schedule-desc">
+                沙河不是你的主战场，但必须来——<br>
+                <strong>目的是建立"价格锚点"</strong>，知道最低底价在哪，日后在十三行/火车站看到同款才不会被坑。<br><br>
+                南城分布：1楼裤子配饰、2楼电商品类、3-4楼网红设计师款、5楼新改造区。
+            </div>
+            <div class="schedule-detail">
+                <table>
+                    <tr><td>看什么</td><td>同款在沙河的最低价 vs 十三行的价格 → 差价就是利润空间</td></tr>
+                    <tr><td>拿什么</td><td>挑2-3款"引流款"（十几元的短袖、几十元的套装）</td></tr>
+                    <tr><td>注意</td><td><span class="badge badge-red">同质化严重</span> 很多款在小红书已经烂大街</td></tr>
+                    <tr><td>时间</td><td><span class="badge badge-red">10:00前必须离开</span> 之后档口陆续关门</td></tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- 10:00 -->
+        <div class="schedule-item d3">
+            <div class="schedule-time">10:00 - 12:00 · 回马枪</div>
+            <div class="schedule-title">回到Day1/Day2的A级档口 · 深度谈判</div>
+            <div class="schedule-desc">
+                带着前两天的数据，回到你最看好的3-5家档口，正式谈合作：<br>
+                ① 表达长期合作意向（"我是小红书博主，后续会稳定出单"）<br>
+                ② 谈一件代发价格和规则<br>
+                ③ 谈补货周期和退换规则<br>
+                ④ 要产品图/面料卡/尺码表
+            </div>
+            <div class="schedule-detail">
+                <table>
+                    <tr><td>谈判重点</td><td>见下方"谈判话术"章节</td></tr>
+                    <tr><td>目标</td><td>敲定3-5家一件代发合作</td></tr>
+                    <tr><td>必拿</td><td>代发价格表 + 发货时效承诺 + 退换货规则</td></tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- 12:00 -->
+        <div class="schedule-item d3">
+            <div class="schedule-time">12:00 - 14:00 · 午饭 + 补货</div>
+            <div class="schedule-title">最后补货 + 采购包装材料</div>
+            <div class="schedule-desc">
+                ① 回去补拿前几天看中的款（追加A级品）<br>
+                ② 如果需要自己发货，采购包装材料（快递袋、感谢卡等）<br>
+                ③ 买些广州特产回去（顺便拍个vlog素材）
+            </div>
+        </div>
+        
+        <!-- 14:00 -->
+        <div class="schedule-item d3">
+            <div class="schedule-time">14:00 - 18:00 · 深度复盘</div>
+            <div class="schedule-title">酒店深度复盘 · 制定后续计划</div>
+            <div class="schedule-desc">
+                这是3天中最重要的一步。坐在酒店里，把所有数据整理成可执行的计划：
+            </div>
+            <div class="schedule-detail">
+                <table>
+                    <tr>
+                        <td>① 选品表</td>
+                        <td>整理所有款式照片 → 建Excel：款号/档口/批发价/代发价/零售价/质量评级/出片率</td>
+                    </tr>
+                    <tr>
+                        <td>② 供应商分级</td>
+                        <td>A级（3-5家，核心合作）/ B级（5-10家，备选）/ C级（淘汰）</td>
+                    </tr>
+                    <tr>
+                        <td>③ 成本核算</td>
+                        <td>每款成本 = 批发价 + 运费 + 包装 + 平台佣金 → 确定零售价</td>
+                    </tr>
+                    <tr>
+                        <td>④ 内容计划</td>
+                        <td>用3天拍的素材，规划未来2周的小红书内容</td>
+                    </tr>
+                    <tr>
+                        <td>⑤ 上线计划</td>
+                        <td>回去后第1天：上架首批10款 → 第2天：发3条笔记 → 第3天：分析数据</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="callout callout-info">
+        <strong>📊 Day3 目标产出</strong>
+        敲定3-5家代发合作 ｜ 完成选品表 ｜ 成本核算完毕 ｜ 回去后立刻能上线
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 谈判话术 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="scripts">
+    <h2 class="section-title">💬 谈判话术手册</h2>
+    <p class="section-subtitle">直接照着说，不用临场发挥</p>
+    
+    <!-- 场景1 -->
+    <h3 style="color: var(--gold); margin-bottom: 1rem;">场景1：第一次进档口（看货+加微信）</h3>
+    <div class="dialog">
+        <div class="dialog-label">你说</div>
+        <div class="dialog-text">
+            <span class="you">"老板你好，我是做小红书穿搭博主的，粉丝一万多（适当夸大），想看看你们家的款，有没有最新的产品图册？"</span>
+        </div>
+    </div>
+    <div class="dialog">
+        <div class="dialog-label">档口回应</div>
+        <div class="dialog-text">
+            <span class="them">"有的有的，你看喜欢哪些款？"</span>
+        </div>
+    </div>
+    <div class="dialog">
+        <div class="dialog-label">你说</div>
+        <div class="dialog-text">
+            <span class="you">"我先看看，这款怎么拿？什么价？起批多少？"</span><br>
+            <span class="note">（摸面料、看走线、拉伸测试）</span><br>
+            <span class="you">"质量还不错。我先加个微信，后面稳定拿货方便联系。你们支持一件代发吗？"</span>
+        </div>
+    </div>
+    <div class="callout callout-tip">
+        <strong>💡 要点</strong>
+        第一次不要表现得太急。先建立关系，让对方觉得你是"有潜力"的客户。说"小红书博主"比说"新手创业"更有分量。
+    </div>
+    
+    <div class="sep"></div>
+    
+    <!-- 场景2 -->
+    <h3 style="color: var(--gold); margin-bottom: 1rem;">场景2：小量拿货（Day1下午）</h3>
+    <div class="dialog">
+        <div class="dialog-label">你说</div>
+        <div class="dialog-text">
+            <span class="you">"老板，我上午在你这看了一圈，这几款我都很喜欢。我先拿几件回去拍内容，如果粉丝反馈好，后面会稳定补货。这几款能混批吗？"</span>
+        </div>
+    </div>
+    <div class="dialog">
+        <div class="dialog-label">档口回应</div>
+        <div class="dialog-text">
+            <span class="them">"我们5件起批哦，单款5件。"</span>
+        </div>
+    </div>
+    <div class="dialog">
+        <div class="dialog-label">你说</div>
+        <div class="dialog-text">
+            <span class="you">"那我选5个款，每款拿1件，凑够25件可以吗？后面卖得好我再按你们的起批量来。"</span><br>
+            <span class="note">（混批是关键！很多档口接受多款混凑起批量）</span>
+        </div>
+    </div>
+    <div class="dialog">
+        <div class="dialog-label">你说（拿货时验货）</div>
+        <div class="dialog-text">
+            <span class="you">"帮我检查一下，有没有线头、色差、拉链问题。如果有质量问题，能换吗？"</span><br>
+            <span class="note">（提前把退换规则说清楚，避免后续扯皮）</span>
+        </div>
+    </div>
+    
+    <div class="sep"></div>
+    
+    <!-- 场景3 -->
+    <h3 style="color: var(--gold); margin-bottom: 1rem;">场景3：谈一件代发合作（Day3重点）</h3>
+    <div class="dialog">
+        <div class="dialog-label">你说</div>
+        <div class="dialog-text">
+            <span class="you">"老板，我前两天在你这拿了几个款，拍成内容发小红书，粉丝反馈很好。我想跟你谈个长期合作——你帮我一件代发，我负责出内容卖货。"</span>
+        </div>
+    </div>
+    <div class="dialog">
+        <div class="dialog-label">档口回应</div>
+        <div class="dialog-text">
+            <span class="them">"可以的，代发价比批发价贵10-20块。"</span>
+        </div>
+    </div>
+    <div class="dialog">
+        <div class="dialog-label">你说</div>
+        <div class="dialog-text">
+            <span class="you">"了解。那我有几个问题想确认一下：<br>
+            ① 发货时效——下单后多久能发？<br>
+            ② 退换货——质量问题怎么处理？客户不喜欢能退吗？<br>
+            ③ 库存同步——我怎么知道哪个码还有货？<br>
+            ④ 如果量起来了，代发价能不能再优惠？"</span>
+        </div>
+    </div>
+    <div class="callout callout-script">
+        <strong>📋 必须拿到的信息</strong>
+        ✅ 代发价格表（每个款的代发价）<br>
+        ✅ 发货时效（24小时内/48小时内）<br>
+        ✅ 退换货规则（质量问题包退？非质量问题怎么处理？）<br>
+        ✅ 库存查询方式（微信群？小程序？每天发库存表？）<br>
+        ✅ 结算方式（先付款后发？月结？微信转账？）
+    </div>
+    
+    <div class="sep"></div>
+    
+    <!-- 场景4 -->
+    <h3 style="color: var(--gold); margin-bottom: 1rem;">场景4：压价话术</h3>
+    <div class="dialog">
+        <div class="dialog-label">❌ 错误说法</div>
+        <div class="dialog-text">
+            <span class="note">"能不能便宜点？" → 太笼统，对方直接说"不能"</span>
+        </div>
+    </div>
+    <div class="dialog">
+        <div class="dialog-label">✅ 正确说法</div>
+        <div class="dialog-text">
+            <span class="you">"老板，我算了下，如果我每月稳定出50件以上，这款代发价能不能从120降到100？我给你看我的小红书数据——我上条笔记曝光5万，转化率3%。"</span>
+        </div>
+    </div>
+    <div class="callout callout-tip">
+        <strong>💡 压价核心逻辑</strong>
+        ① 用数据说话（粉丝数、曝光量、转化率）<br>
+        ② 给承诺（"每月稳定出X件"）<br>
+        ③ 给价值（"我能帮你打品牌、做内容"）<br>
+        ④ 不要第一次就压价——先拿2-3次建立关系，第3次再谈
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 回来后 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="after">
+    <h2 class="section-title">🏠 回来后7天执行表</h2>
+    <p class="section-subtitle">考察的价值在于回来后的执行</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>天数</th>
+                <th>核心任务</th>
+                <th>具体动作</th>
+                <th>产出</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Day 1</strong></td>
+                <td>样品到手 + 质量测试</td>
+                <td>收到快递 → 逐件检查 → 穿洗测试 → 拍照</td>
+                <td>质量评级表（ABC）</td>
+            </tr>
+            <tr>
+                <td><strong>Day 2</strong></td>
+                <td>上架首批商品</td>
+                <td>选10款A级品 → 拍主图（你亲自穿+拍氛围感）→ 写详情 → 上架</td>
+                <td>小红书店铺上线10款</td>
+            </tr>
+            <tr>
+                <td><strong>Day 3</strong></td>
+                <td>发布首批内容</td>
+                <td>发3条笔记（穿搭+拍照教学+挂链接）</td>
+                <td>3条带货笔记上线</td>
+            </tr>
+            <tr>
+                <td><strong>Day 4</strong></td>
+                <td>发考察vlog</td>
+                <td>剪辑广州考察素材 → 发"跟模特去广州拿货"vlog</td>
+                <td>1条vlog（建立信任）</td>
+            </tr>
+            <tr>
+                <td><strong>Day 5-6</strong></td>
+                <td>持续发内容</td>
+                <td>每天1-2条笔记，测试不同类型</td>
+                <td>4条笔记</td>
+            </tr>
+            <tr>
+                <td><strong>Day 7</strong></td>
+                <td>首次数据复盘</td>
+                <td>分析7天数据：点击率/转化率/佣金收入 → 淘汰C级品 → 追加A级品</td>
+                <td>数据复盘报告</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="callout callout-info">
+        <strong>💡 7天目标</strong>
+        上架10款 ｜ 发布10条笔记 ｜ 出第一单 ｜ 收入500-2000元
+    </div>
+    
+    <div class="sep"></div>
+    
+    <!-- 总结 -->
+    <div class="card" style="border-color: var(--gold); text-align: center; padding: 3rem;">
+        <div style="font-size: 1.5rem; color: var(--gold); margin-bottom: 1rem;">3天考察 · 7天上线 · 30天见结果</div>
+        <div style="font-size: 1rem; color: var(--text-dim); line-height: 2;">
+            投入：5000-8000元（含机酒+拿货）<br>
+            产出：30+档口资源 + 10-15款样品 + 代发合作 + 内容素材<br>
+            30天目标：月入1000-3000元（保守）<br><br>
+            <span style="color: var(--gold); font-size: 1.1rem;">"你不需要懂供应链，你只需要懂什么是好货。<br>而这，恰恰是你10年模特经验给你的礼物。"</span>
+        </div>
+    </div>
+</section>
+
+<div class="footer">
+    <p>木子菲儿 · 广州3天考察实战手册 · 2026</p>
+    <p style="margin-top: 0.5rem; color: var(--gold);">"看货 → 拿货 → 谈判，精确到每个小时"</p>
+</div>
+
+<script>
+// Budget Chart
+new Chart(document.getElementById('budgetChart'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Day1 十三行', 'Day2 火车站', 'Day3 沙河+补货', '机酒交通', '应急备用'],
+        datasets: [{
+            data: [1500, 2500, 1500, 3000, 1500],
+            backgroundColor: ['rgba(200,164,92,0.7)', 'rgba(66,165,245,0.7)', 'rgba(76,175,80,0.7)', 'rgba(171,71,188,0.7)', 'rgba(255,152,0,0.7)'],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'right', labels: { color: '#888', font: { size: 11 } } } }
+    }
+});
+
+// Nav dots active state
+const sections = ['overview','prep','day1','day2','day3','scripts','after'];
+const dots = document.querySelectorAll('.nav-dot');
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top < window.innerHeight / 2) current = id;
+    });
+    dots.forEach((dot, i) => {
+        dot.classList.toggle('active', sections[i] === current);
+    });
+});
+</script>
+
+</body>
+</html>

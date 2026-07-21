@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>木子菲儿 · 一件代发完整落地方案（含广州供应链数据）</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg: #0a0a0a;
+            --card: #141414;
+            --border: #222;
+            --gold: #c8a45c;
+            --gold-light: #e8c97a;
+            --text: #e8e8e8;
+            --text-dim: #888;
+            --green: #4caf50;
+            --red: #ef5350;
+            --blue: #42a5f5;
+            --purple: #ab47bc;
+            --orange: #ff9800;
+        }
+        
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            margin-top: 1rem;
+            letter-spacing: 0.3em;
+        }
+        
+        .hero .tagline {
+            font-size: 1.5rem;
+            color: var(--text);
+            margin-top: 2rem;
+            font-weight: 300;
+        }
+        
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-subtitle {
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+        }
+        
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+        
+        th {
+            text-align: left;
+            padding: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        td {
+            padding: 1rem;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        tr:hover td {
+            background: rgba(200,164,92,0.03);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+        
+        .badge-gold { background: rgba(200,164,92,0.15); color: var(--gold); }
+        .badge-green { background: rgba(76,175,80,0.15); color: var(--green); }
+        .badge-blue { background: rgba(66,165,245,0.15); color: var(--blue); }
+        .badge-red { background: rgba(239,83,80,0.15); color: var(--red); }
+        .badge-purple { background: rgba(171,71,188,0.15); color: var(--purple); }
+        .badge-orange { background: rgba(255,152,0,0.15); color: var(--orange); }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+        }
+        
+        .highlight {
+            background: rgba(200,164,92,0.1);
+            border-left: 3px solid var(--gold);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning {
+            background: rgba(239,83,80,0.1);
+            border-left: 3px solid var(--red);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .success {
+            background: rgba(76,175,80,0.1);
+            border-left: 3px solid var(--green);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid var(--border);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding: 1rem 0 1rem 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: 1.2rem;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+        
+        .timeline-day {
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+        }
+        
+        .timeline-content {
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+        
+        .market-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .market-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+        
+        .market-name {
+            font-size: 1.1rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+        
+        .market-info {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+        
+        .price-tag {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--bg);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .comment-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .comment-user {
+            font-size: 0.8rem;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+        
+        .comment-text {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+        
+        .comment-insight {
+            font-size: 0.8rem;
+            color: var(--green);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+        
+        .kpi-box {
+            text-align: center;
+            padding: 2rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+        
+        .kpi-number {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--gold-light);
+        }
+        
+        .kpi-label {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-top: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+
+<section class="hero">
+    <div>
+        <h1>木子菲儿</h1>
+        <p class="subtitle">一件代发 · 完整落地方案</p>
+        <p class="tagline">"线下考察 + 线上挂链接 = 零风险创业"</p>
+    </div>
+</section>
+
+<!-- 核心策略 -->
+<section class="section">
+    <h2 class="section-title">🎯 核心策略：线下考察 + 线上一件代发</h2>
+    <p class="section-subtitle">不囤货、不发货、零风险，只做内容和选品</p>
+    
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-title">📍 线下考察（3-5天）</div>
+            <div style="font-size: 0.9rem; line-height: 2;">
+                ✅ 实地了解供应链<br>
+                ✅ 摸面料、看版型、拍样品<br>
+                ✅ 加档口微信，建立供应商库<br>
+                ✅ 了解真实批发价，避免被线上坑<br>
+                ✅ 为线上选品提供判断依据
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-title">💻 线上一件代发（长期）</div>
+            <div style="font-size: 0.9rem; line-height: 2;">
+                ✅ 小红书选品中心挂链接<br>
+                ✅ 或对接档口做一件代发<br>
+                ✅ 只负责内容+选品<br>
+                ✅ 供应商负责发货+售后<br>
+                ✅ 佣金10-30%，零库存风险
+            </div>
+        </div>
+    </div>
+    
+    <div class="highlight">
+        <strong>💡 核心逻辑：</strong>线下考察是为了"懂货"，线上代发是为了"零风险"。你不需要囤货，但需要知道什么是好货。
+    </div>
+</section>
+
+<!-- 广州市场真实数据 -->
+<section class="section">
+    <h2 class="section-title">📊 广州女装市场真实数据</h2>
+    <p class="section-subtitle">基于你提供的参考数据整理</p>
+    
+    <div class="grid-4">
+        <div class="kpi-box">
+            <div class="kpi-number">5大</div>
+            <div class="kpi-label">核心商圈</div>
+        </div>
+        <div class="kpi-box">
+            <div class="kpi-number">30-800元</div>
+            <div class="kpi-label">价格区间</div>
+        </div>
+        <div class="kpi-box">
+            <div class="kpi-number">10-30%</div>
+            <div class="kpi-label">一件代发佣金</div>
+        </div>
+        <div class="kpi-box">
+            <div class="kpi-number">7:00-17:00</div>
+            <div class="kpi-label">营业时间</div>
+        </div>
+    </div>
+    
+    <h3 style="color: var(--gold); margin: 2rem 0 1rem;">🗺️ 五大商圈对比</h3>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>商圈</th>
+                <th>定位</th>
+                <th>价格区间</th>
+                <th>适合人群</th>
+                <th>你的策略</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>十三行</strong></td>
+                <td>工厂直供中高端</td>
+                <td>100-800元</td>
+                <td>实体店主、买手</td>
+                <td><span class="badge badge-gold">重点考察</span></td>
+            </tr>
+            <tr>
+                <td><strong>火车站商圈</strong></td>
+                <td>中高端二批</td>
+                <td>100-350元</td>
+                <td>精品店、买手店</td>
+                <td><span class="badge badge-blue">次重点</span></td>
+            </tr>
+            <tr>
+                <td><strong>沙河</strong></td>
+                <td>极致性价比</td>
+                <td>15-120元</td>
+                <td>电商铺货、引流款</td>
+                <td><span class="badge badge-green">了解底价</span></td>
+            </tr>
+            <tr>
+                <td><strong>汇美</strong></td>
+                <td>韩系原创</td>
+                <td>150-500元</td>
+                <td>追求品质的店铺</td>
+                <td><span class="badge badge-purple">可选</span></td>
+            </tr>
+            <tr>
+                <td><strong>石井</strong></td>
+                <td>尾货批发</td>
+                <td>10-100元</td>
+                <td>清仓捡漏</td>
+                <td><span class="badge badge-orange">年尾去</span></td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- 重点档口推荐 -->
+<section class="section">
+    <h2 class="section-title">🏪 重点档口推荐（基于真实数据）</h2>
+    <p class="section-subtitle">按风格和定位分类，适合你的选品方向</p>
+    
+    <h3 style="color: var(--gold); margin-bottom: 1rem;">🌟 中高端原创设计（适合你的"质感"定位）</h3>
+    
+    <div class="grid-3">
+        <div class="market-card">
+            <div class="market-name">云裳阁（新中国大厦8楼）</div>
+            <div class="market-info">
+                <strong>风格：</strong>轻奢通勤、设计师款<br>
+                <strong>特色：</strong>原色面料（米白、燕麦色系）、高工艺<br>
+                <strong>价格：</strong><span class="price-tag">300-800元</span><br>
+                <strong>适合：</strong>30-40岁都市女性<br>
+                <strong>优势：</strong>品质稳定，复购率超60%
+            </div>
+        </div>
+        <div class="market-card">
+            <div class="market-name">ZYGODDESS（新中国7楼C28-29）</div>
+            <div class="market-info">
+                <strong>风格：</strong>韩系小女人、全品类<br>
+                <strong>特色：</strong>温柔减龄款、上新快<br>
+                <strong>价格：</strong><span class="price-tag">150-400元</span><br>
+                <strong>适合：</strong>年轻女性、轻熟风<br>
+                <strong>优势：</strong>支持贴牌、服务贴心
+            </div>
+        </div>
+        <div class="market-card">
+            <div class="market-name">EMONI / 非町 / onebytwo</div>
+            <div class="market-info">
+                <strong>风格：</strong>韩系、简约、小女人<br>
+                <strong>特色：</strong>实体店主常拿货的宝藏档口<br>
+                <strong>价格：</strong><span class="price-tag">120-350元</span><br>
+                <strong>适合：</strong>追求质感的店铺<br>
+                <strong>优势：</strong>款式稳、补单快
+            </div>
+        </div>
+    </div>
+    
+    <h3 style="color: var(--gold); margin: 2rem 0 1rem;">💰 性价比跑量（适合引流款）</h3>
+    
+    <div class="grid-3">
+        <div class="market-card">
+            <div class="market-name">红遍天大厦</div>
+            <div class="market-info">
+                <strong>风格：</strong>平价韩系休闲<br>
+                <strong>特色：</strong>库存充足、适合新手捡漏<br>
+                <strong>价格：</strong><span class="price-tag">30-100元</span><br>
+                <strong>适合：</strong>新手试水、引流款<br>
+                <strong>优势：</strong>价格低、款式多
+            </div>
+        </div>
+        <div class="market-card">
+            <div class="market-name">新中国大厦2楼</div>
+            <div class="market-info">
+                <strong>风格：</strong>基础款<br>
+                <strong>特色：</strong>4-6楼实力档口的分档<br>
+                <strong>价格：</strong><span class="price-tag">50-150元</span><br>
+                <strong>适合：</strong>搭配高利润款<br>
+                <strong>优势：</strong>被忽视的潜力楼层
+            </div>
+        </div>
+        <div class="market-card">
+            <div class="market-name">沙河商圈（万佳/南城/金马）</div>
+            <div class="market-info">
+                <strong>风格：</strong>极致性价比<br>
+                <strong>特色：</strong>十几元短袖、几十元套装<br>
+                <strong>价格：</strong><span class="price-tag">15-120元</span><br>
+                <strong>适合：</strong>电商铺货、引流款<br>
+                <strong>注意：</strong>同质化严重
+            </div>
+        </div>
+    </div>
+    
+    <h3 style="color: var(--gold); margin: 2rem 0 1rem;">🎨 特色风格（差异化选品）</h3>
+    
+    <div class="grid-3">
+        <div class="market-card">
+            <div class="market-name">BOBO家（十三行）</div>
+            <div class="market-info">
+                <strong>风格：</strong>酷感设计裤装<br>
+                <strong>特色：</strong>版型适合北方人、裤长充足<br>
+                <strong>价格：</strong><span class="price-tag">80-200元</span><br>
+                <strong>适合：</strong>实体店走量<br>
+                <strong>优势：</strong>版型好
+            </div>
+        </div>
+        <div class="market-card">
+            <div class="market-name">apM时代国际</div>
+            <div class="market-info">
+                <strong>风格：</strong>原创设计高地<br>
+                <strong>特色：</strong>覆盖全品类、部分支持零售<br>
+                <strong>价格：</strong><span class="price-tag">100-400元</span><br>
+                <strong>适合：</strong>小众设计款<br>
+                <strong>优势：</strong>款式潮、撞款率低
+            </div>
+        </div>
+        <div class="market-card">
+            <div class="market-name">UUS九龙国际</div>
+            <div class="market-info">
+                <strong>风格：</strong>对标韩国东大门<br>
+                <strong>特色：</strong>1/3档口韩国直营<br>
+                <strong>价格：</strong><span class="price-tag">150-500元</span><br>
+                <strong>适合：</strong>追求国际潮流<br>
+                <strong>优势：</strong>款式同步国际
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 抖音真实评论洞察 -->
+<section class="section">
+    <h2 class="section-title">💬 抖音真实评论洞察</h2>
+    <p class="section-subtitle">从真实用户反馈中提取避坑指南</p>
+    
+    <div class="grid-2">
+        <div>
+            <div class="comment-box">
+                <div class="comment-user">@壮士美少女</div>
+                <div class="comment-text">"如果追求版型，建议去南油，价格不会很贵，版型绝对比广州的好。广州的之前买了三麻袋回去，全部穿了几次就变形，价格在100-300左右的，全部都这样"</div>
+                <div class="comment-insight">💡 洞察：广州中低价位服装版型/质量可能有问题，选品时要重点测试质量</div>
+            </div>
+            <div class="comment-box">
+                <div class="comment-user">@良哥仔</div>
+                <div class="comment-text">"十三行你去晚了，一般下午3点新中国就打烊了，楼层越高质量越好"</div>
+                <div class="comment-insight">💡 洞察：必须早到！建议7-10点到，楼层越高品质越好</div>
+            </div>
+            <div class="comment-box">
+                <div class="comment-user">@任风吹</div>
+                <div class="comment-text">"快过年买，十三行新中国大厦4-7楼，一百3-4件衣服，我年年去买"</div>
+                <div class="comment-insight">💡 洞察：年尾清仓是捡漏好时机，4-7楼是核心区</div>
+            </div>
+        </div>
+        <div>
+            <div class="comment-box">
+                <div class="comment-user">@灵</div>
+                <div class="comment-text">"信了网上的邪，去了白马和隔壁的天马，价钱真不是人能买的贵...最后对面的一马apm勉强买了两件"</div>
+                <div class="comment-insight">💡 洞察：白马价格偏高，apM性价比更好</div>
+            </div>
+            <div class="comment-box">
+                <div class="comment-user">@睡不饱</div>
+                <div class="comment-text">"红棉楼在白马旁边，里面的衣服50元2件、100元3件，还有男装，好便宜"</div>
+                <div class="comment-insight">💡 洞察：红棉楼有超值捡漏区，适合引流款</div>
+            </div>
+            <div class="comment-box">
+                <div class="comment-user">@foodie</div>
+                <div class="comment-text">"uus和汇美都无介绍，个两间先系天花板，价格都是天花板"</div>
+                <div class="comment-insight">💡 洞察：UUS和汇美是品质天花板，但价格也最高</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="warning">
+        <strong>⚠️ 核心避坑点：</strong><br>
+        1. 广州100-300元价位的衣服可能穿几次就变形 → 选品时必须测试质量<br>
+        2. 下午3点后很多档口关门 → 必须早到（7-10点）<br>
+        3. 楼层越高品质越好 → 优先逛4楼以上<br>
+        4. 白马价格虚高 → apM、红棉性价比更好
+    </div>
+</section>
+
+<!-- 拿货时间策略 -->
+<section class="section">
+    <h2 class="section-title">⏰ 最佳拿货时间策略</h2>
+    <p class="section-subtitle">基于真实数据的时间规划</p>
+    
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-title">📅 每日时段</div>
+            <table>
+                <tr>
+                    <td><strong>7:00-9:00</strong></td>
+                    <td>批发高峰，电梯拥堵，但新款最全</td>
+                </tr>
+                <tr>
+                    <td><strong>10:00-12:00</strong></td>
+                    <td><span class="badge badge-gold">最佳时段</span> 忙完发货，态度友好</td>
+                </tr>
+                <tr>
+                    <td><strong>14:00-16:00</strong></td>
+                    <td>散客体验佳，部分档口清仓</td>
+                </tr>
+                <tr>
+                    <td><strong>16:00后</strong></td>
+                    <td><span class="badge badge-red">避雷</span> 很多档口收摊</td>
+                </tr>
+            </table>
+        </div>
+        <div class="card">
+            <div class="card-title">📆 每周/每月</div>
+            <table>
+                <tr>
+                    <td><strong>周一</strong></td>
+                    <td><span class="badge badge-gold">上新日</span> 爆款集中</td>
+                </tr>
+                <tr>
+                    <td><strong>周末下午</strong></td>
+                    <td>可捡漏，但新款少</td>
+                </tr>
+                <tr>
+                    <td><strong>每月25-30号</strong></td>
+                    <td><span class="badge badge-red">避雷</span> 换季盘点，不接待散客</td>
+                </tr>
+                <tr>
+                    <td><strong>6-7月/1月</strong></td>
+                    <td><span class="badge badge-green">清仓季</span> 低至1折</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    <div class="highlight">
+        <strong>💡 推荐行程（7月下旬）：</strong><br>
+        周一早上7点到十三行 → 先逛新中国大厦4-6楼原创区 → 10点后去红遍天挑基础款 → 下午2点转战沙河捡漏
+    </div>
+</section>
+
+<!-- 一件代发操作路径 -->
+<section class="section">
+    <h2 class="section-title">🚀 一件代发操作路径</h2>
+    <p class="section-subtitle">线下考察后，如何在线上落地</p>
+    
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-title">路径A：小红书选品中心（推荐新手）</div>
+            <div style="font-size: 0.9rem; line-height: 2;">
+                <strong>优势：</strong><br>
+                ✅ 零门槛，1000粉即可开通<br>
+                ✅ 商品池丰富，一键挂链接<br>
+                ✅ 平台担保，佣金自动结算<br>
+                ✅ 不用对接供应商<br><br>
+                <strong>操作：</strong><br>
+                1. 创作中心 → 好物推荐 → 开通<br>
+                2. 选品广场 → 筛选女装<br>
+                3. 选品 → 挂链接 → 发布笔记<br>
+                4. 佣金率：10-30%
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-title">路径B：对接档口一件代发（进阶）</div>
+            <div style="font-size: 0.9rem; line-height: 2;">
+                <strong>优势：</strong><br>
+                ✅ 佣金更高（20-40%）<br>
+                ✅ 可定制独家款<br>
+                ✅ 建立长期供应链关系<br>
+                ✅ 品质可控（你亲自验过）<br><br>
+                <strong>操作：</strong><br>
+                1. 线下考察时加档口微信<br>
+                2. 谈一件代发合作（代发价+佣金）<br>
+                3. 档口发货+售后<br>
+                4. 你只负责内容+选品
+            </div>
+        </div>
+    </div>
+    
+    <div class="success">
+        <strong>✅ 推荐策略：</strong>先用路径A（小红书选品中心）快速启动，跑通后逐步对接线下档口做路径B，提高利润。
+    </div>
+</section>
+
+<!-- 选品策略 -->
+<section class="section">
+    <h2 class="section-title">🎯 选品策略（基于你的定位）</h2>
+    <p class="section-subtitle">结合你的"ins风、松弛感、氛围感"内容风格</p>
+    
+    <div class="card">
+        <div class="card-title">选品公式：基础款60% + 设计款30% + 形象款10%</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>类型</th>
+                    <th>占比</th>
+                    <th>具体款式</th>
+                    <th>价格带</th>
+                    <th>目的</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>基础款</strong></td>
+                    <td>60%</td>
+                    <td>白衬衫、黑裤子、针织衫、基础连衣裙</td>
+                    <td>80-200元</td>
+                    <td>跑量、稳定出单</td>
+                </tr>
+                <tr>
+                    <td><strong>设计款</strong></td>
+                    <td>30%</td>
+                    <td>廓形西装、设计感外套、特色连衣裙</td>
+                    <td>150-400元</td>
+                    <td>差异化、高出片率</td>
+                </tr>
+                <tr>
+                    <td><strong>形象款</strong></td>
+                    <td>10%</td>
+                    <td>高端设计师款、限量款</td>
+                    <td>300-800元</td>
+                    <td>提升调性、吸引高端用户</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <h3 style="color: var(--gold); margin: 2rem 0 1rem;">📊 选品优先级矩阵</h3>
+    
+    <div class="chart-wrapper" style="height: 400px;">
+        <canvas id="selectionMatrix"></canvas>
+    </div>
+    
+    <div class="grid-2" style="margin-top: 2rem;">
+        <div class="card">
+            <div class="card-title">✅ 优先选（高佣金+高出片率）</div>
+            <div style="font-size: 0.9rem; line-height: 2;">
+                • 廓形西装外套（佣金20-30%，出片神器）<br>
+                • 碎花/吊带连衣裙（佣金15-25%，拍照刚需）<br>
+                • 针织开衫（佣金20-30%，居家/户外都能拍）<br>
+                • 设计感衬衫（佣金15-25%，百搭基础款）
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-title">⚠️ 谨慎选（低佣金或高风险）</div>
+            <div style="font-size: 0.9rem; line-height: 2;">
+                • 100元以下低价款（佣金低、退货率高）<br>
+                • 同质化严重的沙河款（撞款率高）<br>
+                • 版型要求高的裤子（退货风险大）<br>
+                • 季节性太强的款（库存风险）
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 收入测算 -->
+<section class="section">
+    <h2 class="section-title">💰 收入测算（基于真实数据）</h2>
+    <p class="section-subtitle">保守/中性/乐观三种场景</p>
+    
+    <div class="grid-3">
+        <div class="kpi-box">
+            <div class="kpi-number" style="color: var(--red);">1000-3000</div>
+            <div class="kpi-label">保守（月1）</div>
+            <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 0.5rem;">
+                每天1条笔记<br>
+                平均曝光5000<br>
+                转化率1%<br>
+                客单价150元<br>
+                佣金率15%
+            </div>
+        </div>
+        <div class="kpi-box">
+            <div class="kpi-number" style="color: var(--gold);">3000-8000</div>
+            <div class="kpi-label">中性（月2-3）</div>
+            <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 0.5rem;">
+                每天1-2条笔记<br>
+                平均曝光1万<br>
+                转化率2%<br>
+                客单价200元<br>
+                佣金率20%
+            </div>
+        </div>
+        <div class="kpi-box">
+            <div class="kpi-number" style="color: var(--green);">10000-30000</div>
+            <div class="kpi-label">乐观（月3+，出爆文）</div>
+            <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 0.5rem;">
+                每天2条笔记<br>
+                平均曝光5万+<br>
+                转化率3%<br>
+                客单价250元<br>
+                佣金率25%
+            </div>
+        </div>
+    </div>
+    
+    <div class="chart-wrapper" style="height: 350px; margin-top: 2rem;">
+        <canvas id="revenueChart"></canvas>
+    </div>
+    
+    <div class="highlight">
+        <strong>💡 收入公式：</strong><br>
+        月收入 = 笔记曝光量 × 点击率 × 转化率 × 客单价 × 佣金率<br><br>
+        <strong>举例（中性场景）：</strong><br>
+        30条笔记 × 平均1万曝光 × 5%点击率 × 2%转化率 × 200元客单价 × 20%佣金率 = <strong>2400元/月</strong><br><br>
+        <strong>如果出1条爆文（10万曝光）：</strong><br>
+        1条 × 10万曝光 × 5%点击率 × 3%转化率 × 250元客单价 × 25%佣金率 = <strong>9375元</strong>
+    </div>
+</section>
+
+<!-- 30天执行计划 -->
+<section class="section">
+    <h2 class="section-title">📅 30天执行计划</h2>
+    <p class="section-subtitle">精确到每天该做什么</p>
+    
+    <div class="grid-2">
+        <div>
+            <h3 style="color: var(--gold); margin-bottom: 1rem;">第1周：准备+开通</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-day">Day 1</div>
+                    <div class="timeline-content">开通小红书"好物推荐"权限（创作中心→好物推荐→申请）</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-day">Day 2-3</div>
+                    <div class="timeline-content">熟悉选品中心，浏览女装类目，收藏50+潜在商品</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-day">Day 4-5</div>
+                    <div class="timeline-content">确定首批10-15款选品（按60%基础+30%设计+10%形象）</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-day">Day 6-7</div>
+                    <div class="timeline-content">拍摄首批3-5条内容（穿搭+拍照教学+挂链接）</div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h3 style="color: var(--gold); margin-bottom: 1rem;">第2周：内容启动</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-day">Day 8-10</div>
+                    <div class="timeline-content">每天发1条笔记，测试不同类型内容的数据</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-day">Day 11-12</div>
+                    <div class="timeline-content">分析数据：哪条点击高？哪个商品转化好？</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-day">Day 13-14</div>
+                    <div class="timeline-content">优化选品：淘汰低效品，追加高效品</div>
+                </div>
+            </div>
+            
+            <h3 style="color: var(--gold); margin: 2rem 0 1rem;">第3-4周：稳定输出</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-day">Day 15-21</div>
+                    <div class="timeline-content">每天1-2条笔记，建立内容矩阵</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-day">Day 22-28</div>
+                    <div class="timeline-content">每周复盘数据，优化内容和选品</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-day">Day 29-30</div>
+                    <div class="timeline-content">月度总结，制定下月计划</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="success">
+        <strong>✅ 30天目标：</strong><br>
+        • 发布30条笔记<br>
+        • 测试50+款商品<br>
+        • 找到5-10个高转化商品<br>
+        • 月收入1000-3000元（保守）<br>
+        • 粉丝增长500-1000
+    </div>
+</section>
+
+<!-- 避坑清单 -->
+<section class="section">
+    <h2 class="section-title">⚠️ 避坑清单（基于真实数据）</h2>
+    <p class="section-subtitle">从抖音评论和案例中提取的教训</p>
+    
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-title">🔴 选品坑</div>
+            <table>
+                <tr>
+                    <td><strong>坑</strong></td>
+                    <td><strong>正确做法</strong></td>
+                </tr>
+                <tr>
+                    <td>只看佣金高低</td>
+                    <td>佣金高但质量差=退货多=影响账号</td>
+                </tr>
+                <tr>
+                    <td>不看差评</td>
+                    <td>选品前必须看差评，避免质量问题</td>
+                </tr>
+                <tr>
+                    <td>选同质化款</td>
+                    <td>优先选有设计感、出片率高的款</td>
+                </tr>
+                <tr>
+                    <td>忽略尺码问题</td>
+                    <td>选尺码友好、退货率低的款</td>
+                </tr>
+            </table>
+        </div>
+        <div class="card">
+            <div class="card-title">🔴 内容坑</div>
+            <table>
+                <tr>
+                    <td><strong>坑</strong></td>
+                    <td><strong>正确做法</strong></td>
+                </tr>
+                <tr>
+                    <td>硬广式推荐</td>
+                    <td>用"穿搭教学"包装，不要说"快来买"</td>
+                </tr>
+                <tr>
+                    <td>一次挂太多链接</td>
+                    <td>每条笔记最多3-5个，聚焦</td>
+                </tr>
+                <tr>
+                    <td>不做数据复盘</td>
+                    <td>每周分析一次，淘汰低效品</td>
+                </tr>
+                <tr>
+                    <td>忽略爆文机会</td>
+                    <td>发现数据好的内容，立即加大投入</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    <div class="warning">
+        <strong>⚠️ 核心教训（来自抖音评论）：</strong><br>
+        1. "广州100-300元的衣服穿几次就变形" → 选品时必须测试质量，优先选有品质保障的档口<br>
+        2. "白马价格虚高" → 不要迷信大牌市场，apM、红棉性价比更好<br>
+        3. "十三行下午3点就关门" → 必须早到，7-10点最佳<br>
+        4. "楼层越高质量越好" → 优先逛4楼以上，2-3楼多炒货
+    </div>
+</section>
+
+<!-- 下一步行动 -->
+<section class="section">
+    <h2 class="section-title">🎯 下一步行动</h2>
+    <p class="section-subtitle">今天就能开始的事</p>
+    
+    <div class="grid-3">
+        <div class="card">
+            <div class="card-title">✅ 立即做（今天）</div>
+            <div style="font-size: 0.9rem; line-height: 2;">
+                1. 开通"好物推荐"权限<br>
+                2. 浏览选品中心，收藏50款<br>
+                3. 确定首批10款测试商品<br>
+                4. 拍摄第1条内容
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-title">📅 本周做（7天内）</div>
+            <div style="font-size: 0.9rem; line-height: 2;">
+                1. 发布5-7条笔记<br>
+                2. 测试不同类型内容<br>
+                3. 分析数据，找到爆款方向<br>
+                4. 规划广州考察行程
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-title">📍 本月做（30天内）</div>
+            <div style="font-size: 0.9rem; line-height: 2;">
+                1. 发布30条笔记<br>
+                2. 去广州考察3-5天<br>
+                3. 加30+档口微信<br>
+                4. 月收入目标：1000-3000元
+            </div>
+        </div>
+    </div>
+    
+    <div class="highlight">
+        <strong>💡 一句话总结：</strong><br><br>
+        你已经有1000粉+6.7万爆文，说明你具备内容能力。<br>
+        一件代发就是零成本验证你的商业模型。<br>
+        线下考察是为了"懂货"，线上代发是为了"零风险"。<br><br>
+        <strong>今天就能开始，0元启动，30天见结果。</strong>
+    </div>
+</section>
+
+<div class="footer">
+    <p>木子菲儿 · 一件代发完整落地方案 · 2026</p>
+    <p style="margin-top: 0.5rem; color: var(--gold);">"线下考察 + 线上挂链接 = 零风险创业"</p>
+</div>
+
+<script>
+// 选品优先级矩阵
+const matrixCtx = document.getElementById('selectionMatrix').getContext('2d');
+new Chart(matrixCtx, {
+    type: 'bubble',
+    data: {
+        datasets: [
+            {
+                label: '优先选（高佣金+高出片率）',
+                data: [
+                    { x: 85, y: 90, r: 15 }, // 西装外套
+                    { x: 80, y: 85, r: 12 }, // 连衣裙
+                    { x: 75, y: 80, r: 10 }, // 针织衫
+                ],
+                backgroundColor: 'rgba(76, 175, 80, 0.6)',
+                borderColor: '#4caf50'
+            },
+            {
+                label: '可选（中等佣金+中等出片率）',
+                data: [
+                    { x: 60, y: 65, r: 10 }, // 衬衫
+                    { x: 55, y: 60, r: 8 },  // 基础款
+                ],
+                backgroundColor: 'rgba(200, 164, 92, 0.6)',
+                borderColor: '#c8a45c'
+            },
+            {
+                label: '谨慎选（低佣金或高风险）',
+                data: [
+                    { x: 30, y: 40, r: 12 }, // 低价款
+                    { x: 25, y: 35, r: 10 }, // 同质化款
+                ],
+                backgroundColor: 'rgba(239, 83, 80, 0.6)',
+                borderColor: '#ef5350'
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { labels: { color: '#888' } },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        const labels = ['西装外套', '连衣裙', '针织衫', '衬衫', '基础款', '低价款', '同质化款'];
+                        return labels[context.dataIndex] || '';
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                title: { display: true, text: '出片率 →', color: '#888' },
+                ticks: { color: '#666' },
+                grid: { color: '#222' },
+                min: 0, max: 100
+            },
+            y: {
+                title: { display: true, text: '佣金率 →', color: '#888' },
+                ticks: { color: '#666' },
+                grid: { color: '#222' },
+                min: 0, max: 100
+            }
+        }
+    }
+});
+
+// 收入增长曲线
+const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+new Chart(revenueCtx, {
+    type: 'line',
+    data: {
+        labels: ['Day 7', 'Day 14', 'Day 21', 'Day 30', 'Day 45', 'Day 60', 'Day 90'],
+        datasets: [
+            {
+                label: '保守',
+                data: [0, 200, 500, 1000, 2000, 3000, 5000],
+                borderColor: '#ef5350',
+                backgroundColor: 'rgba(239, 83, 80, 0.1)',
+                fill: false,
+                tension: 0.4
+            },
+            {
+                label: '中性',
+                data: [0, 500, 1500, 3000, 6000, 10000, 18000],
+                borderColor: '#c8a45c',
+                backgroundColor: 'rgba(200, 164, 92, 0.1)',
+                fill: false,
+                tension: 0.4
+            },
+            {
+                label: '乐观（出爆文）',
+                data: [0, 1000, 3000, 8000, 15000, 25000, 45000],
+                borderColor: '#4caf50',
+                backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                fill: false,
+                tension: 0.4
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { labels: { color: '#888' } }
+        },
+        scales: {
+            x: { ticks: { color: '#666' }, grid: { color: '#222' } },
+            y: { 
+                ticks: { 
+                    color: '#666',
+                    callback: function(value) { return value + '元'; }
+                }, 
+                grid: { color: '#222' } 
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>
