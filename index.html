@@ -242,6 +242,9 @@ body.home-active .bottom-nav{
 .hero-base.hero-alt{background-image:url('hero2.webp')}
 .hero-base.hero-alt2{background-image:url('hero3.webp')}
 .hero-base.hero-alt3{background-image:url('hero4.webp')}
+.hero-base.hero-alt4{background-image:url('hero-mobile-1.webp')}
+.hero-base.hero-alt5{background-image:url('hero-mobile-2.webp')}
+.hero-base.hero-alt6{background-image:url('hero-mobile-3.webp')}
 .hero-reveal-layer{
   position:absolute;inset:0;z-index:20;
   pointer-events:none;
@@ -257,6 +260,9 @@ body.home-active .bottom-nav{
 .hero-reveal-layer.hero-alt{background-image:url('hero2.webp')}
 .hero-reveal-layer.hero-alt2{background-image:url('hero3.webp')}
 .hero-reveal-layer.hero-alt3{background-image:url('hero4.webp')}
+.hero-reveal-layer.hero-alt4{background-image:url('hero-mobile-1.webp')}
+.hero-reveal-layer.hero-alt5{background-image:url('hero-mobile-2.webp')}
+.hero-reveal-layer.hero-alt6{background-image:url('hero-mobile-3.webp')}
 .hero-reveal-layer.active{opacity:1}
 .hero-vignette{
   position:absolute;inset:0;z-index:30;
@@ -292,14 +298,15 @@ body.home-active .bottom-nav{
 }
 .hero-toggle{
   position:absolute;top:calc(var(--header-h) + 16px);right:50%;transform:translateX(50%);
-  z-index:60;display:flex;gap:10px;pointer-events:auto;
+  z-index:60;display:flex;gap:1px;pointer-events:auto;
 }
 .hero-toggle-btn{
-  width:8px;height:8px;border-radius:50%;
-  background:rgba(255,255,255,.3);border:none;cursor:pointer;
-  transition:all .3s;padding:0;
+  position:relative;width:22px;height:22px;border:0;border-radius:50%;
+  background:transparent;cursor:pointer;padding:0;
 }
-.hero-toggle-btn.active{background:rgba(255,255,255,.8);transform:scale(1.4)}
+.hero-toggle-btn::after{content:'';position:absolute;left:50%;top:50%;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.34);transform:translate(-50%,-50%);transition:background .25s,transform .25s}
+.hero-toggle-btn.active::after{background:rgba(255,255,255,.9);transform:translate(-50%,-50%) scale(1.45)}
+.hero-toggle-btn:focus-visible{outline:1px solid rgba(255,255,255,.8);outline-offset:-2px}
 @keyframes heroFadeUp{0%{opacity:0;transform:translateY(12px)}100%{opacity:1;transform:translateY(0)}}
 @keyframes heroZoom{0%{transform:scale(1.08)}100%{transform:scale(1)}}
 @keyframes heroFloat{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-5px)}}
@@ -307,6 +314,9 @@ body.home-active .bottom-nav{
   .hero-deco{font-size:10px;letter-spacing:.12em}
   .hero-deco-tl,.hero-deco-tr{top:calc(var(--header-h) + 12px)}
   .hero-deco-bl,.hero-deco-br{bottom:calc(var(--nav-h) + 36px)}
+  .hero-base.hero-alt4,.hero-reveal-layer.hero-alt4{background-position:center 48%}
+  .hero-base.hero-alt5,.hero-reveal-layer.hero-alt5{background-position:center center}
+  .hero-base.hero-alt6,.hero-reveal-layer.hero-alt6{background-position:center center}
 }
 @media(prefers-reduced-motion:reduce){
   .hero-deco,.hero-scroll{animation:none;opacity:1}
@@ -464,6 +474,9 @@ body.home-active .bottom-nav{
       <button class="hero-toggle-btn" onclick="switchHero(1)" aria-label="Image 2"></button>
       <button class="hero-toggle-btn" onclick="switchHero(2)" aria-label="Image 3"></button>
       <button class="hero-toggle-btn" onclick="switchHero(3)" aria-label="Image 4"></button>
+      <button class="hero-toggle-btn" onclick="switchHero(4)" aria-label="手机背景 1"></button>
+      <button class="hero-toggle-btn" onclick="switchHero(5)" aria-label="手机背景 2"></button>
+      <button class="hero-toggle-btn" onclick="switchHero(6)" aria-label="手机背景 3"></button>
     </div>
     <!-- Content (z-50) -->
     <div class="hero-content">
@@ -1691,21 +1704,15 @@ function switchHero(idx){
   const base = document.querySelector('.hero-base');
   const revealLayer = document.getElementById('revealLayer');
   const btns = document.querySelectorAll('.hero-toggle-btn');
+  const heroClasses = ['hero-alt','hero-alt2','hero-alt3','hero-alt4','hero-alt5','hero-alt6'];
   
-  base.classList.remove('hero-alt','hero-alt2','hero-alt3');
-  revealLayer.classList.remove('hero-alt','hero-alt2','hero-alt3');
-  
-  if(idx === 0){
-    // Default - no class needed
-  } else if(idx === 1){
-    base.classList.add('hero-alt');
-    revealLayer.classList.add('hero-alt');
-  } else if(idx === 2){
-    base.classList.add('hero-alt2');
-    revealLayer.classList.add('hero-alt2');
-  } else if(idx === 3){
-    base.classList.add('hero-alt3');
-    revealLayer.classList.add('hero-alt3');
+  base.classList.remove(...heroClasses);
+  revealLayer.classList.remove(...heroClasses);
+
+  if(idx > 0 && idx <= heroClasses.length){
+    const heroClass = heroClasses[idx - 1];
+    base.classList.add(heroClass);
+    revealLayer.classList.add(heroClass);
   }
   
   btns.forEach((btn, i) => {
