@@ -182,25 +182,18 @@ a{color:var(--gold);text-decoration:none}
   justify-content:center;text-align:center;
   padding:0 20px;pointer-events:none;
 }
-.hero-line1{
+.hero-deco{
+  position:absolute;
   font-family:'Playfair Display','Noto Serif SC',Georgia,serif;
   font-style:italic;font-weight:400;
-  font-size:clamp(36px,8vw,72px);
-  color:#fff;letter-spacing:-.04em;line-height:1.05;
-  opacity:0;animation:heroReveal 1.1s cubic-bezier(.16,1,.3,1) .25s forwards;
+  font-size:11px;color:rgba(255,255,255,.35);
+  letter-spacing:.08em;
+  opacity:0;animation:heroFadeUp 1s cubic-bezier(.16,1,.3,1) forwards;
 }
-.hero-line2{
-  font-weight:300;
-  font-size:clamp(36px,8vw,72px);
-  color:var(--gold-l);letter-spacing:-.06em;line-height:1.05;
-  margin-top:-.05em;
-  opacity:0;animation:heroReveal 1.1s cubic-bezier(.16,1,.3,1) .42s forwards;
-}
-.hero-sub{
-  font-size:clamp(12px,2.5vw,15px);color:rgba(255,255,255,.5);
-  letter-spacing:.25em;text-transform:uppercase;margin-top:24px;
-  opacity:0;animation:heroFadeUp 1s cubic-bezier(.16,1,.3,1) .65s forwards;
-}
+.hero-deco-tl{top:60px;left:20px;animation-delay:.6s}
+.hero-deco-tr{top:60px;right:20px;animation-delay:.7s}
+.hero-deco-bl{bottom:60px;left:20px;animation-delay:.8s}
+.hero-deco-br{bottom:60px;right:20px;animation-delay:.9s}
 .hero-bottom-left,
 .hero-bottom-right{
   display:none;
@@ -215,11 +208,12 @@ a{color:var(--gold);text-decoration:none}
 @keyframes heroZoom{0%{transform:scale(1.12)}100%{transform:scale(1)}}
 @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
 @media(max-width:640px){
-  .hero-bottom-left,.hero-bottom-right{display:none}
-  .hero-content{justify-content:flex-end;padding-bottom:100px}
+  .hero-deco{font-size:10px}
+  .hero-deco-tl,.hero-deco-tr{top:50px}
+  .hero-deco-bl,.hero-deco-br{bottom:50px}
 }
 @media(prefers-reduced-motion:reduce){
-  .hero-line1,.hero-line2,.hero-sub,.hero-bottom-left,.hero-bottom-right{animation:none;opacity:1}
+  .hero-deco{animation:none;opacity:1}
   .hero-base{animation:none}
 }
 
@@ -278,9 +272,11 @@ a{color:var(--gold);text-decoration:none}
     <div class="hero-vignette"></div>
     <!-- Content (z-50) -->
     <div class="hero-content">
-      <div class="hero-line1">光影之间</div>
-      <div class="hero-line2">衣袂如诗</div>
-      <div class="hero-sub">Photography · Styling · Storytelling</div>
+      <!-- Decorative English text -->
+      <div class="hero-deco hero-deco-tl">Photography</div>
+      <div class="hero-deco hero-deco-tr">Est. 2024</div>
+      <div class="hero-deco hero-deco-bl">Visual Stories</div>
+      <div class="hero-deco hero-deco-br">Fashion & Light</div>
     </div>
     <!-- Bottom left -->
     <div class="hero-bottom-left">
