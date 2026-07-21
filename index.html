@@ -173,6 +173,7 @@ body.home-active .bottom-nav{
 }
 .hero-base.hero-alt{background-image:url('hero2.webp')}
 .hero-base.hero-alt2{background-image:url('hero3.webp')}
+.hero-base.hero-alt3{background-image:url('hero4.webp')}
 .hero-reveal-layer{
   position:absolute;inset:0;z-index:20;
   pointer-events:none;
@@ -187,6 +188,7 @@ body.home-active .bottom-nav{
 }
 .hero-reveal-layer.hero-alt{background-image:url('hero2.webp')}
 .hero-reveal-layer.hero-alt2{background-image:url('hero3.webp')}
+.hero-reveal-layer.hero-alt3{background-image:url('hero4.webp')}
 .hero-reveal-layer.active{opacity:1}
 .hero-vignette{
   position:absolute;inset:0;z-index:30;
@@ -304,6 +306,7 @@ body.home-active .bottom-nav{
       <button class="hero-toggle-btn active" onclick="switchHero(0)" aria-label="Image 1"></button>
       <button class="hero-toggle-btn" onclick="switchHero(1)" aria-label="Image 2"></button>
       <button class="hero-toggle-btn" onclick="switchHero(2)" aria-label="Image 3"></button>
+      <button class="hero-toggle-btn" onclick="switchHero(3)" aria-label="Image 4"></button>
     </div>
     <!-- Content (z-50) -->
     <div class="hero-content">
@@ -1501,17 +1504,20 @@ function switchHero(idx){
   const revealLayer = document.getElementById('revealLayer');
   const btns = document.querySelectorAll('.hero-toggle-btn');
   
-  base.classList.remove('hero-alt','hero-alt2');
-  revealLayer.classList.remove('hero-alt','hero-alt2');
+  base.classList.remove('hero-alt','hero-alt2','hero-alt3');
+  revealLayer.classList.remove('hero-alt','hero-alt2','hero-alt3');
   
   if(idx === 0){
     // Default - no class needed
   } else if(idx === 1){
     base.classList.add('hero-alt');
     revealLayer.classList.add('hero-alt');
-  } else {
+  } else if(idx === 2){
     base.classList.add('hero-alt2');
     revealLayer.classList.add('hero-alt2');
+  } else if(idx === 3){
+    base.classList.add('hero-alt3');
+    revealLayer.classList.add('hero-alt3');
   }
   
   btns.forEach((btn, i) => {
