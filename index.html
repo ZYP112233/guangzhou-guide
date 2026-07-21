@@ -263,7 +263,7 @@ body.home-active .bottom-nav{
 }
 .hero-base{
   position:absolute;inset:0;z-index:10;
-  background-image:url('hero-h1.png');
+  background-image:url('hero-h1.webp');
   background-size:cover;background-position:center center;
   background-repeat:no-repeat;
   filter:brightness(0.42) contrast(1.12) saturate(0.72);
@@ -272,15 +272,15 @@ body.home-active .bottom-nav{
 }
 /* 桌面端使用横版裁切版本 */
 @media(min-width:768px){
-  .hero-base{background-image:url('hero-h1.png')}
+  .hero-base{background-image:url('hero-h1.webp')}
 }
-.hero-base.hero-alt{background-image:url('hero-h2.png')}
-.hero-base.hero-alt2{background-image:url('hero-h3.png')}
-.hero-base.hero-alt3{background-image:url('hero-h4.png')}
+.hero-base.hero-alt{background-image:url('hero-h2.webp')}
+.hero-base.hero-alt2{background-image:url('hero-h3.webp')}
+.hero-base.hero-alt3{background-image:url('hero-h4.webp')}
 .hero-reveal-layer{
   position:absolute;inset:0;z-index:20;
   pointer-events:none;
-  background-image:url('hero-h1.png');
+  background-image:url('hero-h1.webp');
   background-size:cover;background-position:center center;
   background-repeat:no-repeat;
   filter:brightness(0.96) contrast(1.04) saturate(1.06);
@@ -291,11 +291,11 @@ body.home-active .bottom-nav{
 }
 /* 桌面端使用横版裁切版本 */
 @media(min-width:768px){
-  .hero-reveal-layer{background-image:url('hero-h1.png')}
+  .hero-reveal-layer{background-image:url('hero-h1.webp')}
 }
-.hero-reveal-layer.hero-alt{background-image:url('hero-h2.png')}
-.hero-reveal-layer.hero-alt2{background-image:url('hero-h3.png')}
-.hero-reveal-layer.hero-alt3{background-image:url('hero-h4.png')}
+.hero-reveal-layer.hero-alt{background-image:url('hero-h2.webp')}
+.hero-reveal-layer.hero-alt2{background-image:url('hero-h3.webp')}
+.hero-reveal-layer.hero-alt3{background-image:url('hero-h4.webp')}
 .hero-reveal-layer.active{opacity:1}
 .hero-vignette{
   position:absolute;inset:0;z-index:30;
@@ -748,19 +748,19 @@ body.home-active .bottom-nav{
     <div class="portrait-carousel">
       <div class="portrait-track" id="portraitTrack">
         <div class="portrait-item">
-          <img src="hero-v1.png" alt="Sweet Day" loading="lazy">
+          <img src="hero-v1.webp" alt="Sweet Day" loading="lazy">
           <div class="portrait-label">SWEET DAY</div>
         </div>
         <div class="portrait-item">
-          <img src="hero-v2.png" alt="Lost in Paris" loading="lazy">
+          <img src="hero-v2.webp" alt="Lost in Paris" loading="lazy">
           <div class="portrait-label">PARIS</div>
         </div>
         <div class="portrait-item">
-          <img src="hero-v3.png" alt="VANTAGE" loading="lazy">
+          <img src="hero-v3.webp" alt="VANTAGE" loading="lazy">
           <div class="portrait-label">VANTAGE</div>
         </div>
         <div class="portrait-item">
-          <img src="hero-v4.png" alt="Portrait" loading="lazy">
+          <img src="hero-v4.webp" alt="Portrait" loading="lazy">
           <div class="portrait-label">PORTRAIT</div>
         </div>
       </div>
@@ -2602,7 +2602,10 @@ document.body.classList.add('home-active');
   if(!container || !dateEl) return;
   
   fetch('daily-data.json')
-    .then(res => res.json())
+    .then(res => {
+      if(!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+      return res.json();
+    })
     .then(data => {
       dateEl.textContent = data.lastUpdate;
       
@@ -2775,8 +2778,12 @@ function renderPriceTrends(data){
   
   container.innerHTML = html;
   
-  // 绘制图表
-  setTimeout(() => drawPriceChart(priceTopic.price_data), 100);
+  // 绘制图表（使用requestAnimationFrame确保DOM已渲染）
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      drawPriceChart(priceTopic.price_data);
+    });
+  });
 }
 
 // ═══ 绘制价格趋势图 ═══
@@ -2898,7 +2905,12 @@ function renderTrendChart(data){
   let html = '<canvas id="trendChart" width="100%" height="200" style="background:var(--card2);border-radius:8px"></canvas>';
   container.innerHTML = html;
   
-  setTimeout(() => drawTrendChart(data.trend), 100);
+  // 绘制图表（使用requestAnimationFrame确保DOM已渲染）
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      drawTrendChart(data.trend);
+    });
+  });
 }
 
 // ═══ 绘制历史趋势图 ═══
