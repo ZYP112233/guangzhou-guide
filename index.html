@@ -8,17 +8,72 @@
 <title>木子菲儿 · 女装带货创业完整手册 v2.1</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{--bg:#0a0a0a;--card:#141414;--card2:#1a1a1a;--border:#1e1e1e;--border2:#2a2a2a;--gold:#c8a45c;--gold-l:#e8c97a;--gold-d:#8a6d3b;--text:#e0e0e0;--dim:#777;--dim2:#555;--green:#4caf50;--red:#ef5350;--blue:#42a5f5;--purple:#ab47bc;--orange:#ff9800;--cyan:#00bcd4;--nav-h:60px;--header-h:50px}
+:root{
+  /* 品牌色 */
+  --bg:#0a0a0a;
+  --card:#141414;
+  --card2:#1a1a1a;
+  --border:#1e1e1e;
+  --border2:#2a2a2a;
+  
+  /* 语义色（只保留四种） */
+  --gold:#c8a45c;
+  --gold-l:#e8c97a;
+  --gold-d:#8a6d3b;
+  --text:#e0e0e0;
+  --text-dim:#96918a;
+  --dim:#777;
+  --dim2:#555;
+  --green:#4caf50;
+  --red:#c87363;
+  
+  /* 字体系统 */
+  --font-ui:-apple-system,BlinkMacSystemFont,'SF Pro Text','PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;
+  --font-editorial:Georgia,'Times New Roman',serif;
+  
+  /* 布局 */
+  --nav-h:60px;
+  --header-h:50px;
+}
 html{scroll-behavior:smooth}
-body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;font-size:15px;padding-bottom:calc(var(--nav-h) + 20px)}
+body{
+  font-family:var(--font-ui);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.65;
+  font-size:14px;
+  padding-bottom:calc(var(--nav-h) + 20px);
+  font-variant-numeric:tabular-nums;
+}
 a{color:var(--gold);text-decoration:none}
+
+/* 排版层级 */
+.h-brand{font-size:20px;font-weight:500;letter-spacing:-0.02em}
+.h-page{font-size:20px;font-weight:600;line-height:28px;letter-spacing:-0.02em}
+.h-section{font-size:17px;font-weight:600;line-height:25px;letter-spacing:-0.01em}
+.h-card{font-size:14px;font-weight:600;line-height:22px}
+.body-text{font-size:14px;font-weight:400;line-height:23px}
+.body-small{font-size:12px;font-weight:400;line-height:19px}
+.label-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase}
+
+/* 数字特殊处理 */
+.kpi-num,.price,.amount{
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-0.03em;
+}
 
 /* Header */
 .header{position:fixed;top:0;left:0;right:0;height:var(--header-h);background:linear-gradient(180deg,rgba(10,10,10,.98),rgba(10,10,10,.95));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:100;transition:all .3s ease}
 .header-left{display:flex;align-items:center;gap:10px}
-.header-logo{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-d));display:flex;align-items:center;justify-content:center;font-size:14px}
+.header-logo{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-d));display:flex;align-items:center;justify-content:center;font-family:var(--font-editorial);font-size:13px;font-weight:600;color:var(--bg);letter-spacing:-0.02em}
 .header h1{font-size:15px;font-weight:500;color:var(--gold)}
 .header .ch-num{font-size:11px;color:var(--dim);letter-spacing:.1em}
+
+/* Icon styles */
+.icon-svg{display:inline-block;width:18px;height:18px;vertical-align:middle;flex-shrink:0}
+.icon-nav{width:20px;height:20px}
+.icon-section{width:20px;height:20px;color:var(--gold)}
+.icon-card{width:16px;height:16px;color:var(--gold-l)}
 
 /* Home page header state */
 body.home-active .header{
@@ -49,17 +104,17 @@ body.home-active .bottom-nav{
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
 /* Section */
-.sec{padding:16px;position:relative}
+.sec{padding:20px 16px;position:relative}
 .sec+.sec{border-top:1px solid var(--border)}
-.sec-title{font-size:18px;font-weight:600;color:var(--gold);margin-bottom:4px;display:flex;align-items:center;gap:8px}
-.sec-title .icon{font-size:22px}
-.sec-sub{font-size:12px;color:var(--dim);margin-bottom:16px;padding-left:2px}
+.sec-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;opacity:0.8}
+.sec-title{font-size:17px;font-weight:600;color:var(--text);margin-bottom:6px;line-height:25px;letter-spacing:-0.01em}
+.sec-sub{font-size:12px;color:var(--text-dim);margin-bottom:20px;line-height:19px}
 
 /* Cards */
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px;transition:border-color .2s}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px;transition:border-color .2s}
 .card:active{border-color:var(--gold-d)}
-.card-title{font-size:14px;font-weight:600;color:var(--gold-l);margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.card-title .icon{font-size:16px}
+.card-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:10px;line-height:22px;display:flex;align-items:center;gap:8px}
+.card-title .icon-svg{color:var(--gold)}
 
 /* KPI */
 .kpi-row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px}
@@ -278,10 +333,59 @@ body.home-active .bottom-nav{
 </head>
 <body>
 
+<!-- SVG Icon Sprite -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+      <polyline points="9 22 9 12 15 12 15 22"/>
+    </symbol>
+    <symbol id="icon-package" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/>
+      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+      <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+      <line x1="12" y1="22.08" x2="12" y2="12"/>
+    </symbol>
+    <symbol id="icon-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+      <circle cx="12" cy="13" r="4"/>
+    </symbol>
+    <symbol id="icon-shield-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      <line x1="12" y1="8" x2="12" y2="12"/>
+      <line x1="12" y1="16" x2="12.01" y2="16"/>
+    </symbol>
+    <symbol id="icon-route" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="6" cy="19" r="3"/>
+      <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/>
+      <circle cx="18" cy="5" r="3"/>
+    </symbol>
+    <symbol id="icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+      <line x1="16" y1="2" x2="16" y2="6"/>
+      <line x1="8" y1="2" x2="8" y2="6"/>
+      <line x1="3" y1="10" x2="21" y2="10"/>
+    </symbol>
+    <symbol id="icon-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="20" x2="18" y2="10"/>
+      <line x1="12" y1="20" x2="12" y2="4"/>
+      <line x1="6" y1="20" x2="6" y2="14"/>
+    </symbol>
+    <symbol id="icon-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <circle cx="12" cy="12" r="6"/>
+      <circle cx="12" cy="12" r="2"/>
+    </symbol>
+    <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"/>
+    </symbol>
+  </defs>
+</svg>
+
 <!-- Header -->
 <div class="header">
   <div class="header-left">
-    <div class="header-logo">📷</div>
+    <div class="header-logo">MF</div>
     <h1 id="headerTitle">木子菲儿</h1>
   </div>
   <span class="ch-num" id="headerSub">v2.1 完整版</span>
@@ -321,7 +425,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="h-stats">
-    <div class="sec-title"><span class="icon">📊</span> 账号现状</div>
+    <div class="sec-eyebrow">OVERVIEW</div>
+    <div class="sec-title">账号现状</div>
     <div class="sec-sub">基于小红书主页数据 · 2026-07-21</div>
     <div class="kpi-row">
       <div class="kpi"><div class="kpi-num">1,000+</div><div class="kpi-label">粉丝数</div></div>
@@ -332,7 +437,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="h-advantage">
-    <div class="sec-title"><span class="icon">🎯</span> 核心优势</div>
+    <div class="sec-eyebrow">STRENGTHS</div>
+    <div class="sec-title">核心优势</div>
     <div class="card">
       <div style="font-size:13px;line-height:1.8">
         <div style="margin-bottom:12px">
@@ -378,87 +484,89 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="h-data">
-    <div class="sec-title"><span class="icon">📈</span> 100条TOP数据洞察</div>
+    <div class="sec-eyebrow">DATA INSIGHTS</div>
+    <div class="sec-title">100条TOP数据洞察</div>
     <div class="sec-sub">用户提供的真实数据分析</div>
     <div class="card">
       <div style="font-size:13px">
         <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)">
-          <span style="color:var(--dim)">🎬 直播/带货类</span>
+          <span style="color:var(--text-dim)">直播/带货类</span>
           <span>39篇 · 8595赞</span>
           <span class="b b-g">最高</span>
         </div>
         <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)">
-          <span style="color:var(--dim)">💰 新手/零成本类</span>
+          <span style="color:var(--text-dim)">新手/零成本类</span>
           <span>13篇 · 8270赞</span>
           <span class="b b-gr">极受欢迎</span>
         </div>
         <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)">
-          <span style="color:var(--dim)">📊 产业链/研究类</span>
+          <span style="color:var(--text-dim)">产业链/研究类</span>
           <span>2篇 · 17390赞</span>
           <span class="b b-b">可爆发</span>
         </div>
         <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)">
-          <span style="color:var(--dim)">💼 创业变现故事</span>
+          <span style="color:var(--text-dim)">创业变现故事</span>
           <span>6篇 · 4436赞</span>
           <span class="b b-p">吸金</span>
         </div>
         <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)">
-          <span style="color:var(--dim)">📷 审美/拍摄类</span>
+          <span style="color:var(--text-dim)">审美/拍摄类</span>
           <span>4篇 · 1657赞</span>
           <span class="b b-o">表现好</span>
         </div>
         <div style="display:flex;justify-content:space-between;padding:6px 0">
-          <span style="color:var(--dim)">📦 供应链/货源类</span>
+          <span style="color:var(--text-dim)">供应链/货源类</span>
           <span>34篇提及</span>
           <span class="b b-r">内容缺口</span>
         </div>
       </div>
     </div>
     <div class="co co-tip">
-      <strong>💡 你的机会</strong>
+      <strong>你的机会</strong>
       供应链/货源类内容"高频低质"——34篇提及但单篇赞偏低，存在明显的<strong>SEO红利缺口</strong>。你用摄影博主视角做"供应链教育内容"，就是差异化定位。
     </div>
   </div>
 
   <div class="sec anchor" id="h-nav">
-    <div class="sec-title"><span class="icon">📋</span> 手册目录</div>
+    <div class="sec-eyebrow">CONTENTS</div>
+    <div class="sec-title">手册目录</div>
     <div class="sec-sub">点击跳转对应章节</div>
     <div class="flow">
       <div class="flow-item flow-gold" onclick="switchPage(1)" style="cursor:pointer">
         <div class="flow-step">CHAPTER 1</div>
-        <div style="font-size:15px;font-weight:500;color:var(--gold);margin-bottom:4px">📦 广州供应链地图</div>
+        <div style="font-size:15px;font-weight:500;color:var(--gold);margin-bottom:4px">广州供应链地图</div>
         <div class="flow-text">6大商圈 · 货源层级 · 28个渠道 · 3日路线</div>
       </div>
       <div class="flow-item flow-blue" onclick="switchPage(2)" style="cursor:pointer">
         <div class="flow-step">CHAPTER 2</div>
-        <div style="font-size:15px;font-weight:500;color:var(--blue);margin-bottom:4px">📷 内容×货源策略</div>
+        <div style="font-size:15px;font-weight:500;color:var(--blue);margin-bottom:4px">内容×货源策略</div>
         <div class="flow-text">433货盘 · 情绪留白拍摄 · AI测款 · 转化路径</div>
       </div>
       <div class="flow-item flow-green" onclick="switchPage(3)" style="cursor:pointer">
         <div class="flow-step">CHAPTER 3</div>
-        <div style="font-size:15px;font-weight:500;color:var(--green);margin-bottom:4px">⚠️ 避坑清单</div>
+        <div style="font-size:15px;font-weight:500;color:var(--green);margin-bottom:4px">避坑清单</div>
         <div class="flow-text">六道关卡 · MOQ对照 · 验收标准 · 炒货识别</div>
       </div>
       <div class="flow-item flow-purple" onclick="switchPage(4)" style="cursor:pointer">
         <div class="flow-step">CHAPTER 4</div>
-        <div style="font-size:15px;font-weight:500;color:var(--purple);margin-bottom:4px">🚀 0→1执行路径</div>
+        <div style="font-size:15px;font-weight:500;color:var(--purple);margin-bottom:4px">0→1执行路径</div>
         <div class="flow-text">四阶段 · 收入测算 · 30天计划 · 选品公式</div>
       </div>
       <div class="flow-item flow-gold" onclick="switchPage(5)" style="cursor:pointer">
         <div class="flow-step">FIELD GUIDE</div>
-        <div style="font-size:15px;font-weight:500;color:var(--orange);margin-bottom:4px">🗓 3天实战手册</div>
+        <div style="font-size:15px;font-weight:500;color:var(--orange);margin-bottom:4px">3天实战手册</div>
         <div class="flow-text">精确到小时 · 谈判话术 · 装备清单 · 回来后7天</div>
       </div>
       <div class="flow-item flow-blue" onclick="window.location.href='trip.html'" style="cursor:pointer">
         <div class="flow-step">BONUS · 行程规划</div>
-        <div style="font-size:15px;font-weight:500;color:var(--cyan);margin-bottom:4px">🏙️ 广州3日行程</div>
+        <div style="font-size:15px;font-weight:500;color:var(--cyan);margin-bottom:4px">广州3日行程</div>
         <div class="flow-text">历史文化 · 美食探店 · 自然风光 · 夜生活 · 高德地图</div>
       </div>
     </div>
   </div>
 
   <div class="foot">
-    <div class="logo">📷</div>
+    <div class="logo" style="font-family:var(--font-editorial);font-style:italic;font-size:28px;color:var(--gold);margin-bottom:8px">MF</div>
     木子菲儿 · 女装带货创业完整手册<br>
     数据更新于 2026-07-21<br>
     <span style="color:var(--gold)">v2.1 · 持续更新中</span>
@@ -470,15 +578,16 @@ body.home-active .bottom-nav{
 <!-- ═══════════════════════════════════════ -->
 <div class="page" id="page-supply">
   <div class="chips">
-    <div class="chip on" onclick="scrollTo2('s-level')">📦 货源层级</div>
-    <div class="chip" onclick="scrollTo2('s-map')">🗺️ 6大商圈</div>
-    <div class="chip" onclick="scrollTo2('s-channels')">📋 28渠道</div>
-    <div class="chip" onclick="scrollTo2('s-daily')">⏰ 时间表</div>
-    <div class="chip" onclick="scrollTo2('s-douyin')">💬 抖音洞察</div>
+    <div class="chip on" onclick="scrollTo2('s-level')">货源层级</div>
+    <div class="chip" onclick="scrollTo2('s-map')">6大商圈</div>
+    <div class="chip" onclick="scrollTo2('s-channels')">28渠道</div>
+    <div class="chip" onclick="scrollTo2('s-daily')">时间表</div>
+    <div class="chip" onclick="scrollTo2('s-douyin')">抖音洞察</div>
   </div>
 
   <div class="sec anchor" id="s-level">
-    <div class="sec-title"><span class="icon">📦</span> 货源四层结构</div>
+    <div class="sec-eyebrow">SUPPLY CHAIN</div>
+    <div class="sec-title">货源四层结构</div>
     <div class="sec-sub">新手从二批切入，有量后上探一批</div>
     <div class="card">
       <div style="font-size:13px;line-height:1.8">
@@ -509,7 +618,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="s-map">
-    <div class="sec-title"><span class="icon">🗺️</span> 6大商圈详解</div>
+    <div class="sec-eyebrow">MARKETS</div>
+    <div class="sec-title">6大商圈详解</div>
     <div class="sec-sub">定位 · 起批 · 价格 · 交通 · 适合谁</div>
 
     <div class="acc open">
@@ -667,7 +777,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="s-channels">
-    <div class="sec-title"><span class="icon">📋</span> 28个全平台渠道</div>
+    <div class="sec-eyebrow">CHANNELS</div>
+    <div class="sec-title">28个全平台渠道</div>
     <div class="sec-sub">线上+线下完整清单</div>
     <div class="acc open">
       <div class="acc-head" onclick="toggleAcc(this)">
@@ -744,7 +855,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="s-daily">
-    <div class="sec-title"><span class="icon">⏰</span> 每日/每周/季节时间表</div>
+    <div class="sec-eyebrow">SCHEDULE</div>
+    <div class="sec-title">每日/每周/季节时间表</div>
     <div class="sec-sub">什么时候去最好</div>
     <div class="card">
       <div class="card-title">⏰ 每日时段</div>
@@ -791,7 +903,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="s-douyin">
-    <div class="sec-title"><span class="icon">💬</span> 抖音真实评论洞察</div>
+    <div class="sec-eyebrow">INSIGHTS</div>
+    <div class="sec-title">抖音真实评论洞察</div>
     <div class="sec-sub">从真实用户反馈中提取避坑指南</div>
     <div class="dlg"><div class="dlg-label">@壮士美少女</div><div class="dlg-them">"追求版型建议去南油，广州100-300的衣服穿几次就变形"</div><div class="dlg-note">💡 广州中低价位版型/质量可能有问题，选品必须测质量</div></div>
     <div class="dlg"><div class="dlg-label">@良哥仔</div><div class="dlg-them">"十三行下午3点就打烊了，楼层越高质量越好"</div><div class="dlg-note">💡 必须早到！7-10点最佳，优先4楼以上</div></div>
@@ -807,15 +920,16 @@ body.home-active .bottom-nav{
 <!-- ═══════════════════════════════════════ -->
 <div class="page" id="page-content">
   <div class="chips">
-    <div class="chip on" onclick="scrollTo2('c-position')">🎯 定位</div>
-    <div class="chip" onclick="scrollTo2('c-goods')">👗 货盘</div>
-    <div class="chip" onclick="scrollTo2('c-photo')">📷 拍摄</div>
-    <div class="chip" onclick="scrollTo2('c-ai')">🤖 AI测款</div>
-    <div class="chip" onclick="scrollTo2('c-convert')">🔄 转化</div>
+    <div class="chip on" onclick="scrollTo2('c-position')">定位</div>
+    <div class="chip" onclick="scrollTo2('c-goods')">货盘</div>
+    <div class="chip" onclick="scrollTo2('c-photo')">拍摄</div>
+    <div class="chip" onclick="scrollTo2('c-ai')">AI测款</div>
+    <div class="chip" onclick="scrollTo2('c-convert')">转化</div>
   </div>
 
   <div class="sec anchor" id="c-position">
-    <div class="sec-title"><span class="icon">🎯</span> 战略定位</div>
+    <div class="sec-eyebrow">POSITIONING</div>
+    <div class="sec-title">战略定位</div>
     <div class="sec-sub">从"拍照教学"到"穿对+拍对"</div>
     <div class="card">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
@@ -844,7 +958,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="c-goods">
-    <div class="sec-title"><span class="icon">👗</span> 433内容货盘法则</div>
+    <div class="sec-eyebrow">PRODUCT MIX</div>
+    <div class="sec-title">433内容货盘法则</div>
     <div class="sec-sub">形象30% + 趋势40% + 常青30%</div>
     <div class="card">
       <div style="font-size:13px;line-height:1.8">
@@ -887,7 +1002,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="c-photo">
-    <div class="sec-title"><span class="icon">📷</span> 情绪留白拍摄法</div>
+    <div class="sec-eyebrow">PHOTOGRAPHY</div>
+    <div class="sec-title">情绪留白拍摄法</div>
     <div class="sec-sub">2026年女装拍摄趋势——和你的风格完美契合</div>
     <div class="card">
       <div style="font-size:13px;line-height:1.8">
@@ -925,7 +1041,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="c-ai">
-    <div class="sec-title"><span class="icon">🤖</span> AI测款</div>
+    <div class="sec-eyebrow">AI TOOLS</div>
+    <div class="sec-title">AI测款</div>
     <div class="sec-sub">用AI工具低成本测试款式热度</div>
     <div class="card">
       <div style="font-size:13px;line-height:1.8">
@@ -942,7 +1059,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="c-convert">
-    <div class="sec-title"><span class="icon">🔄</span> 转化路径</div>
+    <div class="sec-eyebrow">CONVERSION</div>
+    <div class="sec-title">转化路径</div>
     <div class="sec-sub">从内容到成交的完整链路</div>
     <div class="flow">
       <div class="flow-item flow-gold">
@@ -978,16 +1096,17 @@ body.home-active .bottom-nav{
 <!-- ═══════════════════════════════════════ -->
 <div class="page" id="page-risk">
   <div class="chips">
-    <div class="chip on" onclick="scrollTo2('r-level')">🔍 层级</div>
-    <div class="chip" onclick="scrollTo2('r-moq')">📊 MOQ</div>
-    <div class="chip" onclick="scrollTo2('r-quality')">🔎 验收</div>
-    <div class="chip" onclick="scrollTo2('r-price')">💰 谈判</div>
-    <div class="chip" onclick="scrollTo2('r-after')">📝 售后</div>
-    <div class="chip" onclick="scrollTo2('r-you')">📷 专属</div>
+    <div class="chip on" onclick="scrollTo2('r-level')">层级</div>
+    <div class="chip" onclick="scrollTo2('r-moq')">MOQ</div>
+    <div class="chip" onclick="scrollTo2('r-quality')">验收</div>
+    <div class="chip" onclick="scrollTo2('r-price')">谈判</div>
+    <div class="chip" onclick="scrollTo2('r-after')">售后</div>
+    <div class="chip" onclick="scrollTo2('r-you')">专属</div>
   </div>
 
   <div class="sec anchor" id="r-level">
-    <div class="sec-title"><span class="icon">🔍</span> 六道关卡 · 第1道：层级识别</div>
+    <div class="sec-eyebrow">RISK MANAGEMENT</div>
+    <div class="sec-title">六道关卡 · 第1道：层级识别</div>
     <div class="sec-sub">搞清楚你在跟谁做生意</div>
     <div class="card">
       <div style="font-size:13px;line-height:1.8">
@@ -1016,7 +1135,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="r-moq">
-    <div class="sec-title"><span class="icon">📊</span> 第2道：MOQ起批量对照</div>
+    <div class="sec-eyebrow">MINIMUM ORDER</div>
+    <div class="sec-title">第2道：MOQ起批量对照</div>
     <div class="sec-sub">各市场实测数据</div>
     <div class="tbl-wrap">
       <table>
@@ -1039,7 +1159,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="r-quality">
-    <div class="sec-title"><span class="icon">🔎</span> 第3道：品质验收标准</div>
+    <div class="sec-eyebrow">QUALITY CHECK</div>
+    <div class="sec-title">第3道：品质验收标准</div>
     <div class="sec-sub">三标+做工现场验收</div>
     <div class="card">
       <div class="card-title">🏷️ 三标检查（必做）</div>
@@ -1067,7 +1188,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="r-price">
-    <div class="sec-title"><span class="icon">💰</span> 第4道：价格谈判与防坑</div>
+    <div class="sec-eyebrow">NEGOTIATION</div>
+    <div class="sec-title">第4道：价格谈判与防坑</div>
     <div class="sec-sub">三种价格陷阱必须识别</div>
     <div class="card">
       <div class="tbl-wrap" style="border:none;margin:0">
@@ -1089,7 +1211,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="r-after">
-    <div class="sec-title"><span class="icon">📝</span> 第5道：售后书面化</div>
+    <div class="sec-eyebrow">AFTER-SALES</div>
+    <div class="sec-title">第5道：售后书面化</div>
     <div class="sec-sub">所有约定必须留文字记录</div>
     <div class="card">
       <div style="font-size:13px;line-height:1.8">
@@ -1104,7 +1227,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="r-you">
-    <div class="sec-title"><span class="icon">📷</span> 第6道：@木子菲儿 专属</div>
+    <div class="sec-eyebrow">YOUR BRAND</div>
+    <div class="sec-title">第6道：@木子菲儿 专属</div>
     <div class="sec-sub">摄影博主转型的特殊注意事项</div>
     <div class="card">
       <ul class="ck">
@@ -1123,15 +1247,16 @@ body.home-active .bottom-nav{
 <!-- ═══════════════════════════════════════ -->
 <div class="page" id="page-plan">
   <div class="chips">
-    <div class="chip on" onclick="scrollTo2('p-stage')">🚀 四阶段</div>
-    <div class="chip" onclick="scrollTo2('p-money')">💰 收入</div>
-    <div class="chip" onclick="scrollTo2('p-30d')">📅 30天</div>
-    <div class="chip" onclick="scrollTo2('p-budget')">💵 预算</div>
-    <div class="chip" onclick="scrollTo2('p-kpi')">📈 KPI</div>
+    <div class="chip on" onclick="scrollTo2('p-stage')">四阶段</div>
+    <div class="chip" onclick="scrollTo2('p-money')">收入</div>
+    <div class="chip" onclick="scrollTo2('p-30d')">30天</div>
+    <div class="chip" onclick="scrollTo2('p-budget')">预算</div>
+    <div class="chip" onclick="scrollTo2('p-kpi')">KPI</div>
   </div>
 
   <div class="sec anchor" id="p-stage">
-    <div class="sec-title"><span class="icon">🚀</span> 四阶段执行路径</div>
+    <div class="sec-eyebrow">EXECUTION ROADMAP</div>
+    <div class="sec-title">四阶段执行路径</div>
     <div class="sec-sub">从0到1的完整时间线</div>
 
     <div class="acc open">
@@ -1216,7 +1341,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="p-money">
-    <div class="sec-title"><span class="icon">💰</span> 收入测算</div>
+    <div class="sec-eyebrow">REVENUE PROJECTION</div>
+    <div class="sec-title">收入测算</div>
     <div class="sec-sub">三种场景预估</div>
     <div class="kpi-row">
       <div class="kpi" style="border-color:var(--red)"><div class="kpi-num" style="color:var(--red)">1-3K</div><div class="kpi-label">保守（月1）</div></div>
@@ -1235,7 +1361,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="p-30d">
-    <div class="sec-title"><span class="icon">📅</span> 30天执行表</div>
+    <div class="sec-eyebrow">30-DAY PLAN</div>
+    <div class="sec-title">30天执行表</div>
     <div class="sec-sub">精确到每周</div>
     <div class="tl">
       <div class="tl-item t-gold">
@@ -1266,7 +1393,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="p-budget">
-    <div class="sec-title"><span class="icon">💵</span> 启动预算</div>
+    <div class="sec-eyebrow">BUDGET</div>
+    <div class="sec-title">启动预算</div>
     <div class="sec-sub">轻启动，风险可控</div>
     <div class="card">
       <div style="font-size:13px">
@@ -1295,7 +1423,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="p-kpi">
-    <div class="sec-title"><span class="icon">📈</span> 90天KPI</div>
+    <div class="sec-eyebrow">KEY METRICS</div>
+    <div class="sec-title">90天KPI</div>
     <div class="sec-sub">可量化的里程碑</div>
     <div class="kpi-row">
       <div class="kpi"><div class="kpi-num">5000+</div><div class="kpi-label">粉丝</div></div>
@@ -1311,16 +1440,17 @@ body.home-active .bottom-nav{
 <!-- ═══════════════════════════════════════ -->
 <div class="page" id="page-trip">
   <div class="chips">
-    <div class="chip on" onclick="scrollTo2('t-prep')">🎒 准备</div>
-    <div class="chip" onclick="scrollTo2('t-d1')">📍 Day1</div>
-    <div class="chip" onclick="scrollTo2('t-d2')">📍 Day2</div>
-    <div class="chip" onclick="scrollTo2('t-d3')">📍 Day3</div>
-    <div class="chip" onclick="scrollTo2('t-talk')">💬 话术</div>
-    <div class="chip" onclick="scrollTo2('t-back')">🏠 回来</div>
+    <div class="chip on" onclick="scrollTo2('t-prep')">准备</div>
+    <div class="chip" onclick="scrollTo2('t-d1')">Day1</div>
+    <div class="chip" onclick="scrollTo2('t-d2')">Day2</div>
+    <div class="chip" onclick="scrollTo2('t-d3')">Day3</div>
+    <div class="chip" onclick="scrollTo2('t-talk')">话术</div>
+    <div class="chip" onclick="scrollTo2('t-back')">回来</div>
   </div>
 
   <div class="sec anchor" id="t-prep">
-    <div class="sec-title"><span class="icon">🎒</span> 出发前准备</div>
+    <div class="sec-eyebrow">PREPARATION</div>
+    <div class="sec-title">出发前准备</div>
     <div class="sec-sub">必带装备清单</div>
     <div class="card">
       <ul class="ck">
@@ -1340,7 +1470,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="t-d1">
-    <div class="sec-title" style="color:var(--gold)"><span class="icon">📍</span> Day 1 · 十三行商圈</div>
+    <div class="sec-eyebrow">DAY 1 · 老城文化</div>
+    <div class="sec-title" style="color:var(--gold)">十三行商圈</div>
     <div class="sec-sub">新中国大厦 + 红遍天 ｜ 预算1000-2000</div>
     <div class="tl">
       <div class="tl-item t-gold">
@@ -1380,7 +1511,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="t-d2">
-    <div class="sec-title" style="color:var(--blue)"><span class="icon">📍</span> Day 2 · 火车站商圈</div>
+    <div class="sec-eyebrow">DAY 2 · 自然现代</div>
+    <div class="sec-title" style="color:var(--blue)">火车站商圈</div>
     <div class="sec-sub">汇美 + apM + UUS ｜ 预算2000-3000</div>
     <div class="tl">
       <div class="tl-item t-blue">
@@ -1407,7 +1539,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="t-d3">
-    <div class="sec-title" style="color:var(--green)"><span class="icon">📍</span> Day 3 · 沙河 + 复盘</div>
+    <div class="sec-eyebrow">DAY 3 · 岭南风情</div>
+    <div class="sec-title" style="color:var(--green)">沙河 + 复盘</div>
     <div class="sec-sub">了解底价 + 敲定合作</div>
     <div class="tl">
       <div class="tl-item t-green">
@@ -1429,7 +1562,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="t-talk">
-    <div class="sec-title"><span class="icon">💬</span> 谈判话术</div>
+    <div class="sec-eyebrow">NEGOTIATION SCRIPTS</div>
+    <div class="sec-title">谈判话术</div>
     <div class="sec-sub">4个场景，直接照着说</div>
 
     <div class="card">
@@ -1458,7 +1592,8 @@ body.home-active .bottom-nav{
   </div>
 
   <div class="sec anchor" id="t-back">
-    <div class="sec-title"><span class="icon">🏠</span> 回来后7天</div>
+    <div class="sec-eyebrow">POST-TRIP</div>
+    <div class="sec-title">回来后7天</div>
     <div class="sec-sub">考察的价值在于执行</div>
     <div class="tl">
       <div class="tl-item t-gold"><div class="tl-time">Day 1</div><div class="tl-title">📦 样品到手+质量测试</div><div class="tl-desc">逐件检查→穿洗测试→ABC评级</div></div>
@@ -1485,12 +1620,12 @@ body.home-active .bottom-nav{
 
 <!-- Bottom Nav -->
 <div class="bottom-nav">
-  <div class="nav-item active" onclick="switchPage(0)"><div class="nav-icon">🏠</div>首页</div>
-  <div class="nav-item" onclick="switchPage(1)"><div class="nav-icon">📦</div>供应链</div>
-  <div class="nav-item" onclick="switchPage(2)"><div class="nav-icon">📷</div>内容</div>
-  <div class="nav-item" onclick="switchPage(3)"><div class="nav-icon">⚠️</div>避坑</div>
-  <div class="nav-item" onclick="switchPage(4)"><div class="nav-icon">🚀</div>路径</div>
-  <div class="nav-item" onclick="switchPage(5)"><div class="nav-icon">🗓</div>3天</div>
+  <div class="nav-item active" onclick="switchPage(0)"><svg class="icon-svg icon-nav"><use href="#icon-home"/></svg>首页</div>
+  <div class="nav-item" onclick="switchPage(1)"><svg class="icon-svg icon-nav"><use href="#icon-package"/></svg>供应链</div>
+  <div class="nav-item" onclick="switchPage(2)"><svg class="icon-svg icon-nav"><use href="#icon-camera"/></svg>内容</div>
+  <div class="nav-item" onclick="switchPage(3)"><svg class="icon-svg icon-nav"><use href="#icon-shield-alert"/></svg>避坑</div>
+  <div class="nav-item" onclick="switchPage(4)"><svg class="icon-svg icon-nav"><use href="#icon-route"/></svg>路径</div>
+  <div class="nav-item" onclick="switchPage(5)"><svg class="icon-svg icon-nav"><use href="#icon-calendar"/></svg>3天</div>
 </div>
 
 <script>
