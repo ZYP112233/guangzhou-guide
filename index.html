@@ -232,7 +232,7 @@ body.home-active .bottom-nav{
 }
 .hero-base{
   position:absolute;inset:0;z-index:10;
-  background-image:url('hero.webp');
+  background-image:url('hero-h1.png');
   background-size:cover;background-position:center center;
   background-repeat:no-repeat;
   filter:brightness(0.42) contrast(1.12) saturate(0.72);
@@ -241,16 +241,15 @@ body.home-active .bottom-nav{
 }
 /* 桌面端使用横版裁切版本 */
 @media(min-width:768px){
-  .hero-base{background-image:url('hero-desktop.webp')}
+  .hero-base{background-image:url('hero-h1.png')}
 }
-.hero-base.hero-alt{background-image:url('hero2.webp')}
-.hero-base.hero-alt2{background-image:url('hero3.webp')}
-.hero-base.hero-alt3{background-image:url('hero4.webp')}
-.hero-base.hero-alt4{background-image:url('hero5.webp')}
+.hero-base.hero-alt{background-image:url('hero-h2.png')}
+.hero-base.hero-alt2{background-image:url('hero-h3.png')}
+.hero-base.hero-alt3{background-image:url('hero-h4.png')}
 .hero-reveal-layer{
   position:absolute;inset:0;z-index:20;
   pointer-events:none;
-  background-image:url('hero.webp');
+  background-image:url('hero-h1.png');
   background-size:cover;background-position:center center;
   background-repeat:no-repeat;
   filter:brightness(0.96) contrast(1.04) saturate(1.06);
@@ -261,12 +260,11 @@ body.home-active .bottom-nav{
 }
 /* 桌面端使用横版裁切版本 */
 @media(min-width:768px){
-  .hero-reveal-layer{background-image:url('hero-desktop.webp')}
+  .hero-reveal-layer{background-image:url('hero-h1.png')}
 }
-.hero-reveal-layer.hero-alt{background-image:url('hero2.webp')}
-.hero-reveal-layer.hero-alt2{background-image:url('hero3.webp')}
-.hero-reveal-layer.hero-alt3{background-image:url('hero4.webp')}
-.hero-reveal-layer.hero-alt4{background-image:url('hero5.webp')}
+.hero-reveal-layer.hero-alt{background-image:url('hero-h2.png')}
+.hero-reveal-layer.hero-alt2{background-image:url('hero-h3.png')}
+.hero-reveal-layer.hero-alt3{background-image:url('hero-h4.png')}
 .hero-reveal-layer.active{opacity:1}
 .hero-vignette{
   position:absolute;inset:0;z-index:30;
@@ -318,9 +316,7 @@ body.home-active .bottom-nav{
   .hero-deco{font-size:10px;letter-spacing:.12em}
   .hero-deco-tl,.hero-deco-tr{top:calc(var(--header-h) + 12px)}
   .hero-deco-bl,.hero-deco-br{bottom:calc(var(--nav-h) + 36px)}
-  .hero-base.hero-alt4,.hero-reveal-layer.hero-alt4{background-position:center 48%}
-  .hero-base.hero-alt5,.hero-reveal-layer.hero-alt5{background-position:center center}
-  .hero-base.hero-alt6,.hero-reveal-layer.hero-alt6{background-position:center center}
+  .hero-base.hero-alt3,.hero-reveal-layer.hero-alt3{background-position:center 48%}
 }
 @media(prefers-reduced-motion:reduce){
   .hero-deco,.hero-scroll{animation:none;opacity:1}
@@ -573,7 +569,6 @@ body.home-active .bottom-nav{
       <button class="hero-toggle-btn" onclick="switchHero(1)" aria-label="Image 2"></button>
       <button class="hero-toggle-btn" onclick="switchHero(2)" aria-label="Image 3"></button>
       <button class="hero-toggle-btn" onclick="switchHero(3)" aria-label="Image 4"></button>
-      <button class="hero-toggle-btn" onclick="switchHero(4)" aria-label="Image 5"></button>
     </div>
     <!-- Content (z-50) -->
     <div class="hero-content">
@@ -2196,7 +2191,7 @@ function switchHero(idx){
   const base = document.querySelector('.hero-base');
   const revealLayer = document.getElementById('revealLayer');
   const btns = document.querySelectorAll('.hero-toggle-btn');
-  const heroClasses = ['hero-alt','hero-alt2','hero-alt3','hero-alt4'];
+  const heroClasses = ['hero-alt','hero-alt2','hero-alt3'];
   
   base.classList.remove(...heroClasses);
   revealLayer.classList.remove(...heroClasses);
