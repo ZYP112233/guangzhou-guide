@@ -242,9 +242,10 @@ body.home-active .bottom-nav{
 .hero-base.hero-alt{background-image:url('hero2.webp')}
 .hero-base.hero-alt2{background-image:url('hero3.webp')}
 .hero-base.hero-alt3{background-image:url('hero4.webp')}
-.hero-base.hero-alt4{background-image:url('hero-mobile-1.webp')}
-.hero-base.hero-alt5{background-image:url('hero-mobile-2.webp')}
-.hero-base.hero-alt6{background-image:url('hero-mobile-3.webp')}
+.hero-base.hero-alt4{background-image:url('hero5.webp')}
+.hero-base.hero-alt5{background-image:url('hero-mobile-1.webp')}
+.hero-base.hero-alt6{background-image:url('hero-mobile-2.webp')}
+.hero-base.hero-alt7{background-image:url('hero-mobile-3.webp')}
 .hero-reveal-layer{
   position:absolute;inset:0;z-index:20;
   pointer-events:none;
@@ -260,9 +261,10 @@ body.home-active .bottom-nav{
 .hero-reveal-layer.hero-alt{background-image:url('hero2.webp')}
 .hero-reveal-layer.hero-alt2{background-image:url('hero3.webp')}
 .hero-reveal-layer.hero-alt3{background-image:url('hero4.webp')}
-.hero-reveal-layer.hero-alt4{background-image:url('hero-mobile-1.webp')}
-.hero-reveal-layer.hero-alt5{background-image:url('hero-mobile-2.webp')}
-.hero-reveal-layer.hero-alt6{background-image:url('hero-mobile-3.webp')}
+.hero-reveal-layer.hero-alt4{background-image:url('hero5.webp')}
+.hero-reveal-layer.hero-alt5{background-image:url('hero-mobile-1.webp')}
+.hero-reveal-layer.hero-alt6{background-image:url('hero-mobile-2.webp')}
+.hero-reveal-layer.hero-alt7{background-image:url('hero-mobile-3.webp')}
 .hero-reveal-layer.active{opacity:1}
 .hero-vignette{
   position:absolute;inset:0;z-index:30;
@@ -474,9 +476,7 @@ body.home-active .bottom-nav{
       <button class="hero-toggle-btn" onclick="switchHero(1)" aria-label="Image 2"></button>
       <button class="hero-toggle-btn" onclick="switchHero(2)" aria-label="Image 3"></button>
       <button class="hero-toggle-btn" onclick="switchHero(3)" aria-label="Image 4"></button>
-      <button class="hero-toggle-btn" onclick="switchHero(4)" aria-label="手机背景 1"></button>
-      <button class="hero-toggle-btn" onclick="switchHero(5)" aria-label="手机背景 2"></button>
-      <button class="hero-toggle-btn" onclick="switchHero(6)" aria-label="手机背景 3"></button>
+      <button class="hero-toggle-btn" onclick="switchHero(4)" aria-label="Image 5"></button>
     </div>
     <!-- Content (z-50) -->
     <div class="hero-content">
@@ -1704,7 +1704,7 @@ function switchHero(idx){
   const base = document.querySelector('.hero-base');
   const revealLayer = document.getElementById('revealLayer');
   const btns = document.querySelectorAll('.hero-toggle-btn');
-  const heroClasses = ['hero-alt','hero-alt2','hero-alt3','hero-alt4','hero-alt5','hero-alt6'];
+  const heroClasses = ['hero-alt','hero-alt2','hero-alt3','hero-alt4'];
   
   base.classList.remove(...heroClasses);
   revealLayer.classList.remove(...heroClasses);
