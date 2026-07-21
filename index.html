@@ -448,6 +448,139 @@ body.home-active .bottom-nav{
 /* Anchor indicator */
 .anchor{scroll-margin-top:calc(var(--header-h) + 60px)}
 
+/* Edit Button */
+.edit-btn{
+  position:fixed;
+  bottom:calc(var(--nav-h) + 20px);
+  right:20px;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:var(--gold);
+  border:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 4px 12px rgba(200,164,92,0.3);
+  transition:all 0.3s ease;
+  z-index:99;
+}
+.edit-btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 6px 16px rgba(200,164,92,0.4);
+}
+.edit-btn svg{
+  width:24px;
+  height:24px;
+  color:var(--bg);
+}
+
+/* Edit Modal */
+.edit-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.8);
+  z-index:200;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.edit-modal.active{
+  display:flex;
+}
+.edit-panel{
+  background:var(--card);
+  border:1px solid var(--border2);
+  border-radius:16px;
+  max-width:500px;
+  width:100%;
+  max-height:80vh;
+  overflow-y:auto;
+  padding:24px;
+}
+.edit-panel h3{
+  font-size:18px;
+  font-weight:600;
+  color:var(--gold);
+  margin-bottom:20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.edit-panel .close-btn{
+  background:none;
+  border:none;
+  color:var(--text-dim);
+  font-size:24px;
+  cursor:pointer;
+  padding:0;
+  width:32px;
+  height:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.edit-panel .close-btn:hover{
+  color:var(--text);
+}
+.edit-field{
+  margin-bottom:16px;
+}
+.edit-field label{
+  display:block;
+  font-size:12px;
+  color:var(--text-dim);
+  margin-bottom:6px;
+  letter-spacing:0.05em;
+}
+.edit-field input{
+  width:100%;
+  padding:10px 12px;
+  background:var(--card2);
+  border:1px solid var(--border2);
+  border-radius:8px;
+  color:var(--text);
+  font-size:14px;
+  font-family:var(--font-ui);
+}
+.edit-field input:focus{
+  outline:none;
+  border-color:var(--gold);
+}
+.edit-actions{
+  display:flex;
+  gap:12px;
+  margin-top:24px;
+}
+.edit-actions button{
+  flex:1;
+  padding:12px;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:500;
+  cursor:pointer;
+  transition:all 0.2s ease;
+}
+.edit-actions .save-btn{
+  background:var(--gold);
+  color:var(--bg);
+  border:none;
+}
+.edit-actions .save-btn:hover{
+  background:var(--gold-l);
+}
+.edit-actions .cancel-btn{
+  background:transparent;
+  color:var(--text-dim);
+  border:1px solid var(--border2);
+}
+.edit-actions .cancel-btn:hover{
+  background:var(--card2);
+  color:var(--text);
+}
+
 /* Stats grid */
 .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
 .stat{text-align:center;padding:10px 6px;background:var(--card);border:1px solid var(--border);border-radius:10px}
@@ -642,7 +775,7 @@ body.home-active .bottom-nav{
 
   <div class="sec anchor" id="h-stats">
     <div class="sec-eyebrow">OVERVIEW</div>
-    <div class="sec-title">账号现状</div>
+    <div class="sec-title">账号现状 <button class="edit-btn" onclick="openEditModal()" title="编辑数据"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button></div>
     <div class="sec-sub">基于小红书主页数据 · <span id="updateDate"></span></div>
     <div class="kpi-row">
       <div class="kpi"><div class="kpi-num" id="kpiFollowers"></div><div class="kpi-label">粉丝数</div></div>
@@ -2219,6 +2352,40 @@ body.home-active .bottom-nav{
   <div class="nav-item" onclick="switchPage(7)"><svg class="icon-svg icon-nav"><use href="#icon-calendar"/></svg>3天</div>
 </div>
 
+<!-- Edit Modal -->
+<div class="edit-modal" id="editModal">
+  <div class="edit-panel">
+    <h3>
+      编辑账号数据
+      <button class="close-btn" onclick="closeEditModal()">×</button>
+    </h3>
+    <div class="edit-field">
+      <label>粉丝数</label>
+      <input type="text" id="editFollowers" placeholder="例如：6,578">
+    </div>
+    <div class="edit-field">
+      <label>获赞与收藏</label>
+      <input type="text" id="editLikes" placeholder="例如：14.7万">
+    </div>
+    <div class="edit-field">
+      <label>爆款互动</label>
+      <input type="text" id="editHotInteraction" placeholder="例如：6.7万">
+    </div>
+    <div class="edit-field">
+      <label>平台转化率</label>
+      <input type="text" id="editConversion" placeholder="例如：21.4%">
+    </div>
+    <div class="edit-field">
+      <label>数据更新日期</label>
+      <input type="date" id="editUpdateDate">
+    </div>
+    <div class="edit-actions">
+      <button class="cancel-btn" onclick="closeEditModal()">取消</button>
+      <button class="save-btn" onclick="saveData()">保存</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const pages = ['page-home','page-supply','page-content','page-ops','page-monetize','page-risk','page-plan','page-trip'];
 const titles = ['木子菲儿','① 广州供应链地图','② 内容×货源策略','③ 账号运营手册','④ 带货变现路径','⑤ 避坑清单','⑥ 0→1执行路径','⑦ 3天实战手册'];
@@ -2298,6 +2465,17 @@ document.body.classList.add('home-active');
 
 // ═══ 从CONFIG加载数据 ═══
 (function(){
+  // 尝试从localStorage读取数据
+  const savedData = localStorage.getItem('mzfeAccountData');
+  if(savedData){
+    const data = JSON.parse(savedData);
+    CONFIG.account.followers = data.followers || CONFIG.account.followers;
+    CONFIG.account.likes = data.likes || CONFIG.account.likes;
+    CONFIG.account.hotInteraction = data.hotInteraction || CONFIG.account.hotInteraction;
+    CONFIG.account.conversionRate = data.conversionRate || CONFIG.account.conversionRate;
+    CONFIG.lastUpdate = data.lastUpdate || CONFIG.lastUpdate;
+  }
+  
   // 账号数据
   document.getElementById('kpiFollowers').textContent = CONFIG.account.followers;
   document.getElementById('kpiLikes').textContent = CONFIG.account.likes;
@@ -2307,6 +2485,68 @@ document.body.classList.add('home-active');
   // 更新时间
   document.getElementById('updateDate').textContent = CONFIG.lastUpdate;
 })();
+
+// ═══ 编辑功能 ═══
+function openEditModal(){
+  const modal = document.getElementById('editModal');
+  modal.classList.add('active');
+  
+  // 填充当前数据
+  document.getElementById('editFollowers').value = CONFIG.account.followers;
+  document.getElementById('editLikes').value = CONFIG.account.likes;
+  document.getElementById('editHotInteraction').value = CONFIG.account.hotInteraction;
+  document.getElementById('editConversion').value = CONFIG.account.conversionRate;
+  
+  // 转换日期格式
+  const dateStr = CONFIG.lastUpdate.replace(/-/g, '-');
+  document.getElementById('editUpdateDate').value = dateStr;
+}
+
+function closeEditModal(){
+  const modal = document.getElementById('editModal');
+  modal.classList.remove('active');
+}
+
+function saveData(){
+  // 获取输入值
+  const data = {
+    followers: document.getElementById('editFollowers').value,
+    likes: document.getElementById('editLikes').value,
+    hotInteraction: document.getElementById('editHotInteraction').value,
+    conversionRate: document.getElementById('editConversion').value,
+    lastUpdate: document.getElementById('editUpdateDate').value
+  };
+  
+  // 保存到localStorage
+  localStorage.setItem('mzfeAccountData', JSON.stringify(data));
+  
+  // 更新CONFIG
+  CONFIG.account.followers = data.followers;
+  CONFIG.account.likes = data.likes;
+  CONFIG.account.hotInteraction = data.hotInteraction;
+  CONFIG.account.conversionRate = data.conversionRate;
+  CONFIG.lastUpdate = data.lastUpdate;
+  
+  // 更新页面显示
+  document.getElementById('kpiFollowers').textContent = data.followers;
+  document.getElementById('kpiLikes').textContent = data.likes;
+  document.getElementById('kpiHotInteraction').textContent = data.hotInteraction;
+  document.getElementById('kpiConversion').textContent = data.conversionRate;
+  document.getElementById('updateDate').textContent = data.lastUpdate;
+  
+  // 关闭弹窗
+  closeEditModal();
+  
+  // 显示成功提示
+  alert('数据已保存！刷新页面后仍然保留。');
+}
+
+// 点击弹窗外部关闭
+document.getElementById('editModal').addEventListener('click', function(e){
+  if(e.target === this){
+    closeEditModal();
+  }
+});
 
 function toggleAcc(el) {
   el.parentElement.classList.toggle('open');
