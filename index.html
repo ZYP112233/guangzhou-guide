@@ -4,54 +4,62 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0a0a0a">
-<title>木子菲儿 · 女装带货创业完整手册</title>
+<title>木子菲儿 · 女装带货创业完整手册 v2.1</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{--bg:#0a0a0a;--card:#141414;--border:#1e1e1e;--gold:#c8a45c;--gold-l:#e8c97a;--text:#e0e0e0;--dim:#777;--green:#4caf50;--red:#ef5350;--blue:#42a5f5;--purple:#ab47bc;--orange:#ff9800;--nav-h:56px;--header-h:48px}
+:root{--bg:#0a0a0a;--card:#141414;--card2:#1a1a1a;--border:#1e1e1e;--border2:#2a2a2a;--gold:#c8a45c;--gold-l:#e8c97a;--gold-d:#8a6d3b;--text:#e0e0e0;--dim:#777;--dim2:#555;--green:#4caf50;--red:#ef5350;--blue:#42a5f5;--purple:#ab47bc;--orange:#ff9800;--cyan:#00bcd4;--nav-h:60px;--header-h:50px}
 html{scroll-behavior:smooth}
-body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;font-size:15px;padding-bottom:calc(var(--nav-h) + 16px)}
+body{font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;font-size:15px;padding-bottom:calc(var(--nav-h) + 20px)}
 a{color:var(--gold);text-decoration:none}
 
 /* Header */
-.header{position:fixed;top:0;left:0;right:0;height:var(--header-h);background:rgba(10,10,10,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:100}
+.header{position:fixed;top:0;left:0;right:0;height:var(--header-h);background:linear-gradient(180deg,rgba(10,10,10,.98),rgba(10,10,10,.95));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:100}
+.header-left{display:flex;align-items:center;gap:10px}
+.header-logo{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-d));display:flex;align-items:center;justify-content:center;font-size:14px}
 .header h1{font-size:15px;font-weight:500;color:var(--gold)}
 .header .ch-num{font-size:11px;color:var(--dim);letter-spacing:.1em}
 
 /* Bottom Nav */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:var(--nav-h);background:rgba(10,10,10,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--border);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom)}
-.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--dim);font-size:10px;letter-spacing:.05em;transition:color .2s;cursor:pointer;position:relative}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:var(--nav-h);background:linear-gradient(0deg,rgba(10,10,10,.98),rgba(10,10,10,.95));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--border2);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom)}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--dim2);font-size:10px;letter-spacing:.05em;transition:all .2s;cursor:pointer;position:relative}
 .nav-item.active{color:var(--gold)}
-.nav-item .nav-icon{font-size:18px}
-.nav-item.active::after{content:'';position:absolute;top:0;left:25%;right:25%;height:2px;background:var(--gold);border-radius:0 0 2px 2px}
+.nav-item .nav-icon{font-size:20px;transition:transform .2s}
+.nav-item.active .nav-icon{transform:scale(1.1)}
+.nav-item.active::after{content:'';position:absolute;top:0;left:20%;right:20%;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);border-radius:0 0 2px 2px}
 
 /* Pages */
-.page{display:none;padding-top:calc(var(--header-h) + 12px);min-height:100vh}
+.page{display:none;padding-top:calc(var(--header-h) + 8px);min-height:100vh;animation:fadeIn .3s}
 .page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
 /* Section */
-.sec{padding:16px}
+.sec{padding:16px;position:relative}
 .sec+.sec{border-top:1px solid var(--border)}
-.sec-title{font-size:17px;font-weight:600;color:var(--gold);margin-bottom:4px;display:flex;align-items:center;gap:8px}
-.sec-sub{font-size:12px;color:var(--dim);margin-bottom:16px}
+.sec-title{font-size:18px;font-weight:600;color:var(--gold);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.sec-title .icon{font-size:22px}
+.sec-sub{font-size:12px;color:var(--dim);margin-bottom:16px;padding-left:2px}
 
 /* Cards */
-.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:12px}
-.card-title{font-size:14px;font-weight:600;color:var(--gold-l);margin-bottom:8px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px;transition:border-color .2s}
+.card:active{border-color:var(--gold-d)}
+.card-title{font-size:14px;font-weight:600;color:var(--gold-l);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.card-title .icon{font-size:16px}
 
-/* KPI Row */
+/* KPI */
 .kpi-row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px}
-.kpi{text-align:center;padding:14px 8px;background:var(--card);border:1px solid var(--border);border-radius:10px}
-.kpi-num{font-size:22px;font-weight:300;color:var(--gold-l)}
-.kpi-label{font-size:11px;color:var(--dim);margin-top:2px}
+.kpi{text-align:center;padding:16px 10px;background:linear-gradient(135deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:12px;position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-l))}
+.kpi-num{font-size:24px;font-weight:300;color:var(--gold-l);letter-spacing:.02em}
+.kpi-label{font-size:11px;color:var(--dim);margin-top:4px;letter-spacing:.05em}
 
 /* Table */
-.tbl{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:12px;overflow-x:auto;display:block}
-.tbl thead{background:rgba(200,164,92,.08)}
-.tbl th{padding:8px 10px;text-align:left;font-size:11px;color:var(--dim);letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);white-space:nowrap}
-.tbl td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top}
-.tbl tr:last-child td{border:none}
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:12px;border:1px solid var(--border);border-radius:12px;background:var(--card)}
+.tbl-wrap table{width:100%;border-collapse:collapse;font-size:13px;min-width:500px}
+.tbl-wrap th{padding:10px;text-align:left;font-size:11px;color:var(--dim);background:rgba(200,164,92,.05);border-bottom:1px solid var(--border);white-space:nowrap;letter-spacing:.05em}
+.tbl-wrap td{padding:10px;border-bottom:1px solid var(--border);vertical-align:top}
+.tbl-wrap tr:last-child td{border:none}
+.tbl-wrap tr:active{background:rgba(200,164,92,.03)}
 
 /* Badge */
 .b{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:500;white-space:nowrap}
@@ -61,33 +69,37 @@ a{color:var(--gold);text-decoration:none}
 .b-r{background:rgba(239,83,80,.15);color:var(--red)}
 .b-p{background:rgba(171,71,188,.15);color:var(--purple)}
 .b-o{background:rgba(255,152,0,.15);color:var(--orange)}
+.b-c{background:rgba(0,188,212,.15);color:var(--cyan)}
 
 /* Callout */
-.co{padding:12px;border-radius:8px;margin:12px 0;font-size:13px;line-height:1.7}
-.co-tip{background:rgba(76,175,80,.06);border-left:3px solid var(--green)}
-.co-warn{background:rgba(239,83,80,.06);border-left:3px solid var(--red)}
-.co-info{background:rgba(200,164,92,.06);border-left:3px solid var(--gold)}
-.co-blue{background:rgba(66,165,245,.06);border-left:3px solid var(--blue)}
+.co{padding:12px 14px;border-radius:10px;margin:12px 0;font-size:13px;line-height:1.7}
+.co-tip{background:linear-gradient(135deg,rgba(76,175,80,.08),rgba(76,175,80,.03));border-left:3px solid var(--green)}
+.co-warn{background:linear-gradient(135deg,rgba(239,83,80,.08),rgba(239,83,80,.03));border-left:3px solid var(--red)}
+.co-info{background:linear-gradient(135deg,rgba(200,164,92,.08),rgba(200,164,92,.03));border-left:3px solid var(--gold)}
+.co-blue{background:linear-gradient(135deg,rgba(66,165,245,.08),rgba(66,165,245,.03));border-left:3px solid var(--blue)}
 .co strong{display:block;margin-bottom:4px;font-size:13px}
 
 /* Accordion */
-.acc{border:1px solid var(--border);border-radius:10px;margin-bottom:10px;overflow:hidden}
-.acc-head{padding:12px 14px;background:var(--card);display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:14px;font-weight:500;-webkit-user-select:none;user-select:none}
+.acc{border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;background:var(--card)}
+.acc-head{padding:14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:14px;font-weight:500;-webkit-user-select:none;user-select:none;transition:background .2s}
+.acc-head:active{background:rgba(200,164,92,.05)}
 .acc-head .arrow{transition:transform .2s;font-size:12px;color:var(--dim)}
 .acc.open .acc-head .arrow{transform:rotate(180deg)}
+.acc.open .acc-head{border-bottom:1px solid var(--border);background:rgba(200,164,92,.03)}
 .acc-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
 .acc.open .acc-body{max-height:8000px}
-.acc-inner{padding:14px;border-top:1px solid var(--border)}
+.acc-inner{padding:14px}
 
 /* Timeline */
-.tl{position:relative;padding-left:20px;border-left:2px solid var(--border)}
-.tl-item{position:relative;padding:0 0 20px 16px}
-.tl-item::before{content:'';position:absolute;left:-25px;top:4px;width:10px;height:10px;border-radius:50%;border:2px solid var(--bg)}
-.tl-item.t-gold::before{background:var(--gold)}
-.tl-item.t-blue::before{background:var(--blue)}
-.tl-item.t-green::before{background:var(--green)}
-.tl-item.t-red::before{background:var(--red)}
-.tl-time{font-size:11px;letter-spacing:.1em;margin-bottom:2px}
+.tl{position:relative;padding-left:24px;border-left:2px solid var(--border2)}
+.tl-item{position:relative;padding:0 0 24px 18px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{content:'';position:absolute;left:-29px;top:4px;width:12px;height:12px;border-radius:50%;border:2px solid var(--bg)}
+.tl-item.t-gold::before{background:var(--gold);box-shadow:0 0 8px rgba(200,164,92,.4)}
+.tl-item.t-blue::before{background:var(--blue);box-shadow:0 0 8px rgba(66,165,245,.4)}
+.tl-item.t-green::before{background:var(--green);box-shadow:0 0 8px rgba(76,175,80,.4)}
+.tl-item.t-red::before{background:var(--red);box-shadow:0 0 8px rgba(239,83,80,.4)}
+.tl-time{font-size:11px;letter-spacing:.1em;margin-bottom:3px;font-weight:500}
 .tl-item.t-gold .tl-time{color:var(--gold)}
 .tl-item.t-blue .tl-time{color:var(--blue)}
 .tl-item.t-green .tl-time{color:var(--green)}
@@ -96,156 +108,184 @@ a{color:var(--gold);text-decoration:none}
 .tl-desc{font-size:13px;color:var(--dim);line-height:1.6}
 
 /* Dialog */
-.dlg{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:10px}
-.dlg-label{font-size:10px;color:var(--dim);letter-spacing:.1em;margin-bottom:4px}
+.dlg{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:10px}
+.dlg-label{font-size:10px;color:var(--dim);letter-spacing:.1em;margin-bottom:4px;text-transform:uppercase}
 .dlg-you{color:var(--gold);font-size:13px;line-height:1.7}
 .dlg-them{color:var(--blue);font-size:13px;line-height:1.7}
 .dlg-note{color:var(--dim);font-size:12px;font-style:italic;margin-top:4px}
 
-/* Tags */
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
-.tag{font-size:11px;padding:3px 10px;border-radius:16px;border:1px solid var(--border);color:var(--dim)}
-.tag.on{border-color:var(--gold);color:var(--gold)}
+/* Chips */
+.chips{display:flex;gap:8px;overflow-x:auto;padding:10px 16px;-webkit-overflow-scrolling:touch;background:rgba(10,10,10,.5);backdrop-filter:blur(8px);position:sticky;top:var(--header-h);z-index:50;border-bottom:1px solid var(--border)}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;border:1px solid var(--border2);color:var(--dim);cursor:pointer;white-space:nowrap;transition:all .2s;background:var(--card)}
+.chip:active{transform:scale(.95)}
+.chip.on{border-color:var(--gold);color:var(--gold);background:rgba(200,164,92,.08)}
 
 /* Progress */
 .prog{margin:8px 0}
-.prog-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
-.prog-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--gold),var(--gold-l))}
+.prog-bar{height:6px;background:var(--border2);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--gold-d),var(--gold),var(--gold-l))}
 
 /* Price */
-.price{display:inline-block;background:var(--gold);color:var(--bg);padding:1px 8px;border-radius:4px;font-size:12px;font-weight:600}
+.price{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold-d));color:var(--bg);padding:2px 10px;border-radius:6px;font-size:12px;font-weight:600}
 
 /* Checklist */
 .ck{list-style:none}
-.ck li{padding:6px 0;border-bottom:1px solid var(--border);font-size:13px;display:flex;gap:8px;align-items:flex-start}
+.ck li{padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;display:flex;gap:10px;align-items:flex-start}
 .ck li:last-child{border:none}
-.ck-dot{flex-shrink:0;width:18px;height:18px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;margin-top:1px}
+.ck-dot{flex-shrink:0;width:20px;height:20px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;margin-top:1px;font-weight:600}
 .ck-must{background:rgba(239,83,80,.2);color:var(--red)}
 .ck-should{background:rgba(200,164,92,.2);color:var(--gold)}
 .ck-nice{background:rgba(76,175,80,.2);color:var(--green)}
 
-/* Search */
-.search-box{padding:12px 16px;position:sticky;top:var(--header-h);background:var(--bg);z-index:50}
-.search-input{width:100%;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;outline:none}
-.search-input:focus{border-color:var(--gold)}
-.search-input::placeholder{color:var(--dim)}
-
-/* Scrollable table wrapper */
-.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:12px;border:1px solid var(--border);border-radius:10px}
-.tbl-wrap table{width:100%;border-collapse:collapse;font-size:13px;min-width:500px}
-.tbl-wrap th{padding:8px 10px;text-align:left;font-size:11px;color:var(--dim);background:rgba(200,164,92,.05);border-bottom:1px solid var(--border);white-space:nowrap}
-.tbl-wrap td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top}
-
 /* Divider */
-.divider{height:1px;background:var(--border);margin:16px 0}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:20px 0}
 
 /* Footer */
-.foot{text-align:center;padding:24px 16px;color:var(--dim);font-size:12px;line-height:1.8}
+.foot{text-align:center;padding:30px 16px;color:var(--dim);font-size:12px;line-height:1.8}
+.foot .logo{font-size:24px;margin-bottom:8px}
 
-/* Quick jump chips */
-.chips{display:flex;gap:8px;overflow-x:auto;padding:8px 16px;-webkit-overflow-scrolling:touch}
-.chips::-webkit-scrollbar{display:none}
-.chip{flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;border:1px solid var(--border);color:var(--dim);cursor:pointer;white-space:nowrap}
-.chip.on{border-color:var(--gold);color:var(--gold);background:rgba(200,164,92,.08)}
+/* Anchor indicator */
+.anchor{scroll-margin-top:calc(var(--header-h) + 60px)}
+
+/* Stats grid */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.stat{text-align:center;padding:10px 6px;background:var(--card);border:1px solid var(--border);border-radius:10px}
+.stat-num{font-size:18px;font-weight:300;color:var(--gold-l)}
+.stat-label{font-size:10px;color:var(--dim);margin-top:2px}
+
+/* Flow */
+.flow{display:flex;flex-direction:column;gap:10px}
+.flow-item{padding:12px;border-radius:10px;border-left:3px solid;position:relative}
+.flow-item::after{content:'↓';position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);color:var(--dim2);font-size:14px}
+.flow-item:last-child::after{display:none}
+.flow-gold{background:rgba(200,164,92,.06);border-color:var(--gold)}
+.flow-blue{background:rgba(66,165,245,.06);border-color:var(--blue)}
+.flow-green{background:rgba(76,175,80,.06);border-color:var(--green)}
+.flow-purple{background:rgba(171,71,188,.06);border-color:var(--purple)}
+.flow-step{font-size:10px;letter-spacing:.1em;margin-bottom:2px}
+.flow-item.flow-gold .flow-step{color:var(--gold)}
+.flow-item.flow-blue .flow-step{color:var(--blue)}
+.flow-item.flow-green .flow-step{color:var(--green)}
+.flow-item.flow-purple .flow-step{color:var(--purple)}
+.flow-text{font-size:13px}
 </style>
 </head>
 <body>
 
 <!-- Header -->
 <div class="header">
-  <h1 id="headerTitle">木子菲儿 · 完整手册</h1>
-  <span class="ch-num" id="headerSub">v2.0 完整版</span>
+  <div class="header-left">
+    <div class="header-logo">📷</div>
+    <h1 id="headerTitle">木子菲儿</h1>
+  </div>
+  <span class="ch-num" id="headerSub">v2.1 完整版</span>
 </div>
 
 <!-- ═══════════════════════════════════════ -->
 <!-- PAGE 0: 首页 -->
 <!-- ═══════════════════════════════════════ -->
 <div class="page active" id="page-home">
-  <div class="sec" style="text-align:center;padding-top:40px">
-    <div style="font-size:28px;font-weight:300;color:var(--gold);letter-spacing:.1em">木子菲儿</div>
-    <div style="font-size:13px;color:var(--dim);margin-top:8px;letter-spacing:.2em">摄影博主 → 女装带货创业</div>
-    <div style="font-size:15px;margin-top:20px;color:var(--text)">"用摄影师的审美，卖有质感的衣服"</div>
+  <div class="sec" style="text-align:center;padding:40px 16px 20px">
+    <div style="font-size:32px;margin-bottom:8px">📷</div>
+    <div style="font-size:26px;font-weight:300;color:var(--gold);letter-spacing:.1em">木子菲儿</div>
+    <div style="font-size:12px;color:var(--dim);margin-top:8px;letter-spacing:.3em">摄影博主 → 女装带货创业</div>
+    <div style="font-size:14px;margin-top:16px;color:var(--text);font-style:italic">"用摄影师的审美，卖有质感的衣服"</div>
   </div>
 
-  <div class="sec">
-    <div class="sec-title">📊 账号现状</div>
-    <div class="sec-sub">基于小红书主页数据</div>
+  <div class="sec anchor" id="h-stats">
+    <div class="sec-title"><span class="icon">📊</span> 账号现状</div>
+    <div class="sec-sub">基于小红书主页数据 · 2026-07-21</div>
     <div class="kpi-row">
-      <div class="kpi"><div class="kpi-num">1,000+</div><div class="kpi-label">粉丝</div></div>
+      <div class="kpi"><div class="kpi-num">1,000+</div><div class="kpi-label">粉丝数</div></div>
       <div class="kpi"><div class="kpi-num">10,000+</div><div class="kpi-label">获赞与收藏</div></div>
       <div class="kpi"><div class="kpi-num">6.7万</div><div class="kpi-label">爆款互动</div></div>
       <div class="kpi"><div class="kpi-num">21.4%</div><div class="kpi-label">平台转化率</div></div>
     </div>
+  </div>
+
+  <div class="sec anchor" id="h-advantage">
+    <div class="sec-title"><span class="icon">🎯</span> 核心优势</div>
     <div class="card">
-      <div class="card-title">🎯 核心优势</div>
-      <div style="font-size:13px;line-height:2">
-        <div style="display:flex;justify-content:space-between;align-items:center"><span>10+年模特经验 → 懂什么衣服出片</span><span class="b b-g">95%</span></div>
-        <div class="prog"><div class="prog-bar"><div class="prog-fill" style="width:95%"></div></div></div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px"><span>心理咨询师 → 懂用户痛点</span><span class="b b-g">85%</span></div>
-        <div class="prog"><div class="prog-bar"><div class="prog-fill" style="width:85%"></div></div></div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px"><span>已验证爆款能力（6.7万互动）</span><span class="b b-g">90%</span></div>
-        <div class="prog"><div class="prog-bar"><div class="prog-fill" style="width:90%"></div></div></div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px"><span>视觉内容能力（80元拍出800元质感）</span><span class="b b-g">92%</span></div>
-        <div class="prog"><div class="prog-bar"><div class="prog-fill" style="width:92%"></div></div></div>
+      <div style="font-size:13px;line-height:1.8">
+        <div style="margin-bottom:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+            <span>📸 10+年模特经验</span>
+            <span class="b b-g">95%</span>
+          </div>
+          <div class="prog"><div class="prog-bar"><div class="prog-fill" style="width:95%"></div></div></div>
+          <div style="font-size:11px;color:var(--dim);margin-top:2px">懂什么衣服出片，镜头感强</div>
+        </div>
+        <div style="margin-bottom:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+            <span>🧠 心理咨询师背景</span>
+            <span class="b b-g">85%</span>
+          </div>
+          <div class="prog"><div class="prog-bar"><div class="prog-fill" style="width:85%"></div></div></div>
+          <div style="font-size:11px;color:var(--dim);margin-top:2px">懂用户心理，能写出戳中痛点的文案</div>
+        </div>
+        <div style="margin-bottom:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+            <span>🔥 已验证爆款能力</span>
+            <span class="b b-g">90%</span>
+          </div>
+          <div class="prog"><div class="prog-bar"><div class="prog-fill" style="width:90%"></div></div></div>
+          <div style="font-size:11px;color:var(--dim);margin-top:2px">6.7万互动证明你懂小红书算法</div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+            <span>✨ 视觉内容能力</span>
+            <span class="b b-g">92%</span>
+          </div>
+          <div class="prog"><div class="prog-bar"><div class="prog-fill" style="width:92%"></div></div></div>
+          <div style="font-size:11px;color:var(--dim);margin-top:2px">能把80元批发款拍出800元质感</div>
+        </div>
       </div>
     </div>
     <div class="co co-info">
       <strong>💡 转型逻辑</strong>
       教拍照 → 穿什么拍好看 → 女装带货<br>
-      粉丝画像偏好"韩系/松弛感/氛围感"审美 → 直接对应选品方向<br>
-      粉丝迁移成本极低
+      粉丝画像偏好"韩系/松弛感/氛围感" → 直接对应选品方向<br>
+      <strong style="color:var(--gold)">粉丝迁移成本极低</strong>
     </div>
   </div>
 
-  <div class="sec">
-    <div class="sec-title">📋 手册目录</div>
-    <div class="sec-sub">点击跳转对应章节</div>
-    <div style="display:flex;flex-direction:column;gap:8px">
-      <div class="card" style="cursor:pointer" onclick="switchPage(1)">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div><div style="font-size:14px;font-weight:500;color:var(--gold)">① 广州供应链地图</div><div style="font-size:12px;color:var(--dim);margin-top:2px">6大商圈 · 货源层级 · 28个渠道 · 3日路线</div></div>
-          <span style="color:var(--dim)">→</span>
-        </div>
-      </div>
-      <div class="card" style="cursor:pointer" onclick="switchPage(2)">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div><div style="font-size:14px;font-weight:500;color:var(--blue)">② 内容×货源策略</div><div style="font-size:12px;color:var(--dim);margin-top:2px">433货盘 · 情绪留白拍摄 · AI测款 · 转化路径</div></div>
-          <span style="color:var(--dim)">→</span>
-        </div>
-      </div>
-      <div class="card" style="cursor:pointer" onclick="switchPage(3)">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div><div style="font-size:14px;font-weight:500;color:var(--green)">③ 避坑清单</div><div style="font-size:12px;color:var(--dim);margin-top:2px">六道关卡 · MOQ对照 · 验收标准 · 炒货识别</div></div>
-          <span style="color:var(--dim)">→</span>
-        </div>
-      </div>
-      <div class="card" style="cursor:pointer" onclick="switchPage(4)">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div><div style="font-size:14px;font-weight:500;color:var(--purple)">④ 0→1执行路径</div><div style="font-size:12px;color:var(--dim);margin-top:2px">四阶段 · 收入测算 · 30天计划 · 选品公式</div></div>
-          <span style="color:var(--dim)">→</span>
-        </div>
-      </div>
-      <div class="card" style="cursor:pointer" onclick="switchPage(5)">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div><div style="font-size:14px;font-weight:500;color:var(--orange)">⑤ 3天实战手册</div><div style="font-size:12px;color:var(--dim);margin-top:2px">精确到小时 · 谈判话术 · 装备清单 · 回来后7天</div></div>
-          <span style="color:var(--dim)">→</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="sec">
-    <div class="sec-title">📈 100条小红书TOP数据洞察</div>
+  <div class="sec anchor" id="h-data">
+    <div class="sec-title"><span class="icon">📈</span> 100条TOP数据洞察</div>
     <div class="sec-sub">用户提供的真实数据分析</div>
     <div class="card">
-      <table style="width:100%;font-size:13px">
-        <tr><td style="padding:4px 0;color:var(--dim)">直播/带货类</td><td style="padding:4px 0">39篇 · 8595赞</td><td><span class="b b-g">最高</span></td></tr>
-        <tr><td style="padding:4px 0;color:var(--dim)">新手/零成本类</td><td style="padding:4px 0">13篇 · 8270赞</td><td><span class="b b-gr">极受欢迎</span></td></tr>
-        <tr><td style="padding:4px 0;color:var(--dim)">产业链/研究类</td><td style="padding:4px 0">2篇 · 17390赞</td><td><span class="b b-b">可爆发</span></td></tr>
-        <tr><td style="padding:4px 0;color:var(--dim)">创业变现故事</td><td style="padding:4px 0">6篇 · 4436赞</td><td><span class="b b-p">吸金</span></td></tr>
-        <tr><td style="padding:4px 0;color:var(--dim)">审美/拍摄类</td><td style="padding:4px 0">4篇 · 1657赞</td><td><span class="b b-o">表现好</span></td></tr>
-        <tr><td style="padding:4px 0;color:var(--dim)">供应链/货源类</td><td style="padding:4px 0">34篇提及 · 单篇赞低</td><td><span class="b b-r">内容缺口</span></td></tr>
-      </table>
+      <div style="font-size:13px">
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)">
+          <span style="color:var(--dim)">🎬 直播/带货类</span>
+          <span>39篇 · 8595赞</span>
+          <span class="b b-g">最高</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)">
+          <span style="color:var(--dim)">💰 新手/零成本类</span>
+          <span>13篇 · 8270赞</span>
+          <span class="b b-gr">极受欢迎</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)">
+          <span style="color:var(--dim)">📊 产业链/研究类</span>
+          <span>2篇 · 17390赞</span>
+          <span class="b b-b">可爆发</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)">
+          <span style="color:var(--dim)">💼 创业变现故事</span>
+          <span>6篇 · 4436赞</span>
+          <span class="b b-p">吸金</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)">
+          <span style="color:var(--dim)">📷 审美/拍摄类</span>
+          <span>4篇 · 1657赞</span>
+          <span class="b b-o">表现好</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0">
+          <span style="color:var(--dim)">📦 供应链/货源类</span>
+          <span>34篇提及</span>
+          <span class="b b-r">内容缺口</span>
+        </div>
+      </div>
     </div>
     <div class="co co-tip">
       <strong>💡 你的机会</strong>
@@ -253,10 +293,43 @@ a{color:var(--gold);text-decoration:none}
     </div>
   </div>
 
+  <div class="sec anchor" id="h-nav">
+    <div class="sec-title"><span class="icon">📋</span> 手册目录</div>
+    <div class="sec-sub">点击跳转对应章节</div>
+    <div class="flow">
+      <div class="flow-item flow-gold" onclick="switchPage(1)" style="cursor:pointer">
+        <div class="flow-step">CHAPTER 1</div>
+        <div style="font-size:15px;font-weight:500;color:var(--gold);margin-bottom:4px">📦 广州供应链地图</div>
+        <div class="flow-text">6大商圈 · 货源层级 · 28个渠道 · 3日路线</div>
+      </div>
+      <div class="flow-item flow-blue" onclick="switchPage(2)" style="cursor:pointer">
+        <div class="flow-step">CHAPTER 2</div>
+        <div style="font-size:15px;font-weight:500;color:var(--blue);margin-bottom:4px">📷 内容×货源策略</div>
+        <div class="flow-text">433货盘 · 情绪留白拍摄 · AI测款 · 转化路径</div>
+      </div>
+      <div class="flow-item flow-green" onclick="switchPage(3)" style="cursor:pointer">
+        <div class="flow-step">CHAPTER 3</div>
+        <div style="font-size:15px;font-weight:500;color:var(--green);margin-bottom:4px">⚠️ 避坑清单</div>
+        <div class="flow-text">六道关卡 · MOQ对照 · 验收标准 · 炒货识别</div>
+      </div>
+      <div class="flow-item flow-purple" onclick="switchPage(4)" style="cursor:pointer">
+        <div class="flow-step">CHAPTER 4</div>
+        <div style="font-size:15px;font-weight:500;color:var(--purple);margin-bottom:4px">🚀 0→1执行路径</div>
+        <div class="flow-text">四阶段 · 收入测算 · 30天计划 · 选品公式</div>
+      </div>
+      <div class="flow-item flow-gold" onclick="switchPage(5)" style="cursor:pointer">
+        <div class="flow-step">FIELD GUIDE</div>
+        <div style="font-size:15px;font-weight:500;color:var(--orange);margin-bottom:4px">🗓 3天实战手册</div>
+        <div class="flow-text">精确到小时 · 谈判话术 · 装备清单 · 回来后7天</div>
+      </div>
+    </div>
+  </div>
+
   <div class="foot">
+    <div class="logo">📷</div>
     木子菲儿 · 女装带货创业完整手册<br>
     数据更新于 2026-07-21<br>
-    <span style="color:var(--gold)">v2.0 · 持续更新中</span>
+    <span style="color:var(--gold)">v2.1 · 持续更新中</span>
   </div>
 </div>
 
@@ -265,208 +338,230 @@ a{color:var(--gold);text-decoration:none}
 <!-- ═══════════════════════════════════════ -->
 <div class="page" id="page-supply">
   <div class="chips">
-    <div class="chip on" onclick="scrollTo2('s-level')">货源层级</div>
-    <div class="chip" onclick="scrollTo2('s-map')">6大商圈</div>
-    <div class="chip" onclick="scrollTo2('s-channels')">28渠道</div>
-    <div class="chip" onclick="scrollTo2('s-daily')">每日时间表</div>
-    <div class="chip" onclick="scrollTo2('s-douyin')">抖音洞察</div>
+    <div class="chip on" onclick="scrollTo2('s-level')">📦 货源层级</div>
+    <div class="chip" onclick="scrollTo2('s-map')">🗺️ 6大商圈</div>
+    <div class="chip" onclick="scrollTo2('s-channels')">📋 28渠道</div>
+    <div class="chip" onclick="scrollTo2('s-daily')">⏰ 时间表</div>
+    <div class="chip" onclick="scrollTo2('s-douyin')">💬 抖音洞察</div>
   </div>
 
-  <div class="sec" id="s-level">
-    <div class="sec-title">📦 货源四层结构</div>
+  <div class="sec anchor" id="s-level">
+    <div class="sec-title"><span class="icon">📦</span> 货源四层结构</div>
     <div class="sec-sub">新手从二批切入，有量后上探一批</div>
     <div class="card">
-      <div style="font-size:13px;line-height:2">
-        <div style="padding:8px;background:rgba(200,164,92,.08);border-radius:6px;margin-bottom:8px">
-          <strong style="color:var(--gold)">① 一批（一手货源）</strong><br>
+      <div style="font-size:13px;line-height:1.8">
+        <div style="padding:10px;background:linear-gradient(135deg,rgba(200,164,92,.1),rgba(200,164,92,.03));border-radius:8px;margin-bottom:10px;border-left:3px solid var(--gold)">
+          <strong style="color:var(--gold);font-size:14px">① 一批（一手货源）</strong><br>
           自有工厂/设计直供，价格最低但MOQ最高<br>
-          代表：十三行4楼以上、沙河实力档口<br>
-          起批：单款5-10件
+          <span style="color:var(--dim)">代表：十三行4楼以上、沙河实力档口</span><br>
+          <span class="b b-g">起批：单款5-10件</span>
         </div>
-        <div style="padding:8px;background:rgba(66,165,245,.08);border-radius:6px;margin-bottom:8px">
-          <strong style="color:var(--blue)">② 二批（转手加价）← 新手从这里开始</strong><br>
+        <div style="padding:10px;background:linear-gradient(135deg,rgba(66,165,245,.1),rgba(66,165,245,.03));border-radius:8px;margin-bottom:10px;border-left:3px solid var(--blue)">
+          <strong style="color:var(--blue);font-size:14px">② 二批（转手加价）← 新手从这里开始</strong><br>
           从一批拿货转售，加价但门槛低、款多量少<br>
-          代表：火车站三巨头（apM/汇美/UUS）<br>
-          起批：2-5件，支持混批/零售
+          <span style="color:var(--dim)">代表：火车站三巨头（apM/汇美/UUS）</span><br>
+          <span class="b b-b">起批：2-5件，支持混批/零售</span>
         </div>
-        <div style="padding:8px;background:rgba(76,175,80,.08);border-radius:6px;margin-bottom:8px">
-          <strong style="color:var(--green)">③ 工厂店（源头OEM/ODM/代发）</strong><br>
+        <div style="padding:10px;background:linear-gradient(135deg,rgba(76,175,80,.1),rgba(76,175,80,.03));border-radius:8px;margin-bottom:10px;border-left:3px solid var(--green)">
+          <strong style="color:var(--green);font-size:14px">③ 工厂店（源头OEM/ODM/代发）</strong><br>
           集中番禺大石/市桥、海珠新滘<br>
-          服务抖音/小红书达人，可谈一件代发
+          <span style="color:var(--dim)">服务抖音/小红书达人，可谈一件代发</span>
         </div>
-        <div style="padding:8px;background:rgba(239,83,80,.08);border-radius:6px">
-          <strong style="color:var(--red)">④ 炒货 ⚠️ 重点规避</strong><br>
+        <div style="padding:10px;background:linear-gradient(135deg,rgba(239,83,80,.1),rgba(239,83,80,.03));border-radius:8px;border-left:3px solid var(--red)">
+          <strong style="color:var(--red);font-size:14px">④ 炒货 ⚠️ 重点规避</strong><br>
           从别家拿货转卖、非自产，最易货不对板<br>
-          识别：同款多店出现、辅料一致
+          <span style="color:var(--dim)">识别：同款多店出现、辅料一致</span>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="sec" id="s-map">
-    <div class="sec-title">🗺️ 6大商圈详解</div>
+  <div class="sec anchor" id="s-map">
+    <div class="sec-title"><span class="icon">🗺️</span> 6大商圈详解</div>
     <div class="sec-sub">定位 · 起批 · 价格 · 交通 · 适合谁</div>
 
-    <!-- 十三行 -->
     <div class="acc open">
       <div class="acc-head" onclick="toggleAcc(this)">
-        <span><span class="b b-g">一批核心</span> 十三行·新中国大厦</span>
+        <span><span class="b b-g">一批核心</span> 🏢 十三行·新中国大厦</span>
         <span class="arrow">▼</span>
       </div>
       <div class="acc-body"><div class="acc-inner">
-        <div style="font-size:13px;line-height:1.8">
-          <strong>定位：</strong>华南最核心女装一批市场，日均客流10万+<br>
-          <strong>楼层：</strong>1-3楼散货50-150元 ｜ <span class="b b-g">4楼以上原创150-500元</span><br>
-          <strong>起批：</strong>单款5-10件（4-6楼多10件起）<br>
-          <strong>营业：</strong>6:30-16:00（黄金6:30-11:00，<span style="color:var(--red)">15:00后不接散批</span>）<br>
-          <strong>交通：</strong>地铁6/8号线文化公园站D/E口<br>
-          <strong>适合：</strong>有量后的二批、实体店主、直播团队
+        <div style="font-size:13px;line-height:1.8;margin-bottom:12px">
+          <strong>📍 定位：</strong>华南最核心女装一批市场，日均客流10万+<br>
+          <strong>🏗️ 楼层：</strong>1-3楼散货50-150元 ｜ <span class="b b-g">4楼以上原创150-500元</span><br>
+          <strong>📦 起批：</strong>单款5-10件（4-6楼多10件起）<br>
+          <strong>⏰ 营业：</strong>6:30-16:00（黄金6:30-11:00，<span style="color:var(--red)">15:00后不接散批</span>）<br>
+          <strong>🚇 交通：</strong>地铁6/8号线文化公园站D/E口<br>
+          <strong>✅ 适合：</strong>有量后的二批、实体店主、直播团队
         </div>
         <div class="divider"></div>
-        <div style="font-size:13px;font-weight:500;color:var(--gold);margin-bottom:8px">⭐ 重点档口</div>
-        <table style="width:100%;font-size:12px;border-collapse:collapse">
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 0;color:var(--gold)">云裳阁（8楼）</td><td style="padding:6px 0">轻奢通勤 · 原色面料 · <span class="price">300-800</span> · 复购率>60%</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 0;color:var(--gold)">ZYGODDESS（7楼C28-29）</td><td style="padding:6px 0">韩系小女人 · 温柔减龄 · 支持贴牌</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 0;color:var(--gold)">EMONI/非町/onebytwo</td><td style="padding:6px 0">韩系简约 · 实体店主常拿 · 补单快</td></tr>
-          <tr><td style="padding:6px 0;color:var(--gold)">BOBO家</td><td style="padding:6px 0">酷感设计裤装 · 版型好</td></tr>
-        </table>
+        <div style="font-size:13px;font-weight:500;color:var(--gold);margin-bottom:10px">⭐ 重点档口</div>
+        <div style="font-size:12px;line-height:1.8">
+          <div style="padding:8px;background:var(--card2);border-radius:8px;margin-bottom:6px">
+            <strong style="color:var(--gold)">云裳阁（8楼）</strong><br>
+            轻奢通勤 · 原色面料 · <span class="price">300-800</span> · 复购率>60%
+          </div>
+          <div style="padding:8px;background:var(--card2);border-radius:8px;margin-bottom:6px">
+            <strong style="color:var(--gold)">ZYGODDESS（7楼C28-29）</strong><br>
+            韩系小女人 · 温柔减龄 · 支持贴牌
+          </div>
+          <div style="padding:8px;background:var(--card2);border-radius:8px;margin-bottom:6px">
+            <strong style="color:var(--gold)">EMONI/非町/onebytwo</strong><br>
+            韩系简约 · 实体店主常拿 · 补单快
+          </div>
+          <div style="padding:8px;background:var(--card2);border-radius:8px">
+            <strong style="color:var(--gold)">BOBO家</strong><br>
+            酷感设计裤装 · 版型好
+          </div>
+        </div>
       </div></div>
     </div>
 
-    <!-- 沙河 -->
     <div class="acc">
       <div class="acc-head" onclick="toggleAcc(this)">
-        <span><span class="b b-gr">新手友好</span> 沙河（万佳/南城/金马）</span>
+        <span><span class="b b-gr">新手友好</span> 🏭 沙河（万佳/南城/金马）</span>
         <span class="arrow">▼</span>
       </div>
       <div class="acc-body"><div class="acc-inner">
         <div style="font-size:13px;line-height:1.8">
-          <strong>定位：</strong>华南最大中低端跑量基地<br>
-          <strong>梯度：</strong>南城品质最高 > 万佳居中 > 金马最低<br>
-          <strong>起批：</strong>单款2-5件，普遍支持混批<br>
-          <strong>价格：</strong>T恤20-40元 · 连衣裙50-90元<br>
-          <strong>营业：</strong>5:00-14:00（黄金5:00-10:00）<br>
-          <strong>交通：</strong>地铁6号线沙河顶站B口<br>
-          <strong>适合：</strong>预算有限新手、引流款、低成本试水
+          <strong>📍 定位：</strong>华南最大中低端跑量基地<br>
+          <strong>📊 梯度：</strong>南城品质最高 > 万佳居中 > 金马最低<br>
+          <strong>📦 起批：</strong>单款2-5件，普遍支持混批<br>
+          <strong>💰 价格：</strong>T恤20-40元 · 连衣裙50-90元<br>
+          <strong>⏰ 营业：</strong>5:00-14:00（黄金5:00-10:00）<br>
+          <strong>🚇 交通：</strong>地铁6号线沙河顶站B口<br>
+          <strong>✅ 适合：</strong>预算有限新手、引流款、低成本试水
         </div>
-        <div class="co co-warn" style="margin-top:8px">
+        <div class="co co-warn" style="margin-top:10px">
           <strong>⚠️ 注意</strong>同质化严重，十几元的货质量参差不齐。来这里是"建立价格锚点"，不是主力选品。
         </div>
       </div></div>
     </div>
 
-    <!-- 火车站三巨头 -->
     <div class="acc">
       <div class="acc-head" onclick="toggleAcc(this)">
-        <span><span class="b b-b">二批首选</span> 火车站三巨头 apM/汇美/UUS</span>
+        <span><span class="b b-b">二批首选</span> 🏬 火车站三巨头 apM/汇美/UUS</span>
         <span class="arrow">▼</span>
       </div>
       <div class="acc-body"><div class="acc-inner">
-        <div style="font-size:13px;line-height:1.8;margin-bottom:8px">
+        <div style="font-size:13px;line-height:1.8;margin-bottom:12px">
           三者均近广州火车站，韩系为主，均可零售/混批。<br>
           <strong>据抖音实测：</strong>apM"有点贵、不可试穿"；UUS"零售挺贵"；三者性价比"都差不多"
         </div>
-        <table style="width:100%;font-size:12px;border-collapse:collapse">
-          <tr style="background:rgba(66,165,245,.05)"><td style="padding:8px;font-weight:500;color:var(--blue)" colspan="2">apM时代国际（"广州东大门"）</td></tr>
-          <tr><td style="padding:6px 0;color:var(--dim);width:60px">地址</td><td style="padding:6px 0;font-size:12px">站前一街26-28号</td></tr>
-          <tr><td style="padding:6px 0;color:var(--dim)">规模</td><td style="padding:6px 0;font-size:12px">7-9层 · 2000-3000+档口</td></tr>
-          <tr><td style="padding:6px 0;color:var(--dim)">起批</td><td style="padding:6px 0;font-size:12px">3-5件混批 · 可零售</td></tr>
-          <tr><td style="padding:6px 0;color:var(--dim)">价格</td><td style="padding:6px 0;font-size:12px"><span class="price">80-300</span></td></tr>
-          <tr><td style="padding:6px 0;color:var(--dim)">营业</td><td style="padding:6px 0;font-size:12px">9:30-19:00</td></tr>
-        </table>
-        <div style="height:8px"></div>
-        <table style="width:100%;font-size:12px;border-collapse:collapse">
-          <tr style="background:rgba(66,165,245,.05)"><td style="padding:8px;font-weight:500;color:var(--blue)" colspan="2">汇美国际（高端）</td></tr>
-          <tr><td style="padding:6px 0;color:var(--dim);width:60px">地址</td><td style="padding:6px 0;font-size:12px">环市西路139号 · 火车站F口300米</td></tr>
-          <tr><td style="padding:6px 0;color:var(--dim)">风格</td><td style="padding:6px 0;font-size:12px">极简老钱风/通勤针织/轻国风</td></tr>
-          <tr><td style="padding:6px 0;color:var(--dim)">起批</td><td style="padding:6px 0;font-size:12px">5件起 · 混批10件 · 部分1-2件可拿</td></tr>
-          <tr><td style="padding:6px 0;color:var(--dim)">价格</td><td style="padding:6px 0;font-size:12px"><span class="price">80-200</span>（韩系女装）</td></tr>
-        </table>
-        <div style="height:8px"></div>
-        <table style="width:100%;font-size:12px;border-collapse:collapse">
-          <tr style="background:rgba(66,165,245,.05)"><td style="padding:8px;font-weight:500;color:var(--blue)" colspan="2">UUS九龙国际（"第二东大门"）</td></tr>
-          <tr><td style="padding:6px 0;color:var(--dim);width:60px">地址</td><td style="padding:6px 0;font-size:12px">广园西路14号 · 火车站D出口</td></tr>
-          <tr><td style="padding:6px 0;color:var(--dim)">特色</td><td style="padding:6px 0;font-size:12px">韩国东大门团队运营 · 1/3韩国直营</td></tr>
-          <tr><td style="padding:6px 0;color:var(--dim)">起批</td><td style="padding:6px 0;font-size:12px">同款3件起 · 混款5件</td></tr>
-          <tr><td style="padding:6px 0;color:var(--dim)">价格</td><td style="padding:6px 0;font-size:12px"><span class="price">150-500</span>（品质天花板）</td></tr>
-        </table>
+        <div style="background:var(--card2);border-radius:10px;padding:12px;margin-bottom:10px">
+          <div style="font-size:14px;font-weight:500;color:var(--blue);margin-bottom:8px">🏢 apM时代国际（"广州东大门"）</div>
+          <div style="font-size:12px;line-height:1.8">
+            <strong>📍 地址：</strong>站前一街26-28号<br>
+            <strong>📊 规模：</strong>7-9层 · 2000-3000+档口<br>
+            <strong>📦 起批：</strong>3-5件混批 · 可零售<br>
+            <strong>💰 价格：</strong><span class="price">80-300</span><br>
+            <strong>⏰ 营业：</strong>9:30-19:00
+          </div>
+        </div>
+        <div style="background:var(--card2);border-radius:10px;padding:12px;margin-bottom:10px">
+          <div style="font-size:14px;font-weight:500;color:var(--blue);margin-bottom:8px">🏢 汇美国际（高端）</div>
+          <div style="font-size:12px;line-height:1.8">
+            <strong>📍 地址：</strong>环市西路139号 · 火车站F口300米<br>
+            <strong>🎨 风格：</strong>极简老钱风/通勤针织/轻国风<br>
+            <strong>📦 起批：</strong>5件起 · 混批10件 · 部分1-2件可拿<br>
+            <strong>💰 价格：</strong><span class="price">80-200</span>（韩系女装）
+          </div>
+        </div>
+        <div style="background:var(--card2);border-radius:10px;padding:12px">
+          <div style="font-size:14px;font-weight:500;color:var(--blue);margin-bottom:8px">🏢 UUS九龙国际（"第二东大门"）</div>
+          <div style="font-size:12px;line-height:1.8">
+            <strong>📍 地址：</strong>广园西路14号 · 火车站D出口<br>
+            <strong>🇰🇷 特色：</strong>韩国东大门团队运营 · 1/3韩国直营<br>
+            <strong>📦 起批：</strong>同款3件起 · 混款5件<br>
+            <strong>💰 价格：</strong><span class="price">150-500</span>（品质天花板）
+          </div>
+        </div>
       </div></div>
     </div>
 
-    <!-- 白马/红棉 -->
     <div class="acc">
       <div class="acc-head" onclick="toggleAcc(this)">
-        <span><span class="b b-p">中高端韩系</span> 白马 / 红棉 / ARA</span>
+        <span><span class="b b-p">中高端韩系</span> 👗 白马 / 红棉 / ARA</span>
         <span class="arrow">▼</span>
       </div>
       <div class="acc-body"><div class="acc-inner">
         <div style="font-size:13px;line-height:1.8">
-          <strong>红棉国际：</strong>环市西路184号 · 火车站D4出口<br>
+          <strong>🏢 红棉国际：</strong>环市西路184号 · 火车站D4出口<br>
           9层韩风女装 · 1楼大牌版装 · 4楼设计师<br>
-          抖音实测：旁边红棉楼"50元2件/100元3件"超值<br><br>
-          <strong>白马：</strong>站南路16号 · 火车站正对面<br>
+          <span style="color:var(--dim)">抖音实测：旁边红棉楼"50元2件/100元3件"超值</span><br><br>
+          <strong>🏢 白马：</strong>站南路16号 · 火车站正对面<br>
           老牌高端 · 专柜级品质 · 3楼品质女装核心<br>
-          <span style="color:var(--red)">抖音评论：价格虚高，"不是人能买的贵"</span><br><br>
-          <strong>ARA：</strong>红棉旁 · 200+韩国品牌直驻<br>
+          <span style="color:var(--red)">⚠️ 抖音评论：价格虚高，"不是人能买的贵"</span><br><br>
+          <strong>🏢 ARA：</strong>红棉旁 · 200+韩国品牌直驻<br>
           纯正韩版 · 单款3-5件起 · 营业10:00-18:30
         </div>
       </div></div>
     </div>
 
-    <!-- 工厂 -->
     <div class="acc">
       <div class="acc-head" onclick="toggleAcc(this)">
-        <span><span class="b b-gr">源头工厂</span> 番禺/海珠工厂带</span>
+        <span><span class="b b-gr">源头工厂</span> 🏭 番禺/海珠工厂带</span>
         <span class="arrow">▼</span>
       </div>
       <div class="acc-body"><div class="acc-inner">
         <div style="font-size:13px;line-height:1.8">
-          <strong>番禺大石/市桥：</strong>钻汇云、罗町等<br>
+          <strong>📍 番禺大石/市桥：</strong>钻汇云、罗町等<br>
           服务抖音/小红书达人 · 可谈一件代发/贴牌<br>
-          抖音：余婉婉"来广州番禺"4680赞<br><br>
-          <strong>海珠区：</strong>中大纺织圈（面料采购）+ 湖北村（制衣）<br>
+          <span style="color:var(--dim)">抖音：余婉婉"来广州番禺"4680赞</span><br><br>
+          <strong>📍 海珠区：</strong>中大纺织圈（面料采购）+ 湖北村（制衣）<br>
           上午采购布料 → 下午生产 → 晚上出货<br>
-          代表：锴铭/悦禾（数码印花）、金鸣（小单快反200件起）<br><br>
-          <strong>适合：</strong>有稳定单量后谈定制/贴牌
+          <span style="color:var(--dim)">代表：锴铭/悦禾（数码印花）、金鸣（小单快反200件起）</span><br><br>
+          <strong>✅ 适合：</strong>有稳定单量后谈定制/贴牌
         </div>
       </div></div>
     </div>
 
-    <!-- 站西 -->
     <div class="acc">
       <div class="acc-head" onclick="toggleAcc(this)">
-        <span><span class="b b-o">尾货特价</span> 站西/石井尾货</span>
+        <span><span class="b b-o">尾货特价</span> 🏷️ 站西/石井尾货</span>
         <span class="arrow">▼</span>
       </div>
       <div class="acc-body"><div class="acc-inner">
         <div style="font-size:13px;line-height:1.8">
-          <strong>站西：</strong>光复西路57号 · 火车站D出口600米<br>
+          <strong>📍 站西：</strong>光复西路57号 · 火车站D出口600米<br>
           外贸尾单 · 100-300元 · 码数偏大<br><br>
-          <strong>石井/广大/锦东：</strong>白云区<br>
+          <strong>📍 石井/广大/锦东：</strong>白云区<br>
           品牌尾货 · 1折以内 · T恤5-15元<br>
-          抖音实测：10元3件、15元T恤<br>
-          <span style="color:var(--red)">注意：瑕疵/库存/仿品风险</span>
+          <span style="color:var(--dim)">抖音实测：10元3件、15元T恤</span><br>
+          <span style="color:var(--red)">⚠️ 注意：瑕疵/库存/仿品风险</span>
         </div>
       </div></div>
     </div>
   </div>
 
-  <div class="sec" id="s-channels">
-    <div class="sec-title">📋 28个全平台拿货渠道</div>
+  <div class="sec anchor" id="s-channels">
+    <div class="sec-title"><span class="icon">📋</span> 28个全平台渠道</div>
     <div class="sec-sub">线上+线下完整清单</div>
-    <div class="acc">
+    <div class="acc open">
       <div class="acc-head" onclick="toggleAcc(this)">
         <span>🏪 线下15个市场</span><span class="arrow">▼</span>
       </div>
       <div class="acc-body"><div class="acc-inner">
-        <table style="width:100%;font-size:12px;border-collapse:collapse">
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 0"><span class="b b-g">广州</span></td><td style="padding:5px 0 5px 8px">十三行 · 沙河 · apM · 汇美 · UUS · 白马 · 红棉 · 石井</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 0"><span class="b b-b">杭州</span></td><td style="padding:5px 0 5px 8px">四季青（意法/新杭派/常青）· 兴合</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 0"><span class="b b-p">深圳</span></td><td style="padding:5px 0 5px 8px">南油（上上城/金晖/110栋）</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 0"><span class="b b-gr">武汉</span></td><td style="padding:5px 0 5px 8px">汉正街（品牌广场/童装/鞋城）</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 0"><span class="b b-o">湖州</span></td><td style="padding:5px 0 5px 8px">织里（童装之都）</td></tr>
-          <tr><td style="padding:5px 0"><span class="b b-r">嘉兴</span></td><td style="padding:5px 0 5px 8px">平湖·中国服装城</td></tr>
-        </table>
+        <div style="font-size:12px;line-height:1.8">
+          <div style="padding:8px;background:var(--card2);border-radius:8px;margin-bottom:6px">
+            <span class="b b-g">广州</span> 十三行 · 沙河 · apM · 汇美 · UUS · 白马 · 红棉 · 石井
+          </div>
+          <div style="padding:8px;background:var(--card2);border-radius:8px;margin-bottom:6px">
+            <span class="b b-b">杭州</span> 四季青（意法/新杭派/常青）· 兴合
+          </div>
+          <div style="padding:8px;background:var(--card2);border-radius:8px;margin-bottom:6px">
+            <span class="b b-p">深圳</span> 南油（上上城/金晖/110栋）
+          </div>
+          <div style="padding:8px;background:var(--card2);border-radius:8px;margin-bottom:6px">
+            <span class="b b-gr">武汉</span> 汉正街（品牌广场/童装/鞋城）
+          </div>
+          <div style="padding:8px;background:var(--card2);border-radius:8px;margin-bottom:6px">
+            <span class="b b-o">湖州</span> 织里（童装之都）
+          </div>
+          <div style="padding:8px;background:var(--card2);border-radius:8px">
+            <span class="b b-r">嘉兴</span> 平湖·中国服装城
+          </div>
+        </div>
       </div></div>
     </div>
     <div class="acc">
@@ -474,50 +569,97 @@ a{color:var(--gold);text-decoration:none}
         <span>💻 线上13个平台</span><span class="arrow">▼</span>
       </div>
       <div class="acc-body"><div class="acc-inner">
-        <table style="width:100%;font-size:12px;border-collapse:collapse">
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 0;color:var(--gold)">1688</td><td style="padding:5px 0 5px 8px">最大B2B · 源头工厂 · 支持一件代发</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 0;color:var(--gold)">一手APP</td><td style="padding:5px 0 5px 8px">整合2万+档口 · 一件起批 · 新手首选</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 0;color:var(--gold)">搜款网</td><td style="padding:5px 0 5px 8px">沙河货源为主 · 电商铺货</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 0;color:var(--gold)">杭州女装网</td><td style="padding:5px 0 5px 8px">四季青直供 · 杭派女装</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 0;color:var(--gold)">包牛牛</td><td style="padding:5px 0 5px 8px">白沟箱包 · 低价跑量</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 0;color:var(--gold)">织里童装城APP</td><td style="padding:5px 0 5px 8px">织里直供 · 童装专营</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 0;color:var(--gold)">一起做网店</td><td style="padding:5px 0 5px 8px">多地域覆盖 · 一键上传</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 0;color:var(--gold)">酷有拿货网</td><td style="padding:5px 0 5px 8px">实名注册 · 交易保障</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 0;color:var(--gold)">衣联网</td><td style="padding:5px 0 5px 8px">B2B · 品牌招商</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 0;color:var(--gold)">杭州女装网</td><td style="padding:5px 0 5px 8px">杭派直供</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 0;color:var(--gold)">拼多多批发</td><td style="padding:5px 0 5px 8px">低价白牌 · 适合引流款</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 0;color:var(--gold)">抖音/快手直播</td><td style="padding:5px 0 5px 8px">工厂直播拿货 · 实时看版</td></tr>
-          <tr><td style="padding:5px 0;color:var(--gold)">小红书选品中心</td><td style="padding:5px 0 5px 8px">笔记挂链接 · 佣金10-30% · 你的主战场</td></tr>
-        </table>
+        <div style="font-size:12px;line-height:1.8">
+          <div style="padding:8px;background:var(--card2);border-radius:8px;margin-bottom:6px">
+            <strong style="color:var(--gold)">1688</strong> 最大B2B · 源头工厂 · 支持一件代发
+          </div>
+          <div style="padding:8px;background:var(--card2);border-radius:8px;margin-bottom:6px">
+            <strong style="color:var(--gold)">一手APP</strong> 整合2万+档口 · 一件起批 · 新手首选
+          </div>
+          <div style="padding:8px;background:var(--card2);border-radius:8px;margin-bottom:6px">
+            <strong style="color:var(--gold)">搜款网</strong> 沙河货源为主 · 电商铺货
+          </div>
+          <div style="padding:8px;background:var(--card2);border-radius:8px;margin-bottom:6px">
+            <strong style="color:var(--gold)">杭州女装网</strong> 四季青直供 · 杭派女装
+          </div>
+          <div style="padding:8px;background:var(--card2);border-radius:8px;margin-bottom:6px">
+            <strong style="color:var(--gold)">包牛牛</strong> 白沟箱包 · 低价跑量
+          </div>
+          <div style="padding:8px;background:var(--card2);border-radius:8px;margin-bottom:6px">
+            <strong style="color:var(--gold)">织里童装城APP</strong> 织里直供 · 童装专营
+          </div>
+          <div style="padding:8px;background:var(--card2);border-radius:8px;margin-bottom:6px">
+            <strong style="color:var(--gold)">一起做网店</strong> 多地域覆盖 · 一键上传
+          </div>
+          <div style="padding:8px;background:var(--card2);border-radius:8px;margin-bottom:6px">
+            <strong style="color:var(--gold)">酷有拿货网</strong> 实名注册 · 交易保障
+          </div>
+          <div style="padding:8px;background:var(--card2);border-radius:8px;margin-bottom:6px">
+            <strong style="color:var(--gold)">衣联网</strong> B2B · 品牌招商
+          </div>
+          <div style="padding:8px;background:var(--card2);border-radius:8px;margin-bottom:6px">
+            <strong style="color:var(--gold)">拼多多批发</strong> 低价白牌 · 适合引流款
+          </div>
+          <div style="padding:8px;background:var(--card2);border-radius:8px;margin-bottom:6px">
+            <strong style="color:var(--gold)">抖音/快手直播</strong> 工厂直播拿货 · 实时看版
+          </div>
+          <div style="padding:8px;background:var(--card2);border-radius:8px">
+            <strong style="color:var(--gold)">小红书选品中心</strong> 笔记挂链接 · 佣金10-30% · 你的主战场
+          </div>
+        </div>
       </div></div>
     </div>
   </div>
 
-  <div class="sec" id="s-daily">
-    <div class="sec-title">⏰ 每日/每周/季节时间表</div>
+  <div class="sec anchor" id="s-daily">
+    <div class="sec-title"><span class="icon">⏰</span> 每日/每周/季节时间表</div>
     <div class="sec-sub">什么时候去最好</div>
     <div class="card">
-      <div class="card-title">每日时段</div>
-      <table style="width:100%;font-size:13px;border-collapse:collapse">
-        <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 0;color:var(--gold);width:80px">7:00-9:00</td><td style="padding:6px 0">批发高峰，新款最全，电梯拥堵</td></tr>
-        <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 0;color:var(--green)">10:00-12:00</td><td style="padding:6px 0"><span class="b b-gr">最佳</span> 忙完发货，态度友好</td></tr>
-        <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 0;color:var(--blue)">14:00-16:00</td><td style="padding:6px 0">散客体验佳，部分清仓</td></tr>
-        <tr><td style="padding:6px 0;color:var(--red)">16:00后</td><td style="padding:6px 0"><span class="b b-r">避雷</span> 很多档口收摊</td></tr>
-      </table>
+      <div class="card-title">⏰ 每日时段</div>
+      <div style="font-size:13px">
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+          <span style="color:var(--gold);width:80px">7:00-9:00</span>
+          <span>批发高峰，新款最全，电梯拥堵</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+          <span style="color:var(--green);width:80px">10:00-12:00</span>
+          <span><span class="b b-gr">最佳</span> 忙完发货，态度友好</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+          <span style="color:var(--blue);width:80px">14:00-16:00</span>
+          <span>散客体验佳，部分清仓</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0">
+          <span style="color:var(--red);width:80px">16:00后</span>
+          <span><span class="b b-r">避雷</span> 很多档口收摊</span>
+        </div>
+      </div>
     </div>
     <div class="card">
-      <div class="card-title">每周/每月/季节</div>
-      <table style="width:100%;font-size:13px;border-collapse:collapse">
-        <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 0;color:var(--gold);width:80px">周一</td><td style="padding:6px 0"><span class="b b-g">上新日</span> 爆款集中</td></tr>
-        <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 0;color:var(--red)">25-30号</td><td style="padding:6px 0"><span class="b b-r">避雷</span> 换季盘点不接散客</td></tr>
-        <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 0;color:var(--green)">6-7月/1月</td><td style="padding:6px 0"><span class="b b-gr">清仓季</span> 低至1折</td></tr>
-        <tr><td style="padding:6px 0;color:var(--blue)">7月中下旬</td><td style="padding:6px 0">秋装上新 · SKU最全 · 7月底完成采购</td></tr>
-      </table>
+      <div class="card-title">📅 每周/每月/季节</div>
+      <div style="font-size:13px">
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+          <span style="color:var(--gold);width:80px">周一</span>
+          <span><span class="b b-g">上新日</span> 爆款集中</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+          <span style="color:var(--red);width:80px">25-30号</span>
+          <span><span class="b b-r">避雷</span> 换季盘点不接散客</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+          <span style="color:var(--green);width:80px">6-7月/1月</span>
+          <span><span class="b b-gr">清仓季</span> 低至1折</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0">
+          <span style="color:var(--blue);width:80px">7月中下旬</span>
+          <span>秋装上新 · SKU最全 · 7月底完成采购</span>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="sec" id="s-douyin">
-    <div class="sec-title">💬 抖音真实评论洞察</div>
+  <div class="sec anchor" id="s-douyin">
+    <div class="sec-title"><span class="icon">💬</span> 抖音真实评论洞察</div>
     <div class="sec-sub">从真实用户反馈中提取避坑指南</div>
     <div class="dlg"><div class="dlg-label">@壮士美少女</div><div class="dlg-them">"追求版型建议去南油，广州100-300的衣服穿几次就变形"</div><div class="dlg-note">💡 广州中低价位版型/质量可能有问题，选品必须测质量</div></div>
     <div class="dlg"><div class="dlg-label">@良哥仔</div><div class="dlg-them">"十三行下午3点就打烊了，楼层越高质量越好"</div><div class="dlg-note">💡 必须早到！7-10点最佳，优先4楼以上</div></div>
@@ -533,59 +675,60 @@ a{color:var(--gold);text-decoration:none}
 <!-- ═══════════════════════════════════════ -->
 <div class="page" id="page-content">
   <div class="chips">
-    <div class="chip on" onclick="scrollTo2('c-position')">定位</div>
-    <div class="chip" onclick="scrollTo2('c-goods')">货盘</div>
-    <div class="chip" onclick="scrollTo2('c-photo')">拍摄</div>
-    <div class="chip" onclick="scrollTo2('c-ai')">AI测款</div>
-    <div class="chip" onclick="scrollTo2('c-convert')">转化</div>
+    <div class="chip on" onclick="scrollTo2('c-position')">🎯 定位</div>
+    <div class="chip" onclick="scrollTo2('c-goods')">👗 货盘</div>
+    <div class="chip" onclick="scrollTo2('c-photo')">📷 拍摄</div>
+    <div class="chip" onclick="scrollTo2('c-ai')">🤖 AI测款</div>
+    <div class="chip" onclick="scrollTo2('c-convert')">🔄 转化</div>
   </div>
 
-  <div class="sec" id="c-position">
-    <div class="sec-title">🎯 战略定位</div>
+  <div class="sec anchor" id="c-position">
+    <div class="sec-title"><span class="icon">🎯</span> 战略定位</div>
     <div class="sec-sub">从"拍照教学"到"穿对+拍对"</div>
     <div class="card">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
-        <div style="flex:1;padding:10px;background:rgba(200,164,92,.08);border-radius:8px;text-align:center">
+        <div style="flex:1;padding:12px;background:linear-gradient(135deg,rgba(200,164,92,.1),rgba(200,164,92,.03));border-radius:10px;text-align:center">
           <div style="font-size:10px;color:var(--dim)">现有</div>
-          <div style="font-size:13px;color:var(--gold);margin-top:2px">拍照教学</div>
+          <div style="font-size:13px;color:var(--gold);margin-top:4px">📷 拍照教学</div>
         </div>
-        <span style="color:var(--gold)">+</span>
-        <div style="flex:1;padding:10px;background:rgba(66,165,245,.08);border-radius:8px;text-align:center">
+        <span style="color:var(--gold);font-size:18px">+</span>
+        <div style="flex:1;padding:12px;background:linear-gradient(135deg,rgba(66,165,245,.1),rgba(66,165,245,.03));border-radius:10px;text-align:center">
           <div style="font-size:10px;color:var(--dim)">新增</div>
-          <div style="font-size:13px;color:var(--blue);margin-top:2px">穿搭选品</div>
+          <div style="font-size:13px;color:var(--blue);margin-top:4px">👗 穿搭选品</div>
         </div>
-        <span style="color:var(--gold)">=</span>
-        <div style="flex:1;padding:10px;background:rgba(200,164,92,.15);border:1px solid var(--gold);border-radius:8px;text-align:center">
+        <span style="color:var(--gold);font-size:18px">=</span>
+        <div style="flex:1;padding:12px;background:linear-gradient(135deg,rgba(200,164,92,.15),rgba(200,164,92,.05));border:1px solid var(--gold);border-radius:10px;text-align:center">
           <div style="font-size:10px;color:var(--gold)">融合</div>
-          <div style="font-size:13px;color:var(--gold-l);margin-top:2px">穿对+拍对</div>
+          <div style="font-size:13px;color:var(--gold-l);margin-top:4px">✨ 穿对+拍对</div>
         </div>
       </div>
     </div>
     <div class="co co-info">
       <strong>💡 差异化定位</strong>
       "用摄影师的眼光帮你选衣服"——不是卖衣服，是卖审美。<br>
-      你的粉丝不是来买衣服的，是来学拍照的——顺便买了你穿的衣服。
+      你的粉丝不是来买衣服的，是来学拍照的——顺便买了你穿的衣服。<br>
+      <strong style="color:var(--gold)">这就是你的护城河。</strong>
     </div>
   </div>
 
-  <div class="sec" id="c-goods">
-    <div class="sec-title">👗 433内容货盘法则</div>
+  <div class="sec anchor" id="c-goods">
+    <div class="sec-title"><span class="icon">👗</span> 433内容货盘法则</div>
     <div class="sec-sub">形象30% + 趋势40% + 常青30%</div>
     <div class="card">
-      <div style="font-size:13px;line-height:2">
-        <div style="padding:8px;background:rgba(171,71,188,.08);border-radius:6px;margin-bottom:8px">
-          <strong style="color:var(--purple)">🌟 形象款 30%</strong> — 高辨识度，立人设<br>
-          设计感外套/限量款/高端设计师款<br>
+      <div style="font-size:13px;line-height:1.8">
+        <div style="padding:10px;background:linear-gradient(135deg,rgba(171,71,188,.1),rgba(171,71,188,.03));border-radius:8px;margin-bottom:10px;border-left:3px solid var(--purple)">
+          <strong style="color:var(--purple);font-size:14px">🌟 形象款 30%</strong> — 高辨识度，立人设<br>
+          <span style="color:var(--dim)">设计感外套/限量款/高端设计师款</span><br>
           作用：涨粉+立调性，不追求走量
         </div>
-        <div style="padding:8px;background:rgba(66,165,245,.08);border-radius:6px;margin-bottom:8px">
-          <strong style="color:var(--blue)">🔥 趋势款 40%</strong> — 踩季节热点，拉新<br>
-          当季流行色/热门元素/节日主题<br>
+        <div style="padding:10px;background:linear-gradient(135deg,rgba(66,165,245,.1),rgba(66,165,245,.03));border-radius:8px;margin-bottom:10px;border-left:3px solid var(--blue)">
+          <strong style="color:var(--blue);font-size:14px">🔥 趋势款 40%</strong> — 踩季节热点，拉新<br>
+          <span style="color:var(--dim)">当季流行色/热门元素/节日主题</span><br>
           作用：蹭流量+拉新客，快速测款
         </div>
-        <div style="padding:8px;background:rgba(76,175,80,.08);border-radius:6px">
-          <strong style="color:var(--green)">🌿 常青款 30%</strong> — 稳定出单，养复购<br>
-          白衬衫/黑裤子/基础针织/百搭连衣裙<br>
+        <div style="padding:10px;background:linear-gradient(135deg,rgba(76,175,80,.1),rgba(76,175,80,.03));border-radius:8px;border-left:3px solid var(--green)">
+          <strong style="color:var(--green);font-size:14px">🌿 常青款 30%</strong> — 稳定出单，养复购<br>
+          <span style="color:var(--dim)">白衬衫/黑裤子/基础针织/百搭连衣裙</span><br>
           作用：稳定现金流+养复购
         </div>
       </div>
@@ -597,29 +740,30 @@ a{color:var(--gold);text-decoration:none}
     </div>
 
     <div class="divider"></div>
-    <div class="card-title">选品方向（匹配你的风格）</div>
+    <div class="card-title">📊 选品方向（匹配你的风格）</div>
     <div class="tbl-wrap">
       <table>
         <thead><tr><th>品类</th><th>款式</th><th>批发价</th><th>零售建议</th><th>毛利</th><th>出片率</th></tr></thead>
         <tbody>
-          <tr><td>西装外套</td><td>廓形/亚麻/oversize</td><td>80-150</td><td>250-400</td><td><span class="b b-gr">65%+</span></td><td>★★★★★</td></tr>
-          <tr><td>连衣裙</td><td>碎花/吊带/衬衫裙</td><td>60-120</td><td>180-300</td><td><span class="b b-gr">60%+</span></td><td>★★★★★</td></tr>
-          <tr><td>针织衫</td><td>开衫/背心/薄毛衣</td><td>40-80</td><td>120-200</td><td><span class="b b-gr">60%+</span></td><td>★★★★☆</td></tr>
-          <tr><td>衬衫</td><td>白色/条纹/设计感</td><td>50-100</td><td>150-250</td><td><span class="b b-gr">60%+</span></td><td>★★★★☆</td></tr>
+          <tr><td>🧥 西装外套</td><td>廓形/亚麻/oversize</td><td>80-150</td><td>250-400</td><td><span class="b b-gr">65%+</span></td><td>★★★★★</td></tr>
+          <tr><td>👗 连衣裙</td><td>碎花/吊带/衬衫裙</td><td>60-120</td><td>180-300</td><td><span class="b b-gr">60%+</span></td><td>★★★★★</td></tr>
+          <tr><td>🧶 针织衫</td><td>开衫/背心/薄毛衣</td><td>40-80</td><td>120-200</td><td><span class="b b-gr">60%+</span></td><td>★★★★☆</td></tr>
+          <tr><td>👔 衬衫</td><td>白色/条纹/设计感</td><td>50-100</td><td>150-250</td><td><span class="b b-gr">60%+</span></td><td>★★★★☆</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <div class="sec" id="c-photo">
-    <div class="sec-title">📷 情绪留白拍摄法</div>
+  <div class="sec anchor" id="c-photo">
+    <div class="sec-title"><span class="icon">📷</span> 情绪留白拍摄法</div>
     <div class="sec-sub">2026年女装拍摄趋势——和你的风格完美契合</div>
     <div class="card">
       <div style="font-size:13px;line-height:1.8">
-        <strong style="color:var(--gold)">核心理念：</strong>不拍衣服，拍"穿这件衣服的人的状态"<br><br>
-        <strong>你的风格标签：</strong><br>
+        <strong style="color:var(--gold);font-size:14px">🎨 核心理念</strong><br>
+        不拍衣服，拍"穿这件衣服的人的状态"<br><br>
+        <strong style="color:var(--gold)">📸 你的风格标签：</strong><br>
         ins松弛感 · 微动活人感 · 氛围感生活 · 电影感pose · 韩女ins网感自拍<br><br>
-        <strong>与2026趋势的吻合：</strong><br>
+        <strong style="color:var(--gold)">✅ 与2026趋势的吻合：</strong><br>
         ✅ 情绪留白（不堆砌元素，给观者想象空间）<br>
         ✅ 材质叙事（用面料质感讲故事）<br>
         ✅ 场景即内容（日常场景拍出电影感）
@@ -627,56 +771,66 @@ a{color:var(--gold);text-decoration:none}
     </div>
     <div class="card">
       <div class="card-title">🎬 内容矩阵（4类内容）</div>
-      <table style="width:100%;font-size:13px;border-collapse:collapse">
-        <tr style="border-bottom:1px solid var(--border)"><td style="padding:8px 0;width:40%"><span class="b b-g">拍照教学 40%</span></td><td style="padding:8px 0">维持基本盘，吸引新粉</td></tr>
-        <tr style="border-bottom:1px solid var(--border)"><td style="padding:8px 0"><span class="b b-b">穿搭+拍照 40%</span></td><td style="padding:8px 0">种草你卖的衣服</td></tr>
-        <tr style="border-bottom:1px solid var(--border)"><td style="padding:8px 0"><span class="b b-gr">选品vlog 15%</span></td><td style="padding:8px 0">建立专业信任</td></tr>
-        <tr><td style="padding:8px 0"><span class="b b-r">幕后故事 5%</span></td><td style="padding:8px 0">人设建设+粘性</td></tr>
-      </table>
+      <div style="font-size:13px">
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+          <span><span class="b b-g">📷 拍照教学 40%</span></span>
+          <span>维持基本盘，吸引新粉</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+          <span><span class="b b-b">👗 穿搭+拍照 40%</span></span>
+          <span>种草你卖的衣服</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+          <span><span class="b b-gr">🎬 选品vlog 15%</span></span>
+          <span>建立专业信任</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0">
+          <span><span class="b b-r">📖 幕后故事 5%</span></span>
+          <span>人设建设+粘性</span>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="sec" id="c-ai">
-    <div class="sec-title">🤖 AI测款（摄影博主强相关）</div>
+  <div class="sec anchor" id="c-ai">
+    <div class="sec-title"><span class="icon">🤖</span> AI测款</div>
     <div class="sec-sub">用AI工具低成本测试款式热度</div>
     <div class="card">
       <div style="font-size:13px;line-height:1.8">
-        <strong>抖音数据：</strong>Jac.key"低成本生成服装短片"4752赞<br><br>
-        <strong>工具链：</strong><br>
+        <strong style="color:var(--gold)">📊 抖音数据：</strong>Jac.key"低成本生成服装短片"4752赞<br><br>
+        <strong style="color:var(--gold)">🛠️ 工具链：</strong><br>
         ① Shotlab / AI模特 → 一张衣服图生成模特上身效果<br>
         ② Seedance2mini → 输出短片<br>
         ③ 不用模特、不搭场景<br><br>
-        <strong>你的用法：</strong><br>
+        <strong style="color:var(--gold)">✨ 你的用法：</strong><br>
         在广州拍衣服平铺图 → AI生成上身效果 → 发小红书测点击 → 数据好的再拿货<br>
         <span style="color:var(--green)">= 零库存测款，比传统拿样效率高10倍</span>
       </div>
     </div>
   </div>
 
-  <div class="sec" id="c-convert">
-    <div class="sec-title">🔄 转化路径</div>
+  <div class="sec anchor" id="c-convert">
+    <div class="sec-title"><span class="icon">🔄</span> 转化路径</div>
     <div class="sec-sub">从内容到成交的完整链路</div>
-    <div class="card">
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <div style="padding:10px;background:rgba(200,164,92,.08);border-radius:8px;border-left:3px solid var(--gold)">
-          <div style="font-size:11px;color:var(--gold)">STEP 1 · 种草</div>
-          <div style="font-size:13px;margin-top:2px">穿搭教程/选品vlog → 吸引注意力</div>
-        </div>
-        <div style="padding:10px;background:rgba(66,165,245,.08);border-radius:8px;border-left:3px solid var(--blue)">
-          <div style="font-size:11px;color:var(--blue)">STEP 2 · 引流</div>
-          <div style="font-size:13px;margin-top:2px">评论区/私信 → 小红书店铺/微信私域</div>
-        </div>
-        <div style="padding:10px;background:rgba(76,175,80,.08);border-radius:8px;border-left:3px solid var(--green)">
-          <div style="font-size:11px;color:var(--green)">STEP 3 · 转化</div>
-          <div style="font-size:13px;margin-top:2px">首发试穿（限量/预售）→ 收集反馈</div>
-        </div>
-        <div style="padding:10px;background:rgba(171,71,188,.08);border-radius:8px;border-left:3px solid var(--purple)">
-          <div style="font-size:11px;color:var(--purple)">STEP 4 · 复购</div>
-          <div style="font-size:13px;margin-top:2px">稳定上新+直播 → 私域社群（复购5.1倍）</div>
-        </div>
+    <div class="flow">
+      <div class="flow-item flow-gold">
+        <div class="flow-step">STEP 1 · 种草</div>
+        <div class="flow-text">穿搭教程/选品vlog → 吸引注意力</div>
+      </div>
+      <div class="flow-item flow-blue">
+        <div class="flow-step">STEP 2 · 引流</div>
+        <div class="flow-text">评论区/私信 → 小红书店铺/微信私域</div>
+      </div>
+      <div class="flow-item flow-green">
+        <div class="flow-step">STEP 3 · 转化</div>
+        <div class="flow-text">首发试穿（限量/预售）→ 收集反馈</div>
+      </div>
+      <div class="flow-item flow-purple">
+        <div class="flow-step">STEP 4 · 复购</div>
+        <div class="flow-text">稳定上新+直播 → 私域社群（复购5.1倍）</div>
       </div>
     </div>
-    <div class="co co-info">
+    <div class="co co-info" style="margin-top:16px">
       <strong>💡 关键数据</strong>
       • 小红书60%流量来自搜索页（天风证券）<br>
       • 90%用户购买前有搜索行为<br>
@@ -692,57 +846,57 @@ a{color:var(--gold);text-decoration:none}
 <!-- ═══════════════════════════════════════ -->
 <div class="page" id="page-risk">
   <div class="chips">
-    <div class="chip on" onclick="scrollTo2('r-level')">层级识别</div>
-    <div class="chip" onclick="scrollTo2('r-moq')">MOQ对照</div>
-    <div class="chip" onclick="scrollTo2('r-quality')">品质验收</div>
-    <div class="chip" onclick="scrollTo2('r-price')">价格谈判</div>
-    <div class="chip" onclick="scrollTo2('r-after')">售后</div>
-    <div class="chip" onclick="scrollTo2('r-you')">你的专属</div>
+    <div class="chip on" onclick="scrollTo2('r-level')">🔍 层级</div>
+    <div class="chip" onclick="scrollTo2('r-moq')">📊 MOQ</div>
+    <div class="chip" onclick="scrollTo2('r-quality')">🔎 验收</div>
+    <div class="chip" onclick="scrollTo2('r-price')">💰 谈判</div>
+    <div class="chip" onclick="scrollTo2('r-after')">📝 售后</div>
+    <div class="chip" onclick="scrollTo2('r-you')">📷 专属</div>
   </div>
 
-  <div class="sec" id="r-level">
-    <div class="sec-title">🔍 六道关卡 · 第1道：层级识别</div>
+  <div class="sec anchor" id="r-level">
+    <div class="sec-title"><span class="icon">🔍</span> 六道关卡 · 第1道：层级识别</div>
     <div class="sec-sub">搞清楚你在跟谁做生意</div>
     <div class="card">
-      <div style="font-size:13px;line-height:2">
-        <div style="padding:8px;background:rgba(76,175,80,.08);border-radius:6px;margin-bottom:6px">
+      <div style="font-size:13px;line-height:1.8">
+        <div style="padding:10px;background:linear-gradient(135deg,rgba(76,175,80,.1),rgba(76,175,80,.03));border-radius:8px;margin-bottom:8px;border-left:3px solid var(--green)">
           <strong style="color:var(--green)">✅ 一批（优先合作）</strong><br>
           有自有工厂/设计 · 价格最低 · 5-10件起<br>
-          识别：档口有自己的工厂地址、能报面料成本
+          <span style="color:var(--dim)">识别：档口有自己的工厂地址、能报面料成本</span>
         </div>
-        <div style="padding:8px;background:rgba(66,165,245,.08);border-radius:6px;margin-bottom:6px">
+        <div style="padding:10px;background:linear-gradient(135deg,rgba(66,165,245,.1),rgba(66,165,245,.03));border-radius:8px;margin-bottom:8px;border-left:3px solid var(--blue)">
           <strong style="color:var(--blue)">✅ 二批（新手起步）</strong><br>
           从一批加价转售 · 门槛低 · 2-5件起<br>
-          识别：款式多但每款量少、价格比一批贵20-40%
+          <span style="color:var(--dim)">识别：款式多但每款量少、价格比一批贵20-40%</span>
         </div>
-        <div style="padding:8px;background:rgba(255,152,0,.08);border-radius:6px;margin-bottom:6px">
+        <div style="padding:10px;background:linear-gradient(135deg,rgba(255,152,0,.1),rgba(255,152,0,.03));border-radius:8px;margin-bottom:8px;border-left:3px solid var(--orange)">
           <strong style="color:var(--orange)">⚠️ 工厂店（有量后谈）</strong><br>
           OEM/ODM/代发 · 需稳定单量<br>
-          识别：有生产线、能定制、MOQ较高
+          <span style="color:var(--dim)">识别：有生产线、能定制、MOQ较高</span>
         </div>
-        <div style="padding:8px;background:rgba(239,83,80,.08);border-radius:6px">
+        <div style="padding:10px;background:linear-gradient(135deg,rgba(239,83,80,.1),rgba(239,83,80,.03));border-radius:8px;border-left:3px solid var(--red)">
           <strong style="color:var(--red)">❌ 炒货（必须规避）</strong><br>
           从别家拿货转卖 · 货不对板风险最高<br>
-          识别：同款多店出现、辅料一致、无法提供工厂信息
+          <span style="color:var(--dim)">识别：同款多店出现、辅料一致、无法提供工厂信息</span>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="sec" id="r-moq">
-    <div class="sec-title">📊 第2道：MOQ起批量数字对照</div>
+  <div class="sec anchor" id="r-moq">
+    <div class="sec-title"><span class="icon">📊</span> 第2道：MOQ起批量对照</div>
     <div class="sec-sub">各市场实测数据</div>
     <div class="tbl-wrap">
       <table>
         <thead><tr><th>市场</th><th>起批量</th><th>混批</th><th>备注</th></tr></thead>
         <tbody>
-          <tr><td>十三行</td><td>5-10件/款</td><td>部分支持</td><td>4楼以上严格</td></tr>
-          <tr><td>沙河</td><td>2-5件/款</td><td>普遍支持</td><td>门槛最低</td></tr>
-          <tr><td>UUS</td><td>3件/款</td><td>混款5件</td><td>韩系品质高</td></tr>
-          <tr><td>汇美</td><td>5件/款</td><td>10件混批</td><td>部分1-2件可拿</td></tr>
-          <tr><td>apM</td><td>3-5件</td><td>支持</td><td>可零售但贵</td></tr>
-          <tr><td>白马</td><td>5-10件</td><td>少量</td><td>价格虚高</td></tr>
-          <tr><td>红棉</td><td>3-5件</td><td>支持</td><td>韩系为主</td></tr>
+          <tr><td>🏢 十三行</td><td>5-10件/款</td><td>部分支持</td><td>4楼以上严格</td></tr>
+          <tr><td>🏭 沙河</td><td>2-5件/款</td><td>普遍支持</td><td>门槛最低</td></tr>
+          <tr><td>🇰🇷 UUS</td><td>3件/款</td><td>混款5件</td><td>韩系品质高</td></tr>
+          <tr><td>🏬 汇美</td><td>5件/款</td><td>10件混批</td><td>部分1-2件可拿</td></tr>
+          <tr><td>🏢 apM</td><td>3-5件</td><td>支持</td><td>可零售但贵</td></tr>
+          <tr><td>👗 白马</td><td>5-10件</td><td>少量</td><td>价格虚高</td></tr>
+          <tr><td>🎨 红棉</td><td>3-5件</td><td>支持</td><td>韩系为主</td></tr>
         </tbody>
       </table>
     </div>
@@ -752,26 +906,26 @@ a{color:var(--gold);text-decoration:none}
     </div>
   </div>
 
-  <div class="sec" id="r-quality">
-    <div class="sec-title">🔎 第3道：品质验收标准</div>
+  <div class="sec anchor" id="r-quality">
+    <div class="sec-title"><span class="icon">🔎</span> 第3道：品质验收标准</div>
     <div class="sec-sub">三标+做工现场验收</div>
     <div class="card">
-      <div class="card-title">三标检查（必做）</div>
+      <div class="card-title">🏷️ 三标检查（必做）</div>
       <ul class="ck">
-        <li><div class="ck-dot ck-must">必</div>洗水标：成分标注是否清晰</li>
-        <li><div class="ck-dot ck-must">必</div>吊牌：品牌/尺码/价格是否齐全</li>
-        <li><div class="ck-dot ck-must">必</div>合格证：执行标准/安全类别</li>
+        <li><div class="ck-dot ck-must">必</div><div>洗水标：成分标注是否清晰</div></li>
+        <li><div class="ck-dot ck-must">必</div><div>吊牌：品牌/尺码/价格是否齐全</div></li>
+        <li><div class="ck-dot ck-must">必</div><div>合格证：执行标准/安全类别</div></li>
       </ul>
     </div>
     <div class="card">
-      <div class="card-title">做工检查（30秒完成）</div>
+      <div class="card-title">🔍 做工检查（30秒完成）</div>
       <ul class="ck">
-        <li><div class="ck-dot ck-must">必</div>摸面料 → 手感是否舒适</li>
-        <li><div class="ck-dot ck-must">必</div>看走线 → 是否整齐、有无跳线</li>
-        <li><div class="ck-dot ck-must">必</div>查拉链/扣子 → 是否顺滑</li>
-        <li><div class="ck-dot ck-should">应</div>拉伸测试 → 是否变形/起球</li>
-        <li><div class="ck-dot ck-should">应</div>闻气味 → 有无刺鼻异味</li>
-        <li><div class="ck-dot ck-nice">佳</div>对光看 → 面料密度是否均匀</li>
+        <li><div class="ck-dot ck-must">必</div><div>摸面料 → 手感是否舒适</div></li>
+        <li><div class="ck-dot ck-must">必</div><div>看走线 → 是否整齐、有无跳线</div></li>
+        <li><div class="ck-dot ck-must">必</div><div>查拉链/扣子 → 是否顺滑</div></li>
+        <li><div class="ck-dot ck-should">应</div><div>拉伸测试 → 是否变形/起球</div></li>
+        <li><div class="ck-dot ck-should">应</div><div>闻气味 → 有无刺鼻异味</div></li>
+        <li><div class="ck-dot ck-nice">佳</div><div>对光看 → 面料密度是否均匀</div></li>
       </ul>
     </div>
     <div class="co co-warn">
@@ -780,18 +934,20 @@ a{color:var(--gold);text-decoration:none}
     </div>
   </div>
 
-  <div class="sec" id="r-price">
-    <div class="sec-title">💰 第4道：价格谈判与交易防坑</div>
+  <div class="sec anchor" id="r-price">
+    <div class="sec-title"><span class="icon">💰</span> 第4道：价格谈判与防坑</div>
     <div class="sec-sub">三种价格陷阱必须识别</div>
     <div class="card">
-      <table style="width:100%;font-size:13px;border-collapse:collapse">
-        <thead><tr><th>陷阱</th><th>识别</th><th>对策</th></tr></thead>
-        <tbody>
-          <tr><td style="padding:8px 0;color:var(--red)">非档口报价</td><td style="padding:8px 0">报价明显低于同层</td><td style="padding:8px 0">确认是否为炒货</td></tr>
-          <tr><td style="padding:8px 0;color:var(--red)">口头承诺</td><td style="padding:8px 0">"放心质量没问题"</td><td style="padding:8px 0">微信文字确认</td></tr>
-          <tr><td style="padding:8px 0;color:var(--red)">仿版陷阱</td><td style="padding:8px 0">大牌同款超低价</td><td style="padding:8px 0">不碰，法律风险</td></tr>
-        </tbody>
-      </table>
+      <div class="tbl-wrap" style="border:none;margin:0">
+        <table style="min-width:auto">
+          <thead><tr><th>陷阱</th><th>识别</th><th>对策</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--red)">非档口报价</td><td>报价明显低于同层</td><td>确认是否为炒货</td></tr>
+            <tr><td style="color:var(--red)">口头承诺</td><td>"放心质量没问题"</td><td>微信文字确认</td></tr>
+            <tr><td style="color:var(--red)">仿版陷阱</td><td>大牌同款超低价</td><td>不碰，法律风险</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="co co-tip">
       <strong>💡 压价正确姿势</strong>
@@ -800,12 +956,12 @@ a{color:var(--gold);text-decoration:none}
     </div>
   </div>
 
-  <div class="sec" id="r-after">
-    <div class="sec-title">📝 第5道：售后书面化</div>
+  <div class="sec anchor" id="r-after">
+    <div class="sec-title"><span class="icon">📝</span> 第5道：售后书面化</div>
     <div class="sec-sub">所有约定必须留文字记录</div>
     <div class="card">
-      <div style="font-size:13px;line-height:2">
-        <strong>必须微信文字确认的5件事：</strong><br>
+      <div style="font-size:13px;line-height:1.8">
+        <strong style="color:var(--gold)">📱 必须微信文字确认的5件事：</strong><br><br>
         ① 质量问题退换规则（包退？包换？运费谁出？）<br>
         ② 非质量问题处理（滞销能换款吗？）<br>
         ③ 补货价格保障（同款同价？）<br>
@@ -815,8 +971,8 @@ a{color:var(--gold);text-decoration:none}
     </div>
   </div>
 
-  <div class="sec" id="r-you">
-    <div class="sec-title">📷 第6道：@木子菲儿 专属避坑</div>
+  <div class="sec anchor" id="r-you">
+    <div class="sec-title"><span class="icon">📷</span> 第6道：@木子菲儿 专属</div>
     <div class="sec-sub">摄影博主转型的特殊注意事项</div>
     <div class="card">
       <ul class="ck">
@@ -835,15 +991,15 @@ a{color:var(--gold);text-decoration:none}
 <!-- ═══════════════════════════════════════ -->
 <div class="page" id="page-plan">
   <div class="chips">
-    <div class="chip on" onclick="scrollTo2('p-stage')">四阶段</div>
-    <div class="chip" onclick="scrollTo2('p-money')">收入测算</div>
-    <div class="chip" onclick="scrollTo2('p-30d')">30天计划</div>
-    <div class="chip" onclick="scrollTo2('p-budget')">预算</div>
-    <div class="chip" onclick="scrollTo2('p-kpi')">KPI</div>
+    <div class="chip on" onclick="scrollTo2('p-stage')">🚀 四阶段</div>
+    <div class="chip" onclick="scrollTo2('p-money')">💰 收入</div>
+    <div class="chip" onclick="scrollTo2('p-30d')">📅 30天</div>
+    <div class="chip" onclick="scrollTo2('p-budget')">💵 预算</div>
+    <div class="chip" onclick="scrollTo2('p-kpi')">📈 KPI</div>
   </div>
 
-  <div class="sec" id="p-stage">
-    <div class="sec-title">🚀 四阶段执行路径</div>
+  <div class="sec anchor" id="p-stage">
+    <div class="sec-title"><span class="icon">🚀</span> 四阶段执行路径</div>
     <div class="sec-sub">从0到1的完整时间线</div>
 
     <div class="acc open">
@@ -853,12 +1009,12 @@ a{color:var(--gold);text-decoration:none}
       </div>
       <div class="acc-body"><div class="acc-inner">
         <div style="font-size:13px;line-height:1.8">
-          <strong>核心动作：</strong><br>
+          <strong style="color:var(--gold)">🎯 核心动作：</strong><br>
           ① 开通小红书"好物推荐"（1000粉即可）<br>
           ② 选品中心挂链接，一件代发<br>
           ③ 双线内容：拍照教学(40%)+穿搭推荐(40%)<br>
           ④ 去广州考察3天，建供应商库<br><br>
-          <strong>量化目标：</strong><br>
+          <strong style="color:var(--gold)">📊 量化目标：</strong><br>
           • 粉丝：1000→2000<br>
           • 收入：1000-3000元<br>
           • 加30+档口微信<br>
@@ -874,12 +1030,12 @@ a{color:var(--gold);text-decoration:none}
       </div>
       <div class="acc-body"><div class="acc-inner">
         <div style="font-size:13px;line-height:1.8">
-          <strong>核心动作：</strong><br>
+          <strong style="color:var(--blue)">🎯 核心动作：</strong><br>
           ① 锁定韩系/松弛感风格<br>
           ② 开小红书店铺，小批量拿货<br>
           ③ 开始直播（穿搭教学式，不是叫卖式）<br>
           ④ 建私域（微信群）<br><br>
-          <strong>量化目标：</strong><br>
+          <strong style="color:var(--blue)">📊 量化目标：</strong><br>
           • 粉丝：2000→5000<br>
           • 收入：3000-8000元/月<br>
           • 确定3-5个稳定供应商<br>
@@ -895,12 +1051,12 @@ a{color:var(--gold);text-decoration:none}
       </div>
       <div class="acc-body"><div class="acc-inner">
         <div style="font-size:13px;line-height:1.8">
-          <strong>核心动作：</strong><br>
+          <strong style="color:var(--green)">🎯 核心动作：</strong><br>
           ① 番禺/海珠建1-2个工厂关系<br>
           ② 固定3-5个档口长期合作<br>
           ③ 私域社群运营（复购率5.1倍）<br>
           ④ 考虑定制款/贴牌<br><br>
-          <strong>量化目标：</strong><br>
+          <strong style="color:var(--green)">📊 量化目标：</strong><br>
           • 粉丝：5000→10000<br>
           • 收入：1-3万/月<br>
           • 私域500+人
@@ -915,10 +1071,10 @@ a{color:var(--gold);text-decoration:none}
       </div>
       <div class="acc-body"><div class="acc-inner">
         <div style="font-size:13px;line-height:1.8">
-          <strong>参考标杆：</strong><br>
+          <strong style="color:var(--purple)">🎯 参考标杆：</strong><br>
           • Blacknini（小红书起家→自有品牌）<br>
           • 张大奕（内容→供应链→品牌）<br><br>
-          <strong>方向：</strong><br>
+          <strong style="color:var(--purple)">📈 方向：</strong><br>
           ① 自有品牌/设计师联名<br>
           ② 多平台扩张<br>
           ③ 团队化运营
@@ -927,8 +1083,8 @@ a{color:var(--gold);text-decoration:none}
     </div>
   </div>
 
-  <div class="sec" id="p-money">
-    <div class="sec-title">💰 收入测算</div>
+  <div class="sec anchor" id="p-money">
+    <div class="sec-title"><span class="icon">💰</span> 收入测算</div>
     <div class="sec-sub">三种场景预估</div>
     <div class="kpi-row">
       <div class="kpi" style="border-color:var(--red)"><div class="kpi-num" style="color:var(--red)">1-3K</div><div class="kpi-label">保守（月1）</div></div>
@@ -946,28 +1102,28 @@ a{color:var(--gold);text-decoration:none}
     </div>
   </div>
 
-  <div class="sec" id="p-30d">
-    <div class="sec-title">📅 30天执行表</div>
+  <div class="sec anchor" id="p-30d">
+    <div class="sec-title"><span class="icon">📅</span> 30天执行表</div>
     <div class="sec-sub">精确到每周</div>
     <div class="tl">
       <div class="tl-item t-gold">
         <div class="tl-time">第1周 · Day 1-7</div>
-        <div class="tl-title">准备+开通</div>
+        <div class="tl-title">🚀 准备+开通</div>
         <div class="tl-desc">开通好物推荐 → 浏览选品中心 → 确定首批10-15款 → 拍3-5条内容</div>
       </div>
       <div class="tl-item t-blue">
         <div class="tl-time">第2周 · Day 8-14</div>
-        <div class="tl-title">内容启动</div>
+        <div class="tl-title">📝 内容启动</div>
         <div class="tl-desc">每天1条笔记 → 测试不同类型 → 分析数据 → 优化选品</div>
       </div>
       <div class="tl-item t-green">
         <div class="tl-time">第3周 · Day 15-21</div>
-        <div class="tl-title">广州考察</div>
+        <div class="tl-title">✈️ 广州考察</div>
         <div class="tl-desc">3天实地考察 → 加30+档口微信 → 拿10-15款样品 → 谈代发合作</div>
       </div>
       <div class="tl-item t-red">
         <div class="tl-time">第4周 · Day 22-30</div>
-        <div class="tl-title">稳定输出+复盘</div>
+        <div class="tl-title">📊 稳定输出+复盘</div>
         <div class="tl-desc">每天1-2条 → 周复盘数据 → 月度总结 → 制定下月计划</div>
       </div>
     </div>
@@ -977,22 +1133,37 @@ a{color:var(--gold);text-decoration:none}
     </div>
   </div>
 
-  <div class="sec" id="p-budget">
-    <div class="sec-title">💵 启动预算</div>
+  <div class="sec anchor" id="p-budget">
+    <div class="sec-title"><span class="icon">💵</span> 启动预算</div>
     <div class="sec-sub">轻启动，风险可控</div>
     <div class="card">
-      <table style="width:100%;font-size:13px;border-collapse:collapse">
-        <tr style="border-bottom:1px solid var(--border)"><td style="padding:8px 0">✈️ 广州考察（机酒交通餐饮）</td><td style="padding:8px 0;text-align:right;color:var(--gold)">3000-5000</td></tr>
-        <tr style="border-bottom:1px solid var(--border)"><td style="padding:8px 0">👗 首批拿货（10-15款×3-5件）</td><td style="padding:8px 0;text-align:right;color:var(--gold)">5000-10000</td></tr>
-        <tr style="border-bottom:1px solid var(--border)"><td style="padding:8px 0">📸 拍摄道具/场景</td><td style="padding:8px 0;text-align:right;color:var(--gold)">1000-2000</td></tr>
-        <tr style="border-bottom:1px solid var(--border)"><td style="padding:8px 0">🔄 补货+应急</td><td style="padding:8px 0;text-align:right;color:var(--gold)">10000-15000</td></tr>
-        <tr><td style="padding:8px 0;font-weight:600;color:var(--gold)">💎 总计</td><td style="padding:8px 0;text-align:right;font-weight:600;color:var(--gold-l);font-size:16px">1.9-3.2万</td></tr>
-      </table>
+      <div style="font-size:13px">
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+          <span>✈️ 广州考察（机酒交通餐饮）</span>
+          <span style="color:var(--gold)">3000-5000</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+          <span>👗 首批拿货（10-15款×3-5件）</span>
+          <span style="color:var(--gold)">5000-10000</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+          <span>📸 拍摄道具/场景</span>
+          <span style="color:var(--gold)">1000-2000</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+          <span>🔄 补货+应急</span>
+          <span style="color:var(--gold)">10000-15000</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:10px 0;font-weight:600">
+          <span style="color:var(--gold)">💎 总计</span>
+          <span style="color:var(--gold-l);font-size:18px">1.9-3.2万</span>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="sec" id="p-kpi">
-    <div class="sec-title">📈 90天KPI</div>
+  <div class="sec anchor" id="p-kpi">
+    <div class="sec-title"><span class="icon">📈</span> 90天KPI</div>
     <div class="sec-sub">可量化的里程碑</div>
     <div class="kpi-row">
       <div class="kpi"><div class="kpi-num">5000+</div><div class="kpi-label">粉丝</div></div>
@@ -1008,26 +1179,26 @@ a{color:var(--gold);text-decoration:none}
 <!-- ═══════════════════════════════════════ -->
 <div class="page" id="page-trip">
   <div class="chips">
-    <div class="chip on" onclick="scrollTo2('t-prep')">出发前</div>
-    <div class="chip" onclick="scrollTo2('t-d1')">Day1</div>
-    <div class="chip" onclick="scrollTo2('t-d2')">Day2</div>
-    <div class="chip" onclick="scrollTo2('t-d3')">Day3</div>
-    <div class="chip" onclick="scrollTo2('t-talk')">话术</div>
-    <div class="chip" onclick="scrollTo2('t-back')">回来后</div>
+    <div class="chip on" onclick="scrollTo2('t-prep')">🎒 准备</div>
+    <div class="chip" onclick="scrollTo2('t-d1')">📍 Day1</div>
+    <div class="chip" onclick="scrollTo2('t-d2')">📍 Day2</div>
+    <div class="chip" onclick="scrollTo2('t-d3')">📍 Day3</div>
+    <div class="chip" onclick="scrollTo2('t-talk')">💬 话术</div>
+    <div class="chip" onclick="scrollTo2('t-back')">🏠 回来</div>
   </div>
 
-  <div class="sec" id="t-prep">
-    <div class="sec-title">🎒 出发前准备</div>
+  <div class="sec anchor" id="t-prep">
+    <div class="sec-title"><span class="icon">🎒</span> 出发前准备</div>
     <div class="sec-sub">必带装备清单</div>
     <div class="card">
       <ul class="ck">
-        <li><div class="ck-dot ck-must">必</div><div><strong>软尺</strong> — 量衣服尺寸</div></li>
-        <li><div class="ck-dot ck-must">必</div><div><strong>充电宝</strong> — 全天拍照+微信</div></li>
-        <li><div class="ck-dot ck-must">必</div><div><strong>折叠小推车</strong> — 拿货多了拖着走</div></li>
-        <li><div class="ck-dot ck-must">必</div><div><strong>舒适平底鞋</strong> — 全天2万步+</div></li>
-        <li><div class="ck-dot ck-must">必</div><div><strong>现金500元</strong> — 部分档口只收现金</div></li>
-        <li><div class="ck-dot ck-should">应</div><div><strong>大袋子/编织袋</strong> — 装货</div></li>
-        <li><div class="ck-dot ck-should">应</div><div><strong>手机备忘录模板</strong> — 提前建好记录格式</div></li>
+        <li><div class="ck-dot ck-must">必</div><div><strong>📏 软尺</strong> — 量衣服尺寸</div></li>
+        <li><div class="ck-dot ck-must">必</div><div><strong>🔋 充电宝</strong> — 全天拍照+微信</div></li>
+        <li><div class="ck-dot ck-must">必</div><div><strong>🛒 折叠小推车</strong> — 拿货多了拖着走</div></li>
+        <li><div class="ck-dot ck-must">必</div><div><strong>👟 舒适平底鞋</strong> — 全天2万步+</div></li>
+        <li><div class="ck-dot ck-must">必</div><div><strong>💵 现金500元</strong> — 部分档口只收现金</div></li>
+        <li><div class="ck-dot ck-should">应</div><div><strong>👜 大袋子/编织袋</strong> — 装货</div></li>
+        <li><div class="ck-dot ck-should">应</div><div><strong>📱 手机备忘录模板</strong> — 提前建好记录格式</div></li>
       </ul>
     </div>
     <div class="co co-info">
@@ -1036,18 +1207,18 @@ a{color:var(--gold);text-decoration:none}
     </div>
   </div>
 
-  <div class="sec" id="t-d1">
-    <div class="sec-title" style="color:var(--gold)">Day 1 · 十三行商圈</div>
+  <div class="sec anchor" id="t-d1">
+    <div class="sec-title" style="color:var(--gold)"><span class="icon">📍</span> Day 1 · 十三行商圈</div>
     <div class="sec-sub">新中国大厦 + 红遍天 ｜ 预算1000-2000</div>
     <div class="tl">
       <div class="tl-item t-gold">
         <div class="tl-time">07:00 - 08:30</div>
-        <div class="tl-title">新中国1-3楼 · 只看不动手</div>
+        <div class="tl-title">🏢 新中国1-3楼 · 只看不动手</div>
         <div class="tl-desc">了解底价、观察爆款、练眼力。3楼多炒货注意甄别。</div>
       </div>
       <div class="tl-item t-gold">
         <div class="tl-time">08:30 - 12:00</div>
-        <div class="tl-title">新中国4-8楼 · 核心战场</div>
+        <div class="tl-title">⭐ 新中国4-8楼 · 核心战场</div>
         <div class="tl-desc">
           4楼基础原创 → 5-6楼实力档口 → 7楼ZYGODDESS → 8楼云裳阁<br>
           每档口30秒：摸→看→翻→拉→拍→问价→加微信→记录
@@ -1055,115 +1226,115 @@ a{color:var(--gold);text-decoration:none}
       </div>
       <div class="tl-item t-gold">
         <div class="tl-time">12:00 - 13:00</div>
-        <div class="tl-title">午饭 + 整理上午记录</div>
+        <div class="tl-title">🍜 午饭 + 整理上午记录</div>
         <div class="tl-desc">给档口打ABC评级，标记下午重点目标</div>
       </div>
       <div class="tl-item t-gold">
         <div class="tl-time">13:00 - 15:00</div>
-        <div class="tl-title">回A级档口 · 精选下单</div>
+        <div class="tl-title">💰 回A级档口 · 精选下单</div>
         <div class="tl-desc">5-8款×3-5件，验货+谈退换+微信留记录</div>
       </div>
       <div class="tl-item t-gold">
         <div class="tl-time">15:00 - 17:00</div>
-        <div class="tl-title">红遍天 · 平价基础款</div>
+        <div class="tl-title">🏬 红遍天 · 平价基础款</div>
         <div class="tl-desc">找2-3家拿3-5款引流款（30-100元/件）</div>
       </div>
       <div class="tl-item t-gold">
         <div class="tl-time">18:00 - 20:00</div>
-        <div class="tl-title">酒店复盘</div>
+        <div class="tl-title">🏨 酒店复盘</div>
         <div class="tl-desc">建Excel表 → 分级 → 规划Day2</div>
       </div>
     </div>
   </div>
 
-  <div class="sec" id="t-d2">
-    <div class="sec-title" style="color:var(--blue)">Day 2 · 火车站商圈</div>
+  <div class="sec anchor" id="t-d2">
+    <div class="sec-title" style="color:var(--blue)"><span class="icon">📍</span> Day 2 · 火车站商圈</div>
     <div class="sec-sub">汇美 + apM + UUS ｜ 预算2000-3000</div>
     <div class="tl">
       <div class="tl-item t-blue">
         <div class="tl-time">09:00 - 12:00</div>
-        <div class="tl-title">汇美2-3楼 · 韩系原创核心</div>
+        <div class="tl-title">🏬 汇美2-3楼 · 韩系原创核心</div>
         <div class="tl-desc">极简老钱风/通勤针织/轻国风。支持零售，先买2-3件测质量。</div>
       </div>
       <div class="tl-item t-blue">
         <div class="tl-time">13:00 - 15:00</div>
-        <div class="tl-title">apM · 原创设计高地</div>
+        <div class="tl-title">🏢 apM · 原创设计高地</div>
         <div class="tl-desc">款式潮、撞款率低。找3-5家深度聊代发合作。</div>
       </div>
       <div class="tl-item t-blue">
         <div class="tl-time">15:00 - 17:00</div>
-        <div class="tl-title">UUS · 品质天花板</div>
+        <div class="tl-title">🇰🇷 UUS · 品质天花板</div>
         <div class="tl-desc">只挑2-3款"形象款"。17:00前必须到，很多档口16:30收。</div>
       </div>
       <div class="tl-item t-blue">
         <div class="tl-time">18:00 - 20:00</div>
-        <div class="tl-title">复盘 · 排Top10合作意向</div>
+        <div class="tl-title">📊 复盘 · 排Top10合作意向</div>
         <div class="tl-desc">汇总两天数据 → 规划Day3回马枪</div>
       </div>
     </div>
   </div>
 
-  <div class="sec" id="t-d3">
-    <div class="sec-title" style="color:var(--green)">Day 3 · 沙河 + 复盘</div>
+  <div class="sec anchor" id="t-d3">
+    <div class="sec-title" style="color:var(--green)"><span class="icon">📍</span> Day 3 · 沙河 + 复盘</div>
     <div class="sec-sub">了解底价 + 敲定合作</div>
     <div class="tl">
       <div class="tl-item t-green">
         <div class="tl-time">06:00 - 09:00</div>
-        <div class="tl-title">沙河南城 · 建立价格锚点</div>
+        <div class="tl-title">🏭 沙河南城 · 建立价格锚点</div>
         <div class="tl-desc">不是主战场，来了解底价。10:00前必须离开。</div>
       </div>
       <div class="tl-item t-green">
         <div class="tl-time">10:00 - 12:00</div>
-        <div class="tl-title">回马枪 · 回A级档口深度谈判</div>
+        <div class="tl-title">🔄 回马枪 · 回A级档口深度谈判</div>
         <div class="tl-desc">带数据回去谈代发：价格/时效/退换/库存/结算</div>
       </div>
       <div class="tl-item t-green">
         <div class="tl-time">14:00 - 18:00</div>
-        <div class="tl-title">酒店深度复盘</div>
+        <div class="tl-title">🏨 酒店深度复盘</div>
         <div class="tl-desc">选品表 → 供应商分级 → 成本核算 → 内容计划 → 上线计划</div>
       </div>
     </div>
   </div>
 
-  <div class="sec" id="t-talk">
-    <div class="sec-title">💬 谈判话术</div>
+  <div class="sec anchor" id="t-talk">
+    <div class="sec-title"><span class="icon">💬</span> 谈判话术</div>
     <div class="sec-sub">4个场景，直接照着说</div>
 
     <div class="card">
-      <div class="card-title">场景1：第一次进档口</div>
+      <div class="card-title">🎬 场景1：第一次进档口</div>
       <div class="dlg"><div class="dlg-label">你说</div><div class="dlg-you">"老板你好，我是做小红书穿搭博主的，粉丝一万多，想看看你们家的款，有没有产品图册？"</div></div>
       <div class="dlg"><div class="dlg-label">看完后</div><div class="dlg-you">"质量不错。我先加个微信，后面稳定拿货方便联系。你们支持一件代发吗？"</div></div>
     </div>
 
     <div class="card">
-      <div class="card-title">场景2：小量拿货</div>
+      <div class="card-title">📦 场景2：小量拿货</div>
       <div class="dlg"><div class="dlg-label">你说</div><div class="dlg-you">"这几款我都很喜欢。我先拿几件回去拍内容，粉丝反馈好会稳定补货。能混批吗？"</div></div>
       <div class="dlg"><div class="dlg-label">对方说5件起</div><div class="dlg-you">"那我选5个款，每款1件，凑25件可以吗？"</div></div>
     </div>
 
     <div class="card">
-      <div class="card-title">场景3：谈一件代发</div>
+      <div class="card-title">🤝 场景3：谈一件代发</div>
       <div class="dlg"><div class="dlg-label">你说</div><div class="dlg-you">"老板，我前两天拿了几个款拍内容，粉丝反馈很好。想谈长期合作——你帮我一件代发，我负责出内容。"</div></div>
       <div class="dlg"><div class="dlg-label">必问5件事</div><div class="dlg-you">① 发货时效？② 质量问题怎么退？③ 库存怎么同步？④ 量起来价格能优惠吗？⑤ 结算方式？</div></div>
     </div>
 
     <div class="card">
-      <div class="card-title">场景4：压价</div>
+      <div class="card-title">💰 场景4：压价</div>
       <div class="dlg"><div class="dlg-label">❌ 错误</div><div class="dlg-note">"能不能便宜点？" → 太笼统</div></div>
       <div class="dlg"><div class="dlg-label">✅ 正确</div><div class="dlg-you">"如果我每月稳定出50件，这款代发价能从120降到100吗？我给你看我的小红书数据——上条笔记曝光5万，转化率3%。"</div></div>
     </div>
   </div>
 
-  <div class="sec" id="t-back">
-    <div class="sec-title">🏠 回来后7天</div>
+  <div class="sec anchor" id="t-back">
+    <div class="sec-title"><span class="icon">🏠</span> 回来后7天</div>
     <div class="sec-sub">考察的价值在于执行</div>
     <div class="tl">
-      <div class="tl-item t-gold"><div class="tl-time">Day 1</div><div class="tl-title">样品到手+质量测试</div><div class="tl-desc">逐件检查→穿洗测试→ABC评级</div></div>
-      <div class="tl-item t-blue"><div class="tl-time">Day 2</div><div class="tl-title">上架首批10款</div><div class="tl-desc">拍主图（你亲自穿+氛围感）→写详情→上架</div></div>
-      <div class="tl-item t-green"><div class="tl-time">Day 3</div><div class="tl-title">发3条笔记</div><div class="tl-desc">穿搭+拍照教学+挂链接</div></div>
-      <div class="tl-item t-gold"><div class="tl-time">Day 4</div><div class="tl-title">发考察vlog</div><div class="tl-desc">"跟模特去广州拿货"</div></div>
-      <div class="tl-item t-blue"><div class="tl-time">Day 5-6</div><div class="tl-title">每天1-2条笔记</div><div class="tl-desc">持续测试不同类型</div></div>
-      <div class="tl-item t-red"><div class="tl-time">Day 7</div><div class="tl-title">首次数据复盘</div><div class="tl-desc">分析点击/转化/佣金→淘汰C级→追加A级</div></div>
+      <div class="tl-item t-gold"><div class="tl-time">Day 1</div><div class="tl-title">📦 样品到手+质量测试</div><div class="tl-desc">逐件检查→穿洗测试→ABC评级</div></div>
+      <div class="tl-item t-blue"><div class="tl-time">Day 2</div><div class="tl-title">🛍️ 上架首批10款</div><div class="tl-desc">拍主图（你亲自穿+氛围感）→写详情→上架</div></div>
+      <div class="tl-item t-green"><div class="tl-time">Day 3</div><div class="tl-title">📝 发3条笔记</div><div class="tl-desc">穿搭+拍照教学+挂链接</div></div>
+      <div class="tl-item t-gold"><div class="tl-time">Day 4</div><div class="tl-title">🎬 发考察vlog</div><div class="tl-desc">"跟模特去广州拿货"</div></div>
+      <div class="tl-item t-blue"><div class="tl-time">Day 5-6</div><div class="tl-title">📱 每天1-2条笔记</div><div class="tl-desc">持续测试不同类型</div></div>
+      <div class="tl-item t-red"><div class="tl-time">Day 7</div><div class="tl-title">📊 首次数据复盘</div><div class="tl-desc">分析点击/转化/佣金→淘汰C级→追加A级</div></div>
     </div>
     <div class="co co-tip">
       <strong>✅ 7天目标</strong>
@@ -1174,9 +1345,10 @@ a{color:var(--gold);text-decoration:none}
 
 <!-- Footer -->
 <div class="foot">
-  木子菲儿 · 女装带货创业完整手册 v2.0<br>
+  <div class="logo" style="font-size:28px;margin-bottom:8px">📷</div>
+  木子菲儿 · 女装带货创业完整手册<br>
   数据来源：100条小红书TOP + 28个拿货渠道 + 38个引用来源 + 抖音实测<br>
-  <span style="color:var(--gold)">持续更新中 · 随时告诉我补充内容</span>
+  <span style="color:var(--gold)">v2.1 · 持续更新中</span>
 </div>
 
 <!-- Bottom Nav -->
@@ -1191,8 +1363,8 @@ a{color:var(--gold);text-decoration:none}
 
 <script>
 const pages = ['page-home','page-supply','page-content','page-risk','page-plan','page-trip'];
-const titles = ['木子菲儿 · 完整手册','① 广州供应链地图','② 内容×货源策略','③ 避坑清单','④ 0→1执行路径','⑤ 3天实战手册'];
-const subs = ['v2.0 完整版','6大商圈 · 28渠道','433货盘 · 情绪留白','六道关卡 · MOQ对照','四阶段 · 收入测算','精确到小时'];
+const titles = ['木子菲儿','① 广州供应链地图','② 内容×货源策略','③ 避坑清单','④ 0→1执行路径','⑤ 3天实战手册'];
+const subs = ['v2.1 完整版','6大商圈 · 28渠道','433货盘 · 情绪留白','六道关卡 · MOQ对照','四阶段 · 收入测算','精确到小时'];
 
 function switchPage(idx) {
   pages.forEach((id,i) => {
@@ -1213,7 +1385,6 @@ function toggleAcc(el) {
 function scrollTo2(id) {
   const el = document.getElementById(id);
   if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
-  // Update chips
   document.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
   event.target.classList.add('on');
 }
