@@ -492,6 +492,15 @@ body.home-active .bottom-nav{
       <circle cx="12" cy="12" r="6"/>
       <circle cx="12" cy="12" r="2"/>
     </symbol>
+    <symbol id="icon-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+      <circle cx="12" cy="7" r="4"/>
+    </symbol>
+    <symbol id="icon-shopping-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <path d="M16 10a4 4 0 0 1-8 0"/>
+    </symbol>
     <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <polyline points="6 9 12 15 18 9"/>
     </symbol>
@@ -2124,15 +2133,17 @@ body.home-active .bottom-nav{
   <div class="nav-item active" onclick="switchPage(0)"><svg class="icon-svg icon-nav"><use href="#icon-home"/></svg>首页</div>
   <div class="nav-item" onclick="switchPage(1)"><svg class="icon-svg icon-nav"><use href="#icon-package"/></svg>供应链</div>
   <div class="nav-item" onclick="switchPage(2)"><svg class="icon-svg icon-nav"><use href="#icon-camera"/></svg>内容</div>
-  <div class="nav-item" onclick="switchPage(3)"><svg class="icon-svg icon-nav"><use href="#icon-shield-alert"/></svg>避坑</div>
-  <div class="nav-item" onclick="switchPage(4)"><svg class="icon-svg icon-nav"><use href="#icon-route"/></svg>路径</div>
-  <div class="nav-item" onclick="switchPage(5)"><svg class="icon-svg icon-nav"><use href="#icon-calendar"/></svg>3天</div>
+  <div class="nav-item" onclick="switchPage(3)"><svg class="icon-svg icon-nav"><use href="#icon-user"/></svg>运营</div>
+  <div class="nav-item" onclick="switchPage(4)"><svg class="icon-svg icon-nav"><use href="#icon-shopping-bag"/></svg>带货</div>
+  <div class="nav-item" onclick="switchPage(5)"><svg class="icon-svg icon-nav"><use href="#icon-shield-alert"/></svg>避坑</div>
+  <div class="nav-item" onclick="switchPage(6)"><svg class="icon-svg icon-nav"><use href="#icon-route"/></svg>路径</div>
+  <div class="nav-item" onclick="switchPage(7)"><svg class="icon-svg icon-nav"><use href="#icon-calendar"/></svg>3天</div>
 </div>
 
 <script>
-const pages = ['page-home','page-supply','page-content','page-risk','page-plan','page-trip'];
-const titles = ['木子菲儿','① 广州供应链地图','② 内容×货源策略','③ 避坑清单','④ 0→1执行路径','⑤ 3天实战手册'];
-const subs = ['v2.1 完整版','6大商圈 · 28渠道','433货盘 · 情绪留白','六道关卡 · MOQ对照','四阶段 · 收入测算','精确到小时'];
+const pages = ['page-home','page-supply','page-content','page-ops','page-monetize','page-risk','page-plan','page-trip'];
+const titles = ['木子菲儿','① 广州供应链地图','② 内容×货源策略','③ 账号运营手册','④ 带货变现路径','⑤ 避坑清单','⑥ 0→1执行路径','⑦ 3天实战手册'];
+const subs = ['v2.1 完整版','6大商圈 · 28渠道','433货盘 · 情绪留白','涨粉引擎 · 1.5万目标','一件代发 · 零库存','六道关卡 · MOQ对照','四阶段 · 收入测算','精确到小时'];
 
 // ═══ Hero Image Toggle ═══
 function switchHero(idx){
