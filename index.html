@@ -333,30 +333,30 @@ body.home-active .bottom-nav{
 .foot .logo{font-size:28px;margin-bottom:8px}
 
 /* Portrait Gallery */
-.portrait-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
+.portrait-carousel{
+  position:relative;
   margin-top:20px;
+  overflow:hidden;
+  border-radius:12px;
+}
+.portrait-track{
+  display:flex;
+  transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);
 }
 .portrait-item{
   position:relative;
+  flex:0 0 100%;
+  aspect-ratio:9/16;
+  background:#000;
   border-radius:10px;
   overflow:hidden;
-  background:var(--card);
-  border:1px solid var(--border);
-  aspect-ratio:9/16;
 }
 .portrait-item img{
   width:100%;
   height:100%;
   object-fit:contain;
   display:block;
-  transition:transform 0.3s ease;
   background:#000;
-}
-.portrait-item:hover img{
-  transform:scale(1.05);
 }
 .portrait-label{
   position:absolute;
@@ -370,16 +370,52 @@ body.home-active .bottom-nav{
   text-shadow:0 1px 3px rgba(0,0,0,0.6);
   pointer-events:none;
 }
+.portrait-dots{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:12px;
+}
+.portrait-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--dim2);
+  cursor:pointer;
+  transition:all 0.3s ease;
+}
+.portrait-dot.active{
+  background:var(--gold);
+  width:24px;
+  border-radius:4px;
+}
+.portrait-nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:rgba(0,0,0,0.5);
+  border:1px solid var(--border2);
+  color:var(--text);
+  font-size:24px;
+  cursor:pointer;
+  transition:all 0.3s ease;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:10;
+}
+.portrait-nav:hover{
+  background:rgba(0,0,0,0.8);
+  border-color:var(--gold);
+}
+.portrait-prev{left:12px}
+.portrait-next{right:12px}
 @media(max-width:640px){
-  .portrait-grid{
-    grid-template-columns:repeat(3,1fr);
-    gap:8px;
-  }
-  .portrait-label{
-    font-size:10px;
-    bottom:8px;
-    left:8px;
-  }
+  .portrait-nav{width:32px;height:32px;font-size:20px}
+  .portrait-label{font-size:10px;bottom:8px;left:8px}
 }
 
 /* Anchor indicator */
@@ -555,20 +591,37 @@ body.home-active .bottom-nav{
   <div class="sec anchor" id="h-portrait">
     <div class="sec-eyebrow">PORTRAIT GALLERY</div>
     <div class="sec-title">竖版时尚摄影</div>
-    <div class="sec-sub">完整构图 · 手机端优先 · 不裁切</div>
-    <div class="portrait-grid">
-      <div class="portrait-item">
-        <img src="hero6-mobile.webp" alt="VANTAGE 蓝衬衫" loading="lazy">
-        <div class="portrait-label">VANTAGE</div>
+    <div class="sec-sub">完整构图 · 自动轮播 · 不裁切</div>
+    <div class="portrait-carousel">
+      <div class="portrait-track" id="portraitTrack">
+        <div class="portrait-item">
+          <img src="hero-mobile-1.webp" alt="Portrait 1" loading="lazy">
+          <div class="portrait-label">PORTRAIT 01</div>
+        </div>
+        <div class="portrait-item">
+          <img src="hero-mobile-2.webp" alt="Portrait 2" loading="lazy">
+          <div class="portrait-label">PORTRAIT 02</div>
+        </div>
+        <div class="portrait-item">
+          <img src="hero-mobile-3.webp" alt="Portrait 3" loading="lazy">
+          <div class="portrait-label">PORTRAIT 03</div>
+        </div>
+        <div class="portrait-item">
+          <img src="hero6-mobile.webp" alt="VANTAGE 蓝衬衫" loading="lazy">
+          <div class="portrait-label">VANTAGE</div>
+        </div>
+        <div class="portrait-item">
+          <img src="hero7-mobile.webp" alt="黑发三连拍" loading="lazy">
+          <div class="portrait-label">PORTRAIT</div>
+        </div>
+        <div class="portrait-item">
+          <img src="hero8-mobile.webp" alt="Sweet Day 拼贴" loading="lazy">
+          <div class="portrait-label">SWEET DAY</div>
+        </div>
       </div>
-      <div class="portrait-item">
-        <img src="hero7-mobile.webp" alt="黑发三连拍" loading="lazy">
-        <div class="portrait-label">PORTRAIT</div>
-      </div>
-      <div class="portrait-item">
-        <img src="hero8-mobile.webp" alt="Sweet Day 拼贴" loading="lazy">
-        <div class="portrait-label">SWEET DAY</div>
-      </div>
+      <div class="portrait-dots" id="portraitDots"></div>
+      <button class="portrait-nav portrait-prev" onclick="prevPortrait()" aria-label="Previous">‹</button>
+      <button class="portrait-nav portrait-next" onclick="nextPortrait()" aria-label="Next">›</button>
     </div>
   </div>
 
@@ -2201,6 +2254,79 @@ function scrollTo2(id) {
   document.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
   event.target.classList.add('on');
 }
+
+// ═══ Portrait Carousel ═══
+(function(){
+  const track = document.getElementById('portraitTrack');
+  const dotsContainer = document.getElementById('portraitDots');
+  if(!track || !dotsContainer) return;
+  
+  const items = track.querySelectorAll('.portrait-item');
+  const total = items.length;
+  let current = 0;
+  let autoPlayTimer = null;
+  
+  // Create dots
+  for(let i = 0; i < total; i++){
+    const dot = document.createElement('div');
+    dot.className = 'portrait-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goToPortrait(i);
+    dotsContainer.appendChild(dot);
+  }
+  
+  function updateCarousel(){
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dotsContainer.querySelectorAll('.portrait-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === current);
+    });
+  }
+  
+  function nextPortrait(){
+    current = (current + 1) % total;
+    updateCarousel();
+    resetAutoPlay();
+  }
+  
+  function prevPortrait(){
+    current = (current - 1 + total) % total;
+    updateCarousel();
+    resetAutoPlay();
+  }
+  
+  function goToPortrait(idx){
+    current = idx;
+    updateCarousel();
+    resetAutoPlay();
+  }
+  
+  function startAutoPlay(){
+    autoPlayTimer = setInterval(() => {
+      current = (current + 1) % total;
+      updateCarousel();
+    }, 4000);
+  }
+  
+  function resetAutoPlay(){
+    if(autoPlayTimer) clearInterval(autoPlayTimer);
+    startAutoPlay();
+  }
+  
+  // Expose to global
+  window.nextPortrait = nextPortrait;
+  window.prevPortrait = prevPortrait;
+  
+  // Start auto-play
+  startAutoPlay();
+  
+  // Pause on hover
+  const carousel = track.parentElement;
+  carousel.addEventListener('mouseenter', () => {
+    if(autoPlayTimer) clearInterval(autoPlayTimer);
+  });
+  carousel.addEventListener('mouseleave', () => {
+    startAutoPlay();
+  });
+})();
 
 // ═══ Hero Spotlight (CSS Mask + CSS Variables) ═══
 (function(){
