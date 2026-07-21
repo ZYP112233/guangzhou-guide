@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>广州3天考察手册</title>
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoi5bm/5bee5Zu+5a6J5omA5YyF5qCH6KeI54mH5pyq5YiS5bqX5LiO5oqA5pyJSiIsInNob3J0X25hbWUiOiLlu77lu7noiYDl jIXm iEBIiwic3RhcnRfdXJsIjoiLiIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiMwYTBhMGEiLCJ0aGVtZV9jb2xvciI6IiMwYTBhMGEifQ==">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        :root {
+            --bg: #0a0a0a;
+            --card: #141414;
+            --border: #222;
+            --gold: #c8a45c;
+            --gold-light: #e8c97a;
+            --text: #e8e8e8;
+            --text-dim: #888;
+            --green: #4caf50;
+            --red: #ef5350;
+            --blue: #42a5f5;
+            --purple: #ab47bc;
+            --orange: #ff9800;
+            --nav-height: 60px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+            padding-bottom: var(--nav-height);
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Header */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--gold);
+            letter-spacing: 0.05em;
+        }
+        
+        .header .subtitle {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 0.3rem;
+        }
+        
+        /* Day Tabs */
+        .day-tabs {
+            position: sticky;
+            top: 60px;
+            z-index: 99;
+            background: var(--bg);
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .day-tab {
+            flex: 1;
+            min-width: 80px;
+            padding: 1rem 0.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .day-tab.active {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+        }
+        
+        .day-tab.d1.active { color: var(--gold); border-color: var(--gold); }
+        .day-tab.d2.active { color: var(--blue); border-color: var(--blue); }
+        .day-tab.d3.active { color: var(--green); border-color: var(--green); }
+        
+        /* Content */
+        .content {
+            padding: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .day-content {
+            display: none;
+        }
+        
+        .day-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Day Header */
+        .day-header {
+            padding: 1.5rem 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .day-header.d1 { background: rgba(200,164,92,0.1); border: 1px solid rgba(200,164,92,0.3); }
+        .day-header.d2 { background: rgba(66,165,245,0.1); border: 1px solid rgba(66,165,245,0.3); }
+        .day-header.d3 { background: rgba(76,175,80,0.1); border: 1px solid rgba(76,175,80,0.3); }
+        
+        .day-num {
+            font-size: 3rem;
+            font-weight: 200;
+            line-height: 1;
+        }
+        
+        .day-header.d1 .day-num { color: var(--gold); }
+        .day-header.d2 .day-num { color: var(--blue); }
+        .day-header.d3 .day-num { color: var(--green); }
+        
+        .day-title {
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .day-desc {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-top: 0.3rem;
+        }
+        
+        /* Timeline */
+        .timeline-item {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .timeline-header {
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .timeline-header:active {
+            background: rgba(255,255,255,0.02);
+        }
+        
+        .timeline-time {
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+        }
+        
+        .timeline-item.d1 .timeline-time { color: var(--gold); }
+        .timeline-item.d2 .timeline-time { color: var(--blue); }
+        .timeline-item.d3 .timeline-time { color: var(--green); }
+        
+        .timeline-title {
+            font-size: 1rem;
+            font-weight: 400;
+            flex: 1;
+            margin-left: 1rem;
+        }
+        
+        .timeline-arrow {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            transition: transform 0.3s;
+        }
+        
+        .timeline-item.open .timeline-arrow {
+            transform: rotate(180deg);
+        }
+        
+        .timeline-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .timeline-item.open .timeline-body {
+            max-height: 2000px;
+        }
+        
+        .timeline-content {
+            padding: 0 1rem 1rem;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+        
+        .timeline-content table {
+            width: 100%;
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+        }
+        
+        .timeline-content td {
+            padding: 0.4rem 0;
+            border: none;
+        }
+        
+        .timeline-content td:first-child {
+            color: var(--text);
+            width: 80px;
+            font-weight: 500;
+        }
+        
+        /* Callout */
+        .callout {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+            line-height: 1.8;
+        }
+        
+        .callout-warn {
+            background: rgba(239,83,80,0.08);
+            border-left: 3px solid var(--red);
+        }
+        
+        .callout-tip {
+            background: rgba(76,175,80,0.08);
+            border-left: 3px solid var(--green);
+        }
+        
+        .callout-info {
+            background: rgba(200,164,92,0.08);
+            border-left: 3px solid var(--gold);
+        }
+        
+        .callout strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            margin: 0.1rem;
+        }
+        
+        .badge-gold { background: rgba(200,164,92,0.2); color: var(--gold); }
+        .badge-red { background: rgba(239,83,80,0.2); color: var(--red); }
+        .badge-blue { background: rgba(66,165,245,0.2); color: var(--blue); }
+        .badge-green { background: rgba(76,175,80,0.2); color: var(--green); }
+        
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-height);
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border);
+            display: flex;
+            z-index: 100;
+        }
+        
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dim);
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .nav-item.active {
+            color: var(--gold);
+        }
+        
+        .nav-icon {
+            font-size: 1.3rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        /* Dialog */
+        .dialog {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .dialog-label {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .dialog-text {
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+        
+        .dialog-text .you { color: var(--gold); }
+        .dialog-text .them { color: var(--blue); }
+        .dialog-text .note { color: var(--text-dim); font-size: 0.8rem; font-style: italic; }
+        
+        /* Section Title */
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--gold);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        /* KPI Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .kpi {
+            text-align: center;
+            padding: 1rem;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+        
+        .kpi-num {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--gold-light);
+        }
+        
+        .kpi-label {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            margin-top: 0.3rem;
+        }
+        
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .checklist li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+        
+        .checklist li:last-child { border: none; }
+        
+        .check-icon {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            margin-top: 2px;
+        }
+        
+        .check-icon.must { background: rgba(239,83,80,0.2); color: var(--red); }
+        .check-icon.should { background: rgba(200,164,92,0.2); color: var(--gold); }
+        .check-icon.nice { background: rgba(76,175,80,0.2); color: var(--green); }
+        
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+        }
+        
+        th {
+            text-align: left;
+            padding: 0.6rem;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        td {
+            padding: 0.6rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 0; height: 0; }
+        
+        /* Safe area */
+        @supports (padding: max(0px)) {
+            .bottom-nav {
+                padding-bottom: max(0px, env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <h1>广州3天考察手册</h1>
+    <div class="subtitle">木子菲儿 · 女装带货创业</div>
+</div>
+
+<!-- Day Tabs -->
+<div class="day-tabs">
+    <div class="day-tab d1 active" onclick="switchDay(0)">Day 1<br><span style="font-size:0.7rem;">十三行</span></div>
+    <div class="day-tab d2" onclick="switchDay(1)">Day 2<br><span style="font-size:0.7rem;">火车站</span></div>
+    <div class="day-tab d3" onclick="switchDay(2)">Day 3<br><span style="font-size:0.7rem;">沙河+复盘</span></div>
+    <div class="day-tab" onclick="switchDay(3)" style="color:var(--purple);">💬<br><span style="font-size:0.7rem;">话术</span></div>
+</div>
+
+<!-- Content -->
+<div class="content">
+
+<!-- ═══════════════════════════════════════ -->
+<!-- DAY 1 -->
+<!-- ═══════════════════════════════════════ -->
+<div class="day-content active" id="day1">
+    <div class="day-header d1">
+        <div class="day-num">01</div>
+        <div class="day-title">十三行商圈 · 找中高端原创</div>
+        <div class="day-desc">新中国大厦 + 红遍天 ｜ 预算1000-2000元</div>
+    </div>
+    
+    <div class="callout callout-warn">
+        <strong>⏰ 关键提醒</strong>
+        新中国大厦1-3楼 6:30开门，4楼以上 8:30开门。下午3点开始收摊！必须早到！<br>
+        📍 地铁6号线「文化公园站」D口出，步行3分钟。不要开车！
+    </div>
+    
+    <div class="kpi-grid">
+        <div class="kpi">
+            <div class="kpi-num">15-20</div>
+            <div class="kpi-label">加微信档口</div>
+        </div>
+        <div class="kpi">
+            <div class="kpi-num">8-13</div>
+            <div class="kpi-label">拿货款式</div>
+        </div>
+    </div>
+    
+    <!-- 7:00 -->
+    <div class="timeline-item d1">
+        <div class="timeline-header" onclick="toggleTimeline(this)">
+            <div class="timeline-time">07:00-08:30</div>
+            <div class="timeline-title">新中国1-3楼 · 热身</div>
+            <div class="timeline-arrow">▼</div>
+        </div>
+        <div class="timeline-body">
+            <div class="timeline-content">
+                这层是走量区，价格最低但同质化严重。你的目的不是在这里拿货，而是：<br>
+                ① 了解最低价位（心里有底价）<br>
+                ② 观察什么款卖得好<br>
+                ③ 练眼力——快速判断面料和做工
+                <table>
+                    <tr><td>看什么</td><td>面料手感、走线、扣子/拉链质量</td></tr>
+                    <tr><td>记什么</td><td>爆款样式、价格区间、档口号</td></tr>
+                    <tr><td>做什么</td><td>拍照记录，不加微信（效率太低）</td></tr>
+                    <tr><td>避坑</td><td><span class="badge badge-red">3楼多炒货</span></td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 8:30 -->
+    <div class="timeline-item d1">
+        <div class="timeline-header" onclick="toggleTimeline(this)">
+            <div class="timeline-time">08:30-12:00</div>
+            <div class="timeline-title">新中国4-8楼 · 核心战场</div>
+            <div class="timeline-arrow">▼</div>
+        </div>
+        <div class="timeline-body">
+            <div class="timeline-content">
+                这是你的主战场。4楼以上都是原创档口，品质远高于楼下。
+                <table>
+                    <tr><td>4楼</td><td>基础原创款，价格适中</td></tr>
+                    <tr><td>5-6楼</td><td><span class="badge badge-gold">核心层</span> 实力档口集中</td></tr>
+                    <tr><td>7楼</td><td>ZYGODDESS（C28-29）韩系小女人</td></tr>
+                    <tr><td>8楼</td><td><span class="badge badge-gold">云裳阁</span> 轻奢通勤，复购率60%+</td></tr>
+                </table>
+                <div class="callout callout-tip">
+                    <strong>✅ 每个档口的标准动作（30秒完成）</strong>
+                    ① 摸面料 → ② 看走线 → ③ 翻洗标 → ④ 拉伸测试 → ⑤ 拍照 → ⑥ 问价+起批量 → ⑦ 加微信 → ⑧ 记录
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 12:00 -->
+    <div class="timeline-item d1">
+        <div class="timeline-header" onclick="toggleTimeline(this)">
+            <div class="timeline-time">12:00-13:00</div>
+            <div class="timeline-title">午休 · 整理上午记录</div>
+            <div class="timeline-arrow">▼</div>
+        </div>
+        <div class="timeline-body">
+            <div class="timeline-content">
+                吃饭时打开手机备忘录：<br>
+                ① 给上午看的档口打ABC评级<br>
+                ② 标记"下午要回去重点谈"的3-5家<br>
+                ③ 发一条朋友圈/小红书story
+            </div>
+        </div>
+    </div>
+    
+    <!-- 13:00 -->
+    <div class="timeline-item d1">
+        <div class="timeline-header" onclick="toggleTimeline(this)">
+            <div class="timeline-time">13:00-15:00</div>
+            <div class="timeline-title">精选+小量拿货</div>
+            <div class="timeline-arrow">▼</div>
+        </div>
+        <div class="timeline-body">
+            <div class="timeline-content">
+                带着上午的评级回去，只找A级档口：
+                <table>
+                    <tr><td>目标</td><td>5-8款 × 3-5件 = 15-40件</td></tr>
+                    <tr><td>预算</td><td>1000-2000元</td></tr>
+                    <tr><td>必问</td><td>起批量 / 补货周期 / 退换规则 / 能否代发</td></tr>
+                    <tr><td>必做</td><td>微信转账留记录 + 拍照确认款式</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 15:00 -->
+    <div class="timeline-item d1">
+        <div class="timeline-header" onclick="toggleTimeline(this)">
+            <div class="timeline-time">15:00-17:00</div>
+            <div class="timeline-title">红遍天 · 平价基础款</div>
+            <div class="timeline-arrow">▼</div>
+        </div>
+        <div class="timeline-body">
+            <div class="timeline-content">
+                红遍天以平价韩系休闲为主，单价30-100元。适合找"引流款"。
+                <table>
+                    <tr><td>目标</td><td>3-5款基础引流款</td></tr>
+                    <tr><td>预算</td><td>300-500元</td></tr>
+                    <tr><td>注意</td><td><span class="badge badge-red">16:30后收摊</span></td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 晚上 -->
+    <div class="timeline-item d1">
+        <div class="timeline-header" onclick="toggleTimeline(this)">
+            <div class="timeline-time">18:00-20:00</div>
+            <div class="timeline-title">酒店复盘 · 整理Day1数据</div>
+            <div class="timeline-arrow">▼</div>
+        </div>
+        <div class="timeline-body">
+            <div class="timeline-content">
+                ① 建Excel表：档口名/微信/款式/批发价/起批量/质量评级/代发意向<br>
+                ② 给所有档口分类：A（重点合作）/ B（备选）/ C（不合作）<br>
+                ③ 规划Day2路线
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- DAY 2 -->
+<!-- ═══════════════════════════════════════ -->
+<div class="day-content" id="day2">
+    <div class="day-header d2">
+        <div class="day-num">02</div>
+        <div class="day-title">火车站商圈 · 找韩系质感款</div>
+        <div class="day-desc">汇美 + apM + UUS ｜ 预算2000-3000元</div>
+    </div>
+    
+    <div class="callout callout-warn">
+        <strong>⏰ 关键提醒</strong>
+        火车站商圈 8:30-18:30 营业，不用太早到。<br>
+        📍 地铁2号线/5号线「广州火车站」D4出口。
+    </div>
+    
+    <div class="kpi-grid">
+        <div class="kpi">
+            <div class="kpi-num">10-15</div>
+            <div class="kpi-label">加微信档口</div>
+        </div>
+        <div class="kpi">
+            <div class="kpi-num">5-10</div>
+            <div class="kpi-label">拿货款式</div>
+        </div>
+    </div>
+    
+    <!-- 9:00 -->
+    <div class="timeline-item d2">
+        <div class="timeline-header" onclick="toggleTimeline(this)">
+            <div class="timeline-time">09:00-12:00</div>
+            <div class="timeline-title">汇美2-3楼 · 韩系原创</div>
+            <div class="timeline-arrow">▼</div>
+        </div>
+        <div class="timeline-body">
+            <div class="timeline-content">
+                汇美是你的"质感担当"。2-3楼集中了高端品牌。<br>
+                <strong>重点：汇美支持零售！</strong>可以单件买回来测试质量。
+                <table>
+                    <tr><td>策略</td><td>先买2-3件零售（测试质量），好的再谈批量/代发</td></tr>
+                    <tr><td>重点看</td><td>面料质感、版型、上身效果</td></tr>
+                    <tr><td>价格</td><td>零售比批发贵30-50%，但能单件拿=零风险试错</td></tr>
+                    <tr><td>6楼</td><td>品牌展贸中心，有小众设计师品牌</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 13:00 -->
+    <div class="timeline-item d2">
+        <div class="timeline-header" onclick="toggleTimeline(this)">
+            <div class="timeline-time">13:00-15:00</div>
+            <div class="timeline-title">apM · 原创设计高地</div>
+            <div class="timeline-arrow">▼</div>
+        </div>
+        <div class="timeline-body">
+            <div class="timeline-content">
+                抖音评论真实反馈：<br>
+                <em style="color: var(--text-dim);">"apM真的可以冲""apM款式比较潮"</em><br><br>
+                apM是原创设计集中地，款式潮、撞款率低。
+                <table>
+                    <tr><td>策略</td><td>找3-5家风格匹配的档口，深度聊</td></tr>
+                    <tr><td>重点问</td><td>能否一件代发？代发价多少？发货时效？</td></tr>
+                    <tr><td>优势</td><td><span class="badge badge-blue">比白马便宜</span></td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 15:00 -->
+    <div class="timeline-item d2">
+        <div class="timeline-header" onclick="toggleTimeline(this)">
+            <div class="timeline-time">15:00-17:00</div>
+            <div class="timeline-title">UUS · 韩国东大门同款</div>
+            <div class="timeline-arrow">▼</div>
+        </div>
+        <div class="timeline-body">
+            <div class="timeline-content">
+                UUS是品质天花板。1/3档口韩国直营。<br>
+                <strong>但价格也是天花板</strong>，适合你的"形象款10%"。
+                <table>
+                    <tr><td>策略</td><td>只挑2-3款"形象款"</td></tr>
+                    <tr><td>价格</td><td>150-500元/件</td></tr>
+                    <tr><td>注意</td><td><span class="badge badge-red">17:00前必须到</span></td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 晚上 -->
+    <div class="timeline-item d2">
+        <div class="timeline-header" onclick="toggleTimeline(this)">
+            <div class="timeline-time">18:00-20:00</div>
+            <div class="timeline-title">酒店复盘 · 两天汇总</div>
+            <div class="timeline-arrow">▼</div>
+        </div>
+        <div class="timeline-body">
+            <div class="timeline-content">
+                ① 汇总Day1+Day2所有档口数据<br>
+                ② 排出"Top 10 合作意向档口"<br>
+                ③ 规划Day3：哪些要回去谈代发？<br>
+                ④ 发1条小红书（"广州拿货Day2"vlog）
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- DAY 3 -->
+<!-- ═══════════════════════════════════════ -->
+<div class="day-content" id="day3">
+    <div class="day-header d3">
+        <div class="day-num">03</div>
+        <div class="day-title">沙河 + 复盘决策</div>
+        <div class="day-desc">了解底价 + 敲定合作</div>
+    </div>
+    
+    <div class="callout callout-warn">
+        <strong>⏰ 关键提醒</strong>
+        沙河凌晨3-4点就开门！上午10点后很多档口就关了。必须早到！<br>
+        📍 地铁6号线「沙河顶」B出口。
+    </div>
+    
+    <div class="kpi-grid">
+        <div class="kpi">
+            <div class="kpi-num">3-5家</div>
+            <div class="kpi-label">敲定代发合作</div>
+        </div>
+        <div class="kpi">
+            <div class="kpi-num">1份</div>
+            <div class="kpi-label">完整选品表</div>
+        </div>
+    </div>
+    
+    <!-- 6:00 -->
+    <div class="timeline-item d3">
+        <div class="timeline-header" onclick="toggleTimeline(this)">
+            <div class="timeline-time">06:00-09:00</div>
+            <div class="timeline-title">沙河南城 · 了解底价</div>
+            <div class="timeline-arrow">▼</div>
+        </div>
+        <div class="timeline-body">
+            <div class="timeline-content">
+                沙河不是你的主战场，但必须来——<br>
+                <strong>目的是建立"价格锚点"</strong>，知道最低底价在哪。
+                <table>
+                    <tr><td>看什么</td><td>同款在沙河的最低价 vs 十三行的价格</td></tr>
+                    <tr><td>拿什么</td><td>挑2-3款"引流款"（十几元的短袖）</td></tr>
+                    <tr><td>注意</td><td><span class="badge badge-red">同质化严重</span></td></tr>
+                    <tr><td>时间</td><td><span class="badge badge-red">10:00前必须离开</span></td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 10:00 -->
+    <div class="timeline-item d3">
+        <div class="timeline-header" onclick="toggleTimeline(this)">
+            <div class="timeline-time">10:00-12:00</div>
+            <div class="timeline-title">回马枪 · 深度谈判</div>
+            <div class="timeline-arrow">▼</div>
+        </div>
+        <div class="timeline-body">
+            <div class="timeline-content">
+                带着前两天的数据，回到你最看好的3-5家档口，正式谈合作：
+                <table>
+                    <tr><td>①</td><td>表达长期合作意向</td></tr>
+                    <tr><td>②</td><td>谈一件代发价格和规则</td></tr>
+                    <tr><td>③</td><td>谈补货周期和退换规则</td></tr>
+                    <tr><td>④</td><td>要产品图/面料卡/尺码表</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 14:00 -->
+    <div class="timeline-item d3">
+        <div class="timeline-header" onclick="toggleTimeline(this)">
+            <div class="timeline-time">14:00-18:00</div>
+            <div class="timeline-title">酒店深度复盘</div>
+            <div class="timeline-arrow">▼</div>
+        </div>
+        <div class="timeline-body">
+            <div class="timeline-content">
+                这是3天中最重要的一步：
+                <table>
+                    <tr><td>① 选品表</td><td>整理所有款式照片 → 建Excel</td></tr>
+                    <tr><td>② 供应商分级</td><td>A级（3-5家）/ B级（5-10家）/ C级（淘汰）</td></tr>
+                    <tr><td>③ 成本核算</td><td>批发价 + 运费 + 包装 + 佣金 → 零售价</td></tr>
+                    <tr><td>④ 内容计划</td><td>用3天素材，规划未来2周内容</td></tr>
+                    <tr><td>⑤ 上线计划</td><td>回去后第1天：上架首批10款</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- 谈判话术 -->
+<!-- ═══════════════════════════════════════ -->
+<div class="day-content" id="scripts">
+    <div class="section-title">💬 谈判话术</div>
+    
+    <div class="callout callout-info">
+        <strong>直接照着说，不用临场发挥</strong>
+    </div>
+    
+    <!-- 场景1 -->
+    <h3 style="color: var(--gold); margin: 1.5rem 0 1rem; font-size: 1rem;">场景1：第一次进档口</h3>
+    <div class="dialog">
+        <div class="dialog-label">你说</div>
+        <div class="dialog-text">
+            <span class="you">"老板你好，我是做小红书穿搭博主的，粉丝一万多，想看看你们家的款，有没有最新的产品图册？"</span>
+        </div>
+    </div>
+    <div class="dialog">
+        <div class="dialog-label">档口回应</div>
+        <div class="dialog-text">
+            <span class="them">"有的有的，你看喜欢哪些款？"</span>
+        </div>
+    </div>
+    <div class="dialog">
+        <div class="dialog-label">你说</div>
+        <div class="dialog-text">
+            <span class="you">"我先看看，这款怎么拿？什么价？起批多少？"</span><br>
+            <span class="note">（摸面料、看走线、拉伸测试）</span><br>
+            <span class="you">"质量还不错。我先加个微信，后面稳定拿货方便联系。你们支持一件代发吗？"</span>
+        </div>
+    </div>
+    
+    <div class="sep"></div>
+    
+    <!-- 场景2 -->
+    <h3 style="color: var(--gold); margin: 1.5rem 0 1rem; font-size: 1rem;">场景2：小量拿货</h3>
+    <div class="dialog">
+        <div class="dialog-label">你说</div>
+        <div class="dialog-text">
+            <span class="you">"老板，我上午在你这看了一圈，这几款我都很喜欢。我先拿几件回去拍内容，如果粉丝反馈好，后面会稳定补货。这几款能混批吗？"</span>
+        </div>
+    </div>
+    <div class="dialog">
+        <div class="dialog-label">档口回应</div>
+        <div class="dialog-text">
+            <span class="them">"我们5件起批哦，单款5件。"</span>
+        </div>
+    </div>
+    <div class="dialog">
+        <div class="dialog-label">你说</div>
+        <div class="dialog-text">
+            <span class="you">"那我选5个款，每款拿1件，凑够25件可以吗？后面卖得好我再按你们的起批量来。"</span>
+        </div>
+    </div>
+    
+    <div class="sep"></div>
+    
+    <!-- 场景3 -->
+    <h3 style="color: var(--gold); margin: 1.5rem 0 1rem; font-size: 1rem;">场景3：谈一件代发</h3>
+    <div class="dialog">
+        <div class="dialog-label">你说</div>
+        <div class="dialog-text">
+            <span class="you">"老板，我前两天在你这拿了几个款，拍成内容发小红书，粉丝反馈很好。我想跟你谈个长期合作——你帮我一件代发，我负责出内容卖货。"</span>
+        </div>
+    </div>
+    <div class="dialog">
+        <div class="dialog-label">你说（必问）</div>
+        <div class="dialog-text">
+            <span class="you">"① 发货时效——下单后多久能发？<br>
+            ② 退换货——质量问题怎么处理？<br>
+            ③ 库存同步——我怎么知道哪个码还有货？<br>
+            ④ 如果量起来了，代发价能不能再优惠？"</span>
+        </div>
+    </div>
+    <div class="callout callout-tip">
+        <strong>📋 必须拿到的信息</strong>
+        ✅ 代发价格表<br>
+        ✅ 发货时效（24/48小时内）<br>
+        ✅ 退换货规则<br>
+        ✅ 库存查询方式<br>
+        ✅ 结算方式
+    </div>
+    
+    <div class="sep"></div>
+    
+    <!-- 场景4 -->
+    <h3 style="color: var(--gold); margin: 1.5rem 0 1rem; font-size: 1rem;">场景4：压价话术</h3>
+    <div class="dialog">
+        <div class="dialog-label">❌ 错误说法</div>
+        <div class="dialog-text">
+            <span class="note">"能不能便宜点？" → 太笼统，对方直接说"不能"</span>
+        </div>
+    </div>
+    <div class="dialog">
+        <div class="dialog-label">✅ 正确说法</div>
+        <div class="dialog-text">
+            <span class="you">"老板，我算了下，如果我每月稳定出50件以上，这款代发价能不能从120降到100？我给你看我的小红书数据——我上条笔记曝光5万，转化率3%。"</span>
+        </div>
+    </div>
+    <div class="callout callout-tip">
+        <strong>💡 压价核心逻辑</strong>
+        ① 用数据说话（粉丝数、曝光量、转化率）<br>
+        ② 给承诺（"每月稳定出X件"）<br>
+        ③ 给价值（"我能帮你打品牌、做内容"）<br>
+        ④ 不要第一次就压价——先拿2-3次建立关系
+    </div>
+</div>
+
+</div>
+
+<!-- Bottom Nav -->
+<div class="bottom-nav">
+    <div class="nav-item active" onclick="switchDay(0)">
+        <div class="nav-icon">📍</div>
+        <div>Day 1</div>
+    </div>
+    <div class="nav-item" onclick="switchDay(1)">
+        <div class="nav-icon">📍</div>
+        <div>Day 2</div>
+    </div>
+    <div class="nav-item" onclick="switchDay(2)">
+        <div class="nav-icon">📍</div>
+        <div>Day 3</div>
+    </div>
+    <div class="nav-item" onclick="switchDay(3)">
+        <div class="nav-icon">💬</div>
+        <div>话术</div>
+    </div>
+</div>
+
+<script>
+// Switch day
+function switchDay(index) {
+    const days = document.querySelectorAll('.day-content');
+    const tabs = document.querySelectorAll('.day-tab');
+    const navItems = document.querySelectorAll('.nav-item');
+    
+    days.forEach((day, i) => {
+        day.classList.toggle('active', i === index);
+    });
+    
+    tabs.forEach((tab, i) => {
+        tab.classList.toggle('active', i === index);
+    });
+    
+    navItems.forEach((item, i) => {
+        item.classList.toggle('active', i === index);
+    });
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Toggle timeline
+function toggleTimeline(header) {
+    const item = header.parentElement;
+    item.classList.toggle('open');
+}
+
+// Auto-open first timeline of each day
+document.querySelectorAll('.day-content').forEach(day => {
+    const first = day.querySelector('.timeline-item');
+    if (first) first.classList.add('open');
+});
+</script>
+
+</body>
+</html>
