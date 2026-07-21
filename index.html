@@ -6,6 +6,37 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#0a0a0a">
 <title>木子菲儿 · 女装带货创业完整手册 v2.1</title>
+<script>
+// ═══════════════════════════════════════════════════════════════
+// 配置区 - 在这里修改所有可变数据
+// ═══════════════════════════════════════════════════════════════
+const CONFIG = {
+  // 账号数据
+  account: {
+    followers: '6,578',
+    likes: '14.7万',
+    hotInteraction: '6.7万',
+    conversionRate: '21.4%'
+  },
+  
+  // 阶段目标
+  goals: {
+    phase1: {
+      current: '6.5k',
+      target30d: '8-10k',
+      target90d: '15-20k'
+    },
+    phase2: {
+      threshold: '1.5万',
+      scale: '3万+'
+    }
+  },
+  
+  // 数据更新时间
+  lastUpdate: '2026-07-21'
+};
+// ═══════════════════════════════════════════════════════════════
+</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
@@ -612,12 +643,12 @@ body.home-active .bottom-nav{
   <div class="sec anchor" id="h-stats">
     <div class="sec-eyebrow">OVERVIEW</div>
     <div class="sec-title">账号现状</div>
-    <div class="sec-sub">基于小红书主页数据 · 2026-07-21</div>
+    <div class="sec-sub">基于小红书主页数据 · <span id="updateDate"></span></div>
     <div class="kpi-row">
-      <div class="kpi"><div class="kpi-num">6,578</div><div class="kpi-label">粉丝数</div></div>
-      <div class="kpi"><div class="kpi-num">14.7万</div><div class="kpi-label">获赞与收藏</div></div>
-      <div class="kpi"><div class="kpi-num">6.7万</div><div class="kpi-label">爆款互动</div></div>
-      <div class="kpi"><div class="kpi-num">21.4%</div><div class="kpi-label">平台转化率</div></div>
+      <div class="kpi"><div class="kpi-num" id="kpiFollowers"></div><div class="kpi-label">粉丝数</div></div>
+      <div class="kpi"><div class="kpi-num" id="kpiLikes"></div><div class="kpi-label">获赞与收藏</div></div>
+      <div class="kpi"><div class="kpi-num" id="kpiHotInteraction"></div><div class="kpi-label">爆款互动</div></div>
+      <div class="kpi"><div class="kpi-num" id="kpiConversion"></div><div class="kpi-label">平台转化率</div></div>
     </div>
   </div>
 
@@ -2264,6 +2295,18 @@ function switchPage(idx){
 
 // Initialize home state on load
 document.body.classList.add('home-active');
+
+// ═══ 从CONFIG加载数据 ═══
+(function(){
+  // 账号数据
+  document.getElementById('kpiFollowers').textContent = CONFIG.account.followers;
+  document.getElementById('kpiLikes').textContent = CONFIG.account.likes;
+  document.getElementById('kpiHotInteraction').textContent = CONFIG.account.hotInteraction;
+  document.getElementById('kpiConversion').textContent = CONFIG.account.conversionRate;
+  
+  // 更新时间
+  document.getElementById('updateDate').textContent = CONFIG.lastUpdate;
+})();
 
 function toggleAcc(el) {
   el.parentElement.classList.toggle('open');
