@@ -6,6 +6,20 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#0a0a0a">
 <title>木子菲儿 · 女装带货创业完整手册 v2.1</title>
+<!-- Service Worker 注册 -->
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => {
+        console.log('Service Worker 注册成功:', reg.scope);
+      })
+      .catch(err => {
+        console.log('Service Worker 注册失败:', err);
+      });
+  });
+}
+</script>
 <script>
 // ═══════════════════════════════════════════════════════════════
 // 配置区 - 在这里修改所有可变数据
@@ -384,6 +398,13 @@ body.home-active .bottom-nav{
   object-fit:contain;
   display:block;
   background:#000;
+  transition:opacity 0.3s ease;
+}
+.portrait-item img.lazy-img{
+  opacity:0;
+}
+.portrait-item img.lazy-img.loaded{
+  opacity:1;
 }
 .portrait-label{
   position:absolute;
@@ -748,20 +769,20 @@ body.home-active .bottom-nav{
     <div class="portrait-carousel">
       <div class="portrait-track" id="portraitTrack">
         <div class="portrait-item">
-          <img src="hero-v1.webp" alt="Sweet Day" loading="lazy">
-          <div class="portrait-label">SWEET DAY</div>
+          <img data-src="hero-v1.webp" alt="Portrait 1" class="lazy-img">
+          <div class="portrait-label">PORTRAIT 01</div>
         </div>
         <div class="portrait-item">
-          <img src="hero-v2.webp" alt="Lost in Paris" loading="lazy">
-          <div class="portrait-label">PARIS</div>
+          <img data-src="hero-v2.webp" alt="Portrait 2" class="lazy-img">
+          <div class="portrait-label">PORTRAIT 02</div>
         </div>
         <div class="portrait-item">
-          <img src="hero-v3.webp" alt="VANTAGE" loading="lazy">
-          <div class="portrait-label">VANTAGE</div>
+          <img data-src="hero-v3.webp" alt="Portrait 3" class="lazy-img">
+          <div class="portrait-label">PORTRAIT 03</div>
         </div>
         <div class="portrait-item">
-          <img src="hero-v4.webp" alt="Portrait" loading="lazy">
-          <div class="portrait-label">PORTRAIT</div>
+          <img data-src="hero-v4.webp" alt="Portrait 4" class="lazy-img">
+          <div class="portrait-label">PORTRAIT 04</div>
         </div>
       </div>
       <div class="portrait-dots" id="portraitDots"></div>
@@ -3078,6 +3099,50 @@ function scrollTo2(id) {
   document.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
   event.target.classList.add('on');
 }
+
+// ═══ 图片懒加载（IntersectionObserver） ═══
+(function(){
+  const lazyImages = document.querySelectorAll('img.lazy-img');
+  if(lazyImages.length === 0) return;
+  
+  // 检查是否支持IntersectionObserver
+  if('IntersectionObserver' in window){
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          const img = entry.target;
+          const src = img.dataset.src;
+          
+          if(src){
+            // 创建新Image对象预加载
+            const tempImg = new Image();
+            tempImg.onload = () => {
+              img.src = src;
+              img.classList.add('loaded');
+              observer.unobserve(img);
+            };
+            tempImg.onerror = () => {
+              console.error('图片加载失败:', src);
+              observer.unobserve(img);
+            };
+            tempImg.src = src;
+          }
+        }
+      });
+    }, {
+      rootMargin: '50px 0px',  // 提前50px开始加载
+      threshold: 0.01
+    });
+    
+    lazyImages.forEach(img => imageObserver.observe(img));
+  } else {
+    // 降级处理：直接加载所有图片
+    lazyImages.forEach(img => {
+      img.src = img.dataset.src;
+      img.classList.add('loaded');
+    });
+  }
+})();
 
 // ═══ Portrait Carousel ═══
 (function(){
