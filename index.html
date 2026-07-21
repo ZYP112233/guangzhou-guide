@@ -2168,8 +2168,12 @@ function switchHero(idx){
 
 // ═══ Page Switch with Home State ═══
 function switchPage(idx){
+  console.log('switchPage called with idx:', idx);
+  console.log('pages array:', pages);
   pages.forEach((id,i) => {
-    document.getElementById(id).classList.toggle('active', i===idx);
+    const page = document.getElementById(id);
+    console.log(`Page ${id} (index ${i}):`, page ? 'found' : 'NOT FOUND');
+    if(page) page.classList.toggle('active', i===idx);
   });
   document.querySelectorAll('.nav-item').forEach((el,i) => {
     el.classList.toggle('active', i===idx);
